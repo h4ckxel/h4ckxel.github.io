@@ -1,15 +1,1001 @@
----
-layout: archive
-author_profile: true
-title: "Posts"
----
 
-{% capture written_year %}'None'{% endcapture %}
-{% for post in site.posts %}
-  {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-  {% if year != written_year %}
-    <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
-    {% capture written_year %}{{ year }}{% endcapture %}
-  {% endif %}
-  {% include archive-single.html %}
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>h4ckxel — Security Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323:wght@400&family=Inconsolata:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #00ff41;
+  --green-dim: rgba(0,255,65,0.15);
+  --green-mid: rgba(0,255,65,0.4);
+  --cyan: #00e5ff;
+  --yellow: #ffd600;
+  --orange: #ff6d00;
+  --red: #ff1744;
+  --bg: #050805;
+  --bg2: #080e08;
+  --bg3: #0b160b;
+  --border: rgba(0,255,65,0.12);
+  --border-bright: rgba(0,255,65,0.3);
+  --text: #b8f0b8;
+  --text-dim: rgba(184,240,184,0.45);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inconsolata', monospace;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+#cursor {
+  position: fixed;
+  width: 16px; height: 16px;
+  border: 1px solid var(--green);
+  border-radius: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.08s, width 0.15s, height 0.15s, opacity 0.15s;
+  mix-blend-mode: screen;
+}
+#cursor::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 3px; height: 3px;
+  background: var(--green);
+  transform: translate(-50%,-50%);
+}
+body:hover #cursor { opacity: 1; }
+
+/* ── SCANLINES OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── MATRIX RAIN BG ── */
+#matrix-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0.04;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(5,8,5,0.9);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  padding: 0 40px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.nav-logo {
+  font-family: 'VT323', monospace;
+  color: var(--green);
+  font-size: 22px;
+  letter-spacing: 3px;
+  margin-right: auto;
+  text-shadow: 0 0 10px rgba(0,255,65,0.4);
+}
+
+.nav-links { display: flex; gap: 2px; }
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover {
+  color: var(--green);
+  border-color: var(--border-bright);
+  background: var(--green-dim);
+}
+
+/* ── SECTIONS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 80px 60px;
+  gap: 80px;
+}
+
+.hero-left { flex: 1; }
+
+.hero-tag {
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.hero-name {
+  font-family: 'VT323', monospace;
+  font-size: clamp(52px, 8vw, 96px);
+  color: var(--green);
+  line-height: 0.9;
+  text-shadow: 0 0 30px rgba(0,255,65,0.25), 0 0 60px rgba(0,255,65,0.08);
+  letter-spacing: 4px;
+  animation: glitch 8s infinite;
+}
+
+@keyframes glitch {
+  0%,94%,100% { text-shadow: 0 0 30px rgba(0,255,65,0.25); transform: none; }
+  95% { text-shadow: -2px 0 var(--cyan), 2px 0 var(--red); transform: skewX(-1deg); }
+  96% { text-shadow: 2px 0 var(--cyan), -2px 0 var(--red); transform: skewX(1deg); }
+  97% { text-shadow: 0 0 30px rgba(0,255,65,0.25); transform: none; }
+}
+
+.hero-alias {
+  font-family: 'VT323', monospace;
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--cyan);
+  letter-spacing: 6px;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+.hero-bio {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 460px;
+  border-left: 2px solid var(--border-bright);
+  padding-left: 16px;
+}
+
+.hero-bio span { color: var(--green); }
+
+.hero-links {
+  margin-top: 32px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  padding: 8px 20px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--green);
+  text-decoration: none;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform: translateX(-101%);
+  transition: transform 0.2s;
+  z-index: -1;
+}
+
+.btn:hover { color: var(--bg); border-color: var(--green); }
+.btn:hover::before { transform: translateX(0); }
+
+.btn.ghost { border-color: var(--border); color: var(--text-dim); }
+.btn.ghost:hover { color: var(--bg); border-color: var(--green); }
+
+/* ── HERO RIGHT: ID CARD ── */
+.hero-right { flex-shrink: 0; }
+
+.id-card {
+  width: 280px;
+  border: 1px solid var(--border-bright);
+  background: var(--bg2);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.id-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 20px; right: 20px;
+  height: 2px;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
+}
+
+.id-header {
+  background: var(--bg3);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.id-header-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%,100% { opacity:1; box-shadow: 0 0 4px var(--green); }
+  50% { opacity:0.3; box-shadow: none; }
+}
+
+.id-header span {
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  color: var(--green);
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.id-avatar {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg3);
+}
+
+.id-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0) brightness(0.85) contrast(1.1);
+  mix-blend-mode: normal;
+}
+
+.id-avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, var(--bg2));
+  mix-blend-mode: multiply;
+}
+
+.id-scan {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--green), transparent);
+  opacity: 0.6;
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan { from { top: 0; } to { top: 100%; } }
+
+.id-body { padding: 14px 16px; }
+
+.id-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0,255,65,0.06);
+  font-size: 11px;
+}
+
+.id-row:last-child { border-bottom: none; }
+.id-label { color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; font-size: 10px; }
+.id-value { color: var(--green); font-family: 'Share Tech Mono', monospace; font-size: 11px; }
+.id-value.cyan { color: var(--cyan); }
+.id-value.yellow { color: var(--yellow); }
+
+.id-footer {
+  background: var(--bg3);
+  padding: 8px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  font-family: 'Share Tech Mono', monospace;
+  text-align: center;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 80px;
+  position: relative;
+}
+
+.divider::before {
+  content: attr(data-label);
+  position: absolute;
+  top: -8px; left: 0;
+  font-size: 10px;
+  color: var(--green);
+  letter-spacing: 3px;
+  background: var(--bg);
+  padding-right: 12px;
+  opacity: 0.5;
+}
+
+/* ── TERMINAL SECTION ── */
+#terminal-section {
+  padding: 80px 80px;
+}
+
+.section-label {
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'VT323', monospace;
+  font-size: 36px;
+  color: var(--green);
+  letter-spacing: 3px;
+  margin-bottom: 32px;
+}
+
+.terminal-container {
+  border: 1px solid var(--border-bright);
+  background: var(--bg2);
+  max-width: 780px;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-container::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 30px; right: 30px;
+  height: 2px;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+}
+
+.term-bar {
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.term-dot { width: 10px; height: 10px; border-radius: 50%; }
+.term-dot.r { background: #ff5f57; }
+.term-dot.y { background: #ffbd2e; }
+.term-dot.g { background: #28c840; }
+
+.term-path {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-left: 8px;
+  letter-spacing: 1px;
+}
+
+.term-body {
+  padding: 20px 20px 16px;
+  min-height: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.term-line {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-line.green  { color: var(--green); }
+.term-line.cyan   { color: var(--cyan); }
+.term-line.yellow { color: var(--yellow); }
+.term-line.orange { color: var(--orange); }
+.term-line.white  { color: #ddd; }
+.term-line.dim    { color: rgba(0,255,65,0.25); }
+.term-line.red    { color: var(--red); }
+.term-line.bold   { color: #76ff03; font-size: 14px; }
+
+.term-input-row {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 16px;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.term-prompt {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  color: var(--green);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--green);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  caret-color: var(--green);
+  cursor: none;
+}
+
+.term-hint {
+  padding: 6px 20px 14px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: rgba(0,255,65,0.2);
+  letter-spacing: 1px;
+}
+
+/* ── POSTS ── */
+#posts-section { padding: 80px 80px; }
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 960px;
+}
+
+.post-card {
+  background: var(--bg2);
+  padding: 24px 28px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--green);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.2s;
+}
+
+.post-card:hover { background: var(--bg3); }
+.post-card:hover::before { transform: scaleY(1); }
+
+.post-tag {
+  font-size: 10px;
+  color: var(--green);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 10px;
+}
+
+.post-title {
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  color: var(--green);
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.post-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.post-arrow {
+  margin-top: 16px;
+  font-size: 11px;
+  color: var(--border-bright);
+  letter-spacing: 2px;
+  transition: color 0.2s, letter-spacing 0.2s;
+}
+
+.post-card:hover .post-arrow { color: var(--green); letter-spacing: 4px; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-left {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: var(--green);
+  letter-spacing: 3px;
+  opacity: 0.6;
+}
+
+.footer-links { display: flex; gap: 16px; }
+
+.footer-links a {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--green); }
+
+.footer-right {
+  font-size: 10px;
+  color: rgba(0,255,65,0.2);
+  letter-spacing: 2px;
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.fade-in.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  #hero { flex-direction: column; padding: 100px 24px 60px; gap: 40px; }
+  .hero-right { width: 100%; }
+  .id-card { width: 100%; }
+  #terminal-section, #posts-section { padding: 60px 24px; }
+  footer { flex-direction: column; gap: 16px; padding: 24px; }
+  .divider { margin: 0 24px; }
+  nav { padding: 0 16px; }
+  .nav-links a { padding: 6px 8px; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+
+<!-- Matrix BG -->
+<canvas id="matrix-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">H4CKXEL</div>
+  <div class="nav-links">
+    <a href="#terminal-section">Terminal</a>
+    <a href="#posts-section">Posts</a>
+    <a href="https://h4ckxel.github.io/projects/" target="_blank">Projects</a>
+    <a href="https://h4ckxel.github.io/writeups/" target="_blank">Write-Ups</a>
+    <a href="https://h4ckxel.github.io/about/" target="_blank">About</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">// security researcher</div>
+    <div class="hero-name">H4CKXEL</div>
+    <div class="hero-alias">z3r0 c00l</div>
+    <p class="hero-bio">
+      <span>Just Another Hacker.</span> Security Researcher. Bytes Addict. Almost Human.<br><br>
+      Exploiting systems, writing about it, and occasionally touching grass.
+      <span>127.0.0.1</span>
+    </p>
+    <div class="hero-links">
+      <a class="btn" href="#terminal-section">[ LAUNCH TERMINAL ]</a>
+      <a class="btn ghost" href="https://github.com/h4ckxel" target="_blank">[ GITHUB ]</a>
+      <a class="btn ghost" href="https://x.com/h4ckxel" target="_blank">[ TWITTER ]</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/acxel-elizalde-06b9b9331/" target="_blank">[ LINKEDIN ]</a>
+    </div>
+  </div>
+
+  <div class="hero-right fade-in">
+    <div class="id-card">
+      <div class="id-header">
+        <div class="id-header-dot"></div>
+        <span>IDENTITY_CARD.bin</span>
+      </div>
+      <div class="id-avatar">
+        <div class="id-scan"></div>
+        <img src="https://h4ckxel.github.io/images/bio_main.jpg" alt="h4ckxel" onerror="this.parentElement.style.background='#0b160b'">
+      </div>
+      <div class="id-body">
+        <div class="id-row">
+          <span class="id-label">alias</span>
+          <span class="id-value">z3r0 c00l // h4ckxel</span>
+        </div>
+        <div class="id-row">
+          <span class="id-label">role</span>
+          <span class="id-value cyan">Security Researcher</span>
+        </div>
+        <div class="id-row">
+          <span class="id-label">origin</span>
+          <span class="id-value">127.0.0.1</span>
+        </div>
+        <div class="id-row">
+          <span class="id-label">status</span>
+          <span class="id-value yellow">● ONLINE</span>
+        </div>
+        <div class="id-row">
+          <span class="id-label">clearance</span>
+          <span class="id-value">ROOT</span>
+        </div>
+      </div>
+      <div class="id-footer">PHANTOM NETWORK — ENCRYPTED CHANNEL</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" data-label="// INTERACTIVE TERMINAL">
+
+<!-- TERMINAL -->
+<section id="terminal-section">
+  <div class="section-label">// access point</div>
+  <div class="section-title">TERMINAL_</div>
+
+  <div class="terminal-container fade-in">
+    <div class="term-bar">
+      <div class="term-dot r"></div>
+      <div class="term-dot y"></div>
+      <div class="term-dot g"></div>
+      <span class="term-path">h4ckxel@phantom:~$</span>
+    </div>
+    <div class="term-body" id="term-body"></div>
+    <div class="term-input-row">
+      <span class="term-prompt">h4ckxel@phantom:~$</span>
+      <input class="term-input" id="term-input" type="text" autocomplete="off" spellcheck="false" autofocus>
+    </div>
+    <div class="term-hint">type 'help' for available commands</div>
+  </div>
+</section>
+
+<hr class="divider" data-label="// LATEST POSTS">
+
+<!-- POSTS -->
+<section id="posts-section">
+  <div class="section-label">// knowledge base</div>
+  <div class="section-title">WRITE_UPS &amp; POSTS_</div>
+
+  <div class="posts-grid">
+    <a class="post-card fade-in" href="https://h4ckxel.github.io/playing-with-ld_preload/" target="_blank">
+      <div class="post-tag">// linux internals</div>
+      <div class="post-title">Playing with LD_PRELOAD</div>
+      <div class="post-desc">Introduction to the LD_PRELOAD environment variable and how it can be leveraged for hooking and injection.</div>
+      <div class="post-arrow">READ —&gt;</div>
+    </a>
+    <a class="post-card fade-in" href="https://h4ckxel.github.io/exploit-101-format-strings/" target="_blank">
+      <div class="post-tag">// exploit dev</div>
+      <div class="post-title">Exploit 101 — Format Strings</div>
+      <div class="post-desc">Deep dive into format string vulnerabilities on Linux and how to exploit them step by step.</div>
+      <div class="post-arrow">READ —&gt;</div>
+    </a>
+    <a class="post-card fade-in" href="https://h4ckxel.github.io/code-injection-with-python/" target="_blank">
+      <div class="post-tag">// malware dev</div>
+      <div class="post-title">Code Injection with Python</div>
+      <div class="post-desc">How to inject a backdoor into a PE file using Python. Hands-on binary manipulation.</div>
+      <div class="post-arrow">READ —&gt;</div>
+    </a>
+    <a class="post-card fade-in" href="https://h4ckxel.github.io/writeups/" target="_blank">
+      <div class="post-tag">// ctf & pentesting</div>
+      <div class="post-title">All Write-Ups</div>
+      <div class="post-desc">Collection of CTF write-ups, pentesting notes and security research published on the blog.</div>
+      <div class="post-arrow">VIEW ALL —&gt;</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">H4CKXEL // 2025</div>
+  <div class="footer-links">
+    <a href="https://github.com/h4ckxel" target="_blank">GitHub</a>
+    <a href="https://x.com/h4ckxel" target="_blank">Twitter</a>
+    <a href="https://www.linkedin.com/in/acxel-elizalde-06b9b9331/" target="_blank">LinkedIn</a>
+    <a href="https://h4ckxel.github.io/disclaimer/" target="_blank">Disclaimer</a>
+  </div>
+  <div class="footer-right">© ALL RIGHTS RESERVED</div>
+</footer>
+
+<script>
+// ── CURSOR ────────────────────────────────────────────────
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,input').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.width='24px'; cur.style.height='24px'; });
+  el.addEventListener('mouseleave', () => { cur.style.width='16px'; cur.style.height='16px'; });
+});
+
+// ── MATRIX RAIN ──────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('matrix-bg');
+  const ctx = canvas.getContext('2d');
+  let W, H, cols, drops;
+  const chars = 'アイウエオカキクケコ01アBCDEF0123456789ABCDEF'.split('');
+
+  function init() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    cols = Math.floor(W / 18);
+    drops = Array(cols).fill(0);
+  }
+
+  function draw() {
+    ctx.fillStyle = 'rgba(5,8,5,0.05)';
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = '#00ff41';
+    ctx.font = '13px Share Tech Mono';
+    drops.forEach((y, i) => {
+      const ch = chars[Math.floor(Math.random()*chars.length)];
+      ctx.fillText(ch, i*18, y*18);
+      if (y*18 > H && Math.random() > 0.975) drops[i] = 0;
+      else drops[i]++;
+    });
+  }
+
+  init();
+  window.addEventListener('resize', init);
+  setInterval(draw, 60);
+})();
+
+// ── FADE IN OBSERVER ─────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── TERMINAL ─────────────────────────────────────────────
+const tbody = document.getElementById('term-body');
+const tinput = document.getElementById('term-input');
+
+function sleep(ms){ return new Promise(r => setTimeout(r,ms)); }
+
+function addLine(text, cls='green', delay=0){
+  return new Promise(async r => {
+    await sleep(delay);
+    const d = document.createElement('div');
+    d.className = 'term-line ' + cls;
+    d.textContent = text;
+    tbody.appendChild(d);
+    tbody.scrollTop = tbody.scrollHeight;
+    r();
+  });
+}
+
+async function typeLines(lines){
+  for(const [t,c,d] of lines) await addLine(t,c,d||0);
+}
+
+const COMMANDS = {
+  help: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  AVAILABLE COMMANDS:', 'yellow'],
+      ['  ─────────────────────────────────────────', 'dim'],
+      ['  help          show this help menu','green'],
+      ['  whoami        display operator profile', 'green'],
+      ['  cv            open curriculum vitae', 'green'],
+      ['  decuber       open Decuber project', 'green'],
+      ['  projects      list all projects', 'green'],
+      ['  skills        list technical skills', 'green'],
+      ['  contact       show contact info', 'green'],
+      ['  blog          open blog / write-ups', 'green'],
+      ['  clear         clear terminal', 'green'],
+      ['','dim'],
+    ]);
+  },
+  whoami: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  ┌─ IDENTITY RECORD ──────────────────────┐', 'cyan'],
+      ['  │                                         │', 'cyan'],
+      ['  │  alias    : z3r0 c00l // h4ckxel        │', 'green'],
+      ['  │  role     : Security Researcher          │', 'green'],
+      ['  │  origin   : 127.0.0.1                   │', 'green'],
+      ['  │  status   : Almost Human                │', 'green'],
+      ['  │                                         │', 'cyan'],
+      ['  │  interests: exploit dev, RE, malware     │', 'white'],
+      ['  │             binary analysis, CTFs         │', 'white'],
+      ['  │                                         │', 'cyan'],
+      ['  └─────────────────────────────────────────┘', 'cyan'],
+      ['','dim'],
+    ]);
+  },
+  cv: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  [*] Abriendo CV...', 'cyan'],
+      ['  [*] URL: https://h4ckxel.github.io/CV', 'dim'],
+      ['','dim'],
+    ]);
+    await sleep(600);
+    window.open('https://h4ckxel.github.io/CV', '_blank');
+    await addLine('  [✓] CV cargado en nueva ventana.', 'green');
+    await addLine('','dim');
+  },
+  decuber: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  [*] Abriendo proyecto Decuber...', 'cyan'],
+      ['  [*] URL: https://h4ckxel.github.io/Decuber', 'dim'],
+      ['','dim'],
+    ]);
+    await sleep(600);
+    window.open('https://h4ckxel.github.io/Decuber', '_blank');
+    await addLine('  [✓] Decuber cargado en nueva ventana.', 'green');
+    await addLine('','dim');
+  },
+  projects: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  [*] Listando proyectos...', 'cyan'],
+      ['','dim'],
+      ['  01  Decuber          https://h4ckxel.github.io/Decuber', 'green'],
+      ['  02  Blog / Portfolio https://h4ckxel.github.io', 'green'],
+      ['  03  GitHub           https://github.com/h4ckxel', 'green'],
+      ['','dim'],
+      ['  use "decuber" to open Decuber project.', 'dim'],
+      ['','dim'],
+    ]);
+  },
+  skills: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  TECHNICAL SKILLS', 'yellow'],
+      ['  ─────────────────────────────────────────', 'dim'],
+      ['','dim'],
+      ['  [ EXPLOIT DEV ]     ████████████░░  90%', 'green'],
+      ['  [ REVERSE ENG ]     ██████████░░░░  76%', 'green'],
+      ['  [ MALWARE DEV ]     █████████░░░░░  70%', 'green'],
+      ['  [ PYTHON/C    ]     ████████████░░  88%', 'green'],
+      ['  [ CTF/PENTEST ]     ███████████░░░  82%', 'green'],
+      ['  [ LINUX       ]     █████████████░  95%', 'green'],
+      ['','dim'],
+    ]);
+  },
+  contact: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  CONTACT CHANNELS', 'yellow'],
+      ['  ─────────────────────────────────────────', 'dim'],
+      ['','dim'],
+      ['  Twitter    https://x.com/h4ckxel', 'cyan'],
+      ['  GitHub     https://github.com/h4ckxel', 'cyan'],
+      ['  LinkedIn   https://linkedin.com/in/acxel-elizalde-06b9b9331', 'cyan'],
+      ['  Blog       https://h4ckxel.github.io', 'cyan'],
+      ['','dim'],
+    ]);
+  },
+  blog: async () => {
+    await typeLines([
+      ['','dim'],
+      ['  [*] Abriendo blog...', 'cyan'],
+    ]);
+    await sleep(400);
+    window.open('https://h4ckxel.github.io', '_blank');
+    await addLine('  [✓] Blog abierto en nueva ventana.', 'green');
+    await addLine('','dim');
+  },
+  clear: async () => {
+    tbody.innerHTML = '';
+    await boot();
+  },
+};
+
+async function boot(){
+  await typeLines([
+    ['  PHANTOM TERMINAL v3.1.7 — h4ckxel', 'bold', 0],
+    ['  ─────────────────────────────────────────', 'dim', 60],
+    ['  Security Researcher // Bytes Addict', 'white', 60],
+    ['  Type "help" to see available commands.', 'dim', 60],
+    ['','dim', 40],
+  ]);
+}
+
+let history = [];
+let histIdx = -1;
+
+tinput.addEventListener('keydown', async e => {
+  if(e.key === 'Enter'){
+    const cmd = tinput.value.trim().toLowerCase();
+    if(!cmd){ tinput.value=''; return; }
+
+    history.unshift(cmd);
+    histIdx = -1;
+
+    await addLine('h4ckxel@phantom:~$ ' + cmd, 'bold');
+    tinput.value = '';
+
+    if(COMMANDS[cmd]) {
+      await COMMANDS[cmd]();
+    } else {
+      await addLine('','dim');
+      await addLine('  bash: ' + cmd + ': command not found', 'red');
+      await addLine('  type "help" for available commands.', 'dim');
+      await addLine('','dim');
+    }
+
+  } else if(e.key === 'ArrowUp'){
+    e.preventDefault();
+    if(histIdx < history.length-1){ histIdx++; tinput.value = history[histIdx]; }
+  } else if(e.key === 'ArrowDown'){
+    e.preventDefault();
+    if(histIdx > 0){ histIdx--; tinput.value = history[histIdx]; }
+    else { histIdx=-1; tinput.value=''; }
+  } else if(e.key === 'Tab'){
+    e.preventDefault();
+    const partial = tinput.value.trim().toLowerCase();
+    const matches = Object.keys(COMMANDS).filter(k => k.startsWith(partial));
+    if(matches.length === 1) tinput.value = matches[0];
+    else if(matches.length > 1) {
+      await addLine('h4ckxel@phantom:~$ ' + tinput.value, 'bold');
+      await addLine('  ' + matches.join('   '), 'dim');
+    }
+  }
+});
+
+document.addEventListener('click', () => tinput.focus());
+
+boot();
+</script>
+</body>
+</html>
