@@ -5,18 +5,24 @@ excerpt: "About this blog."
 ---
 
 ---
-We live in the **Digital Age**, we grow up around computers, cameras, smartphones and other digital technologies. Nowadays computers are so small that they are embedded in our [clothes](http://www.omsignal.com), we carry them in our [pockets](https://www.google.com/nexus/) or even wear them as [jewelry](https://www.apple.com/watch/). But all these devices are quite complex and most of us struggle to fully understand them and use them properly.
+I am **Acxel Elizalde**, a Software Engineering student in Mexico City studying cybersecurity independently with a focus on offensive security, networking, and secure software development.
 
-The question that now arises is: *What about security and privacy?*
+This blog is where I document what I build and what I learn: write-ups, exploitation notes, small tools, and technical experiments around systems, Linux, and software engineering. I use it to make my thinking clearer, preserve the path behind each project, and share work that may help someone else learning the same terrain.
 
-Well, this is the main topic of this blog, mostly on a technical standpoint. For 10 years now, I study the security around computers, networks and devices in order to bypass it. By creating this blog, I want to share, among other things, my projects, techniques, hacks and discoveries. Because **Hacking** is about **Sharing**, but it's also about getting a better understanding of the technologies that we use every day.
+My current interests include:
 
+- web security and exploitation methodology
+- Linux and network fundamentals
+- binary exploitation foundations
+- security tooling with Python, C, Bash, and Go
+- the overlap between good software engineering and resilient systems
 
 ## About me
 
-I'm just another hacker, learning and studying hard, I split my time between researching, consulting, and training on a wide range of topics related to offensive security and computer networks.
+I am still early in the path, and I prefer that honesty. The goal here is not to look finished; it is to keep becoming more precise, more capable, and more useful through consistent public work.
 
+I am especially interested in projects that force theory and implementation to meet: building tools, reproducing vulnerabilities in authorized labs, writing down what failed, and improving the code until the result is both technically sound and understandable.
 
 ### Notes
 
-> The opinions expressed herein are not necessarily those of my employer, not necessarily mine, and probably not necessary.
+> This site contains educational material, notes, and experiments produced while learning. Security work should be performed only in authorized environments.

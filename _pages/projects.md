@@ -5,9 +5,25 @@ excerpt: "Projects"
 ---
 
 ---
-Here is a list of the various projects I worked on.
+This is a curated selection of projects that best represent my current direction: offensive security, security tooling, and software engineering fundamentals.
 
-## Decuber
+## Security
+
+### CVE-2025-2005
+
+Proof-of-concept research around a critical WordPress plugin vulnerability. The project documents the issue, the exploitation flow, and the defensive ideas needed to understand the bug responsibly.
+
+**Link:** [CVE-2025-2005](https://github.com/h4ckxel/CVE-2025-2005)
+
+### Escaner de Puertos
+
+A Python networking project focused on port scanning and concurrent execution. It is one of the projects I am evolving into a more disciplined security tool with better validation, reporting, and testing.
+
+**Link:** [escaner-de-puertos](https://github.com/h4ckxel/escaner-de-puertos)
+
+## Software engineering
+
+### Decuber
 
 Decuber is a Rubik's Cube-inspired message encoder built with HTML, CSS, JS, and Python.  
 It converts characters into color pairs using a 6-color scheme, storing 4 characters per cube face.  
@@ -17,22 +33,22 @@ It requires Python 3.x and has no external dependencies.
 
 **Link:** [Decuber](https://github.com/h4ckxel/Decuber)
 
-## Didactic-Darakeet
+### CardsGame
 
-A project designed to facilitate fluid and natural communication with deaf and mute people. It uses an application based on the Mediapipe framework for real-time visual sign language recognition, enabling two-way translation between speech/text and sign language.
+An UNO game implemented in Java and used to practice object-oriented design, separation of responsibilities, and iterative refactoring. The project includes a documented redesign from an initial version into a clearer architecture.
 
-> **Note:** Code improvements are currently underway to enhance functionality and maintainability.
+**Link:** [CardsGame](https://github.com/h4ckxel/CardsGame)
 
-**Link**: [Didactic-Darakeet](https://github.com/h4ckxel/didactic-parakeet)
+## Systems and technical experiments
 
-## Agujero_Negro_Simulador (Black Hole Simulator)
+### Agujero Negro Simulador (Black Hole Simulator)
 
 This is a Black Hole Simulator project developed primarily in **C++** using ray tracing and geodesics calculation to visualize the gravitational effects (such as gravitational lensing) of a black hole. It includes C++ source files (`ray_tracing.cpp`, `CPU-geodesic.cpp`) and shader files (`geodesic.comp`, `grid.frag`, `grid.vert`).
 
 **Link**: [Black Hole Simulator](https://github.com/h4ckxel/agujero_negro_simulador)
 
-## FiltroGaussiano (Gaussian Filter)
+### Didactic Parakeet
 
-This Python script performs **Image Smoothing with a Gaussian Filter** on a grayscale image using the `NumPy`, `SciPy`, and `Pillow` libraries. It loads an image, applies a controllable Gaussian blur by adjusting the `sigma` value, and displays both the original and filtered images for comparison.
+A computer-vision prototype for sign-language recognition built around MediaPipe. It remains an active learning project and is included here as an example of experimentation with applied machine learning and accessibility.
 
-**Link**: [Gaussian Filter](https://github.com/h4ckxel/FiltroGaussiano)
+**Link:** [didactic-parakeet](https://github.com/h4ckxel/didactic-parakeet)
