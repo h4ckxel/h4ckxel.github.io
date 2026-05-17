@@ -1,1093 +1,135 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>h4ckxel — Security Researcher</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-:root {
-  --orange: #ff6a00;
-  --orange-bright: #ff8c00;
-  --orange-dim: rgba(255,106,0,0.12);
-  --orange-glow: rgba(255,106,0,0.35);
-  --blue: #00d4ff;
-  --blue-dim: rgba(0,212,255,0.1);
-  --blue-glow: rgba(0,212,255,0.3);
-  --red: #ff1744;
-  --yellow: #ffe600;
-  --bg: #070709;
-  --bg2: #0c0c10;
-  --bg3: #111118;
-  --bg4: #161620;
-  --border: rgba(255,106,0,0.18);
-  --border-bright: rgba(255,106,0,0.45);
-  --text: #c8c8d8;
-  --text-dim: rgba(200,200,216,0.4);
-  --clip: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  --clip-sm: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Rajdhani', sans-serif;
-  overflow-x: hidden;
-  cursor: none;
-}
-
-/* ── NOISE TEXTURE ── */
-body::after {
-  content:'';
-  position:fixed;inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:9000;opacity:0.6;
-}
-
-/* ── CHROMATIC SCAN ── */
-body::before {
-  content:'';position:fixed;inset:0;
-  background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,106,0,0.015) 3px,rgba(255,106,0,0.015) 4px);
-  pointer-events:none;z-index:8999;
-  animation: scanroll 12s linear infinite;
-}
-@keyframes scanroll {
-  0%{background-position:0 0;}
-  100%{background-position:0 200px;}
-}
-
-/* ── CURSOR ── */
-#cursor {
-  position:fixed;width:20px;height:20px;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:transform 0.06s;
-}
-#cursor::before {
-  content:'';position:absolute;inset:0;
-  border:1px solid var(--orange);
-  clip-path:var(--clip-sm);
-  transition:all 0.15s;
-}
-#cursor::after {
-  content:'';position:absolute;
-  top:50%;left:50%;
-  width:4px;height:4px;
-  background:var(--orange);
-  transform:translate(-50%,-50%);
-  box-shadow:0 0 6px var(--orange);
-}
-body.cursor-hover #cursor::before {
-  width:30px;height:30px;
-  top:-5px;left:-5px;
-  background:var(--orange-dim);
-  border-color:var(--orange-bright);
-}
-
-/* ── GRID BG ── */
-#grid-bg {
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background-image:
-    linear-gradient(rgba(255,106,0,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,106,0,0.03) 1px, transparent 1px);
-  background-size:48px 48px;
-  pointer-events:none;z-index:0;
-}
-
-/* ── HEX PARTICLE CANVAS ── */
-#particle-canvas {
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  opacity:0.25;pointer-events:none;z-index:0;
-}
-
-/* ── NAV ── */
-nav {
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  height:52px;
-  background:rgba(7,7,9,0.92);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
-  display:flex;align-items:center;
-  padding:0 32px;gap:0;
-}
-
-.nav-wedge {
-  position:absolute;bottom:-1px;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,var(--orange),transparent 40%,transparent 60%,var(--blue) 100%);
-}
-
-.nav-logo {
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;font-size:20px;
-  letter-spacing:6px;
-  color:var(--orange);
-  text-shadow:0 0 20px var(--orange-glow);
-  margin-right:auto;
-  position:relative;
-}
-.nav-logo::after {
-  content:'///';
-  font-size:10px;letter-spacing:2px;
-  color:var(--blue);opacity:0.6;
-  margin-left:8px;vertical-align:middle;
-}
-
-.nav-status {
-  display:flex;align-items:center;gap:6px;
-  font-family:'Share Tech Mono',monospace;
-  font-size:10px;color:var(--text-dim);
-  letter-spacing:1px;margin-right:20px;
-}
-.nav-status-dot {
-  width:6px;height:6px;border-radius:50%;
-  background:#00ff88;
-  box-shadow:0 0 8px #00ff88;
-  animation:blink 2s ease-in-out infinite;
-}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
-
-.nav-links{display:flex;gap:0;}
-.nav-links a {
-  color:var(--text-dim);text-decoration:none;
-  font-family:'Share Tech Mono',monospace;
-  font-size:11px;letter-spacing:2px;
-  padding:6px 16px;
-  border-left:1px solid transparent;
-  text-transform:uppercase;
-  transition:all 0.15s;
-  position:relative;
-}
-.nav-links a::after {
-  content:'';position:absolute;
-  bottom:0;left:16px;right:16px;height:1px;
-  background:var(--orange);
-  transform:scaleX(0);
-  transition:transform 0.2s;
-}
-.nav-links a:hover{color:var(--orange);border-left-color:var(--border);}
-.nav-links a:hover::after{transform:scaleX(1);}
-
-/* ── HERO ── */
-#hero {
-  min-height:100vh;
-  display:flex;align-items:center;
-  padding:80px 56px 60px;
-  gap:60px;
-  position:relative;z-index:1;
-}
-
-.hero-left{flex:1;position:relative;}
-
-.hero-sys-label {
-  font-family:'Share Tech Mono',monospace;
-  font-size:10px;letter-spacing:4px;
-  color:var(--blue);text-transform:uppercase;
-  opacity:0.7;margin-bottom:12px;
-  display:flex;align-items:center;gap:8px;
-}
-.hero-sys-label::before {
-  content:'';width:20px;height:1px;background:var(--blue);
-}
-
-.hero-name {
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;
-  font-size:clamp(72px,10vw,128px);
-  line-height:0.85;
-  letter-spacing:8px;
-  color:#fff;
-  position:relative;
-  display:inline-block;
-}
-.hero-name .n-orange{color:var(--orange);text-shadow:0 0 40px var(--orange-glow),0 0 80px rgba(255,106,0,0.15);}
-.hero-name .n-blue{color:var(--blue);text-shadow:0 0 30px var(--blue-glow);}
-
-.hero-name-glitch {
-  position:relative;
-  animation:nameglitch 7s infinite;
-}
-@keyframes nameglitch {
-  0%,90%,100%{text-shadow:none;transform:none;clip-path:none;}
-  91%{
-    text-shadow:-3px 0 var(--blue),3px 0 var(--red);
-    transform:skewX(-2deg);
-    clip-path:polygon(0 15%,100% 15%,100% 35%,0 35%);
-  }
-  92%{
-    text-shadow:3px 0 var(--orange),-3px 0 var(--blue);
-    transform:skewX(1deg);
-    clip-path:polygon(0 55%,100% 55%,100% 75%,0 75%);
-  }
-  93%{text-shadow:none;transform:none;clip-path:none;}
-}
-
-.hero-alias {
-  font-family:'Share Tech Mono',monospace;
-  font-size:16px;letter-spacing:8px;
-  color:var(--blue);
-  margin-top:8px;opacity:0.8;
-}
-
-.hero-divider {
-  width:120px;height:2px;
-  background:linear-gradient(90deg,var(--orange),transparent);
-  margin:24px 0;
-}
-
-.hero-bio {
-  font-size:15px;line-height:1.9;
-  color:var(--text-dim);
-  max-width:500px;
-  font-weight:500;
-  letter-spacing:0.3px;
-}
-.hero-bio strong{color:var(--orange);font-weight:600;}
-
-.hero-links{margin-top:32px;display:flex;gap:10px;flex-wrap:wrap;}
-
-/* ── BUTTONS ── */
-.btn {
-  font-family:'Share Tech Mono',monospace;
-  font-size:11px;letter-spacing:2px;
-  padding:9px 22px;
-  text-decoration:none;
-  text-transform:uppercase;
-  clip-path:var(--clip-sm);
-  position:relative;
-  cursor:none;
-  transition:all 0.2s;
-  overflow:hidden;
-}
-.btn-primary {
-  background:var(--orange);
-  color:var(--bg);
-  border:none;
-}
-.btn-primary::after {
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
-  transform:translateX(-100%);
-  transition:transform 0.3s;
-}
-.btn-primary:hover::after{transform:translateX(100%);}
-.btn-primary:hover{background:var(--orange-bright);}
-
-.btn-ghost {
-  background:transparent;
-  color:var(--text-dim);
-  border:1px solid rgba(200,200,216,0.2);
-}
-.btn-ghost:hover{color:var(--orange);border-color:var(--border-bright);}
-
-/* ── ID CARD ── */
-.hero-right{flex-shrink:0;}
-
-.id-card {
-  width:290px;
-  background:var(--bg2);
-  clip-path:var(--clip);
-  position:relative;
-  border:1px solid var(--border-bright);
-}
-.id-card::before {
-  content:'';position:absolute;
-  top:0;left:20px;right:20px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--orange),transparent);
-  box-shadow:0 0 12px var(--orange);
-}
-
-.id-top-bar {
-  background:var(--bg3);
-  padding:10px 14px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.id-top-bar-left{display:flex;align-items:center;gap:6px;}
-.id-top-dot{width:6px;height:6px;background:var(--orange);box-shadow:0 0 8px var(--orange);animation:blink 2.5s ease-in-out infinite;}
-.id-top-title{
-  font-family:'Share Tech Mono',monospace;
-  font-size:11px;letter-spacing:2px;color:var(--orange);opacity:0.8;
-}
-.id-top-badge{
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;letter-spacing:1px;
-  color:var(--blue);border:1px solid rgba(0,212,255,0.3);
-  padding:2px 6px;
-}
-
-.id-img-wrap{
-  position:relative;
-  height:190px;
-  background:var(--bg3);
-  overflow:hidden;
-}
-.id-img-wrap img{
-  width:100%;height:100%;object-fit:cover;
-  filter:saturate(0.2) brightness(0.75) contrast(1.15);
-}
-.id-img-wrap::before{
-  content:'';position:absolute;inset:0;z-index:2;
-  background:
-    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,106,0,0.04) 2px,rgba(255,106,0,0.04) 4px);
-}
-.id-img-wrap::after{
-  content:'';position:absolute;inset:0;z-index:3;
-  background:linear-gradient(to bottom,transparent 50%,var(--bg2));
-}
-.id-scan-line{
-  position:absolute;left:0;right:0;height:2px;z-index:5;
-  background:linear-gradient(90deg,transparent,var(--orange),transparent);
-  opacity:0.5;animation:scanimg 3.5s linear infinite;
-}
-.id-corners::before,.id-corners::after{
-  content:'';position:absolute;width:16px;height:16px;z-index:6;
-}
-.id-corners::before{
-  top:0;left:0;
-  border-top:2px solid var(--orange);
-  border-left:2px solid var(--orange);
-}
-.id-corners::after{
-  bottom:0;right:0;
-  border-bottom:2px solid var(--orange);
-  border-right:2px solid var(--orange);
-}
-@keyframes scanimg{from{top:0;}to{top:100%;}}
-
-.id-data{padding:14px;}
-.id-row{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:5px 0;
-  border-bottom:1px solid rgba(255,106,0,0.06);
-  font-size:11px;
-}
-.id-row:last-child{border-bottom:none;}
-.id-k{
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;letter-spacing:2px;
-  color:var(--text-dim);text-transform:uppercase;
-}
-.id-v{
-  font-family:'Share Tech Mono',monospace;
-  font-size:11px;color:var(--orange);letter-spacing:1px;
-}
-.id-v.blue{color:var(--blue);}
-.id-v.yellow{color:var(--yellow);}
-.id-v.white{color:#fff;}
-
-.id-bar {
-  background:var(--bg3);
-  padding:8px 14px;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.id-bar-txt{
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;letter-spacing:2px;
-  color:rgba(255,106,0,0.35);
-}
-
-/* ── SECTION WRAPPER ── */
-.section-wrapper{
-  position:relative;z-index:1;
-  padding:80px 56px;
-}
-
-.sec-eyebrow{
-  font-family:'Share Tech Mono',monospace;
-  font-size:10px;letter-spacing:4px;
-  color:var(--blue);text-transform:uppercase;
-  opacity:0.65;margin-bottom:8px;
-  display:flex;align-items:center;gap:10px;
-}
-.sec-eyebrow::after{
-  content:'';flex:1;max-width:80px;height:1px;
-  background:linear-gradient(90deg,var(--blue),transparent);
-}
-
-.sec-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;font-size:42px;
-  letter-spacing:4px;color:#fff;
-  margin-bottom:40px;
-  position:relative;display:inline-block;
-}
-.sec-title span{color:var(--orange);}
-.sec-title::after{
-  content:'';position:absolute;
-  bottom:-8px;left:0;width:60px;height:2px;
-  background:var(--orange);
-  box-shadow:0 0 10px var(--orange-glow);
-}
-
-/* ── SECTION DIVIDER ── */
-.sec-divide{
-  margin:0 56px;
-  height:1px;
-  background:linear-gradient(90deg,var(--orange),rgba(255,106,0,0.05) 60%,transparent);
-  position:relative;
-}
-.sec-divide-label{
-  position:absolute;right:0;top:-9px;
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;letter-spacing:3px;
-  color:rgba(0,212,255,0.4);
-}
-
-/* ── TERMINAL ── */
-.terminal-wrap{
-  clip-path:var(--clip);
-  background:var(--bg2);
-  border:1px solid var(--border-bright);
-  max-width:820px;
-  position:relative;
-  overflow:hidden;
-}
-.terminal-wrap::before{
-  content:'';position:absolute;
-  top:0;left:40px;right:40px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--orange),var(--blue),transparent);
-  box-shadow:0 0 10px var(--orange);
-}
-
-.term-titlebar{
-  background:var(--bg3);
-  padding:9px 16px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:8px;
-}
-.tbar-dot{width:10px;height:10px;clip-path:var(--clip-sm);}
-.tbar-dot.r{background:#ff3b30;}
-.tbar-dot.y{background:#ffcc00;}
-.tbar-dot.g{background:#28cd41;}
-.tbar-path{
-  font-family:'Share Tech Mono',monospace;
-  font-size:11px;color:var(--text-dim);
-  margin-left:6px;letter-spacing:1px;
-}
-.tbar-badge{
-  margin-left:auto;
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;color:var(--orange);
-  letter-spacing:2px;opacity:0.6;
-}
-
-.term-body{
-  padding:20px;
-  min-height:300px;max-height:400px;
-  overflow-y:auto;
-  scrollbar-width:thin;
-  scrollbar-color:var(--border) transparent;
-}
-
-.tl{
-  font-family:'Share Tech Mono',monospace;
-  font-size:13px;line-height:1.75;
-  white-space:pre-wrap;word-break:break-word;
-}
-.tl.g{color:#00ff88;}
-.tl.o{color:var(--orange);}
-.tl.b{color:var(--blue);}
-.tl.y{color:var(--yellow);}
-.tl.w{color:#ddd;}
-.tl.d{color:rgba(200,200,216,0.2);}
-.tl.r{color:var(--red);}
-.tl.bold{color:#fff;font-size:14px;font-weight:bold;}
-
-.term-prompt-row{
-  display:flex;align-items:center;
-  padding:12px 20px 14px;
-  gap:8px;
-  border-top:1px solid var(--border);
-}
-.tprompt{
-  font-family:'Share Tech Mono',monospace;
-  font-size:13px;color:var(--orange);
-  white-space:nowrap;flex-shrink:0;
-}
-.tinput{
-  flex:1;background:transparent;border:none;outline:none;
-  color:var(--orange);
-  font-family:'Share Tech Mono',monospace;
-  font-size:13px;
-  caret-color:var(--orange);
-  cursor:none;
-}
-.term-hint{
-  padding:6px 20px 14px;
-  font-family:'Share Tech Mono',monospace;
-  font-size:10px;
-  color:rgba(255,106,0,0.2);letter-spacing:1px;
-}
-
-/* ── POSTS GRID ── */
-.posts-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:2px;
-  background:rgba(255,106,0,0.08);
-  border:1px solid var(--border);
-  max-width:1100px;
-}
-
-.post-card{
-  background:var(--bg2);
-  padding:26px 28px;
-  text-decoration:none;
-  display:block;
-  position:relative;
-  overflow:hidden;
-  transition:background 0.2s;
-  clip-path:none;
-}
-.post-card::before{
-  content:'';position:absolute;
-  top:0;left:0;bottom:0;width:2px;
-  background:var(--orange);
-  transform:scaleY(0);transform-origin:top;
-  transition:transform 0.25s;
-}
-.post-card::after{
-  content:'';position:absolute;
-  top:0;right:0;width:0;height:0;
-  border-style:solid;
-  border-width:0 24px 24px 0;
-  border-color:transparent var(--bg3) transparent transparent;
-  transition:border-color 0.2s;
-}
-.post-card:hover{background:var(--bg3);}
-.post-card:hover::before{transform:scaleY(1);}
-.post-card:hover::after{border-color:transparent rgba(255,106,0,0.3) transparent transparent;}
-
-.post-id{
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;letter-spacing:3px;
-  color:var(--text-dim);margin-bottom:6px;
-}
-.post-tag{
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;letter-spacing:2px;
-  color:var(--blue);text-transform:uppercase;
-  opacity:0.7;margin-bottom:10px;
-}
-.post-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:20px;
-  letter-spacing:2px;
-  color:#fff;line-height:1.2;
-  margin-bottom:10px;
-}
-.post-desc{
-  font-size:13px;
-  color:var(--text-dim);
-  line-height:1.7;font-weight:500;
-}
-.post-arrow{
-  margin-top:18px;
-  font-family:'Share Tech Mono',monospace;
-  font-size:10px;letter-spacing:2px;
-  color:rgba(255,106,0,0.3);
-  transition:color 0.2s,letter-spacing 0.2s;
-}
-.post-card:hover .post-arrow{color:var(--orange);letter-spacing:4px;}
-
-/* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--border);
-  padding:28px 56px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:relative;z-index:1;
-}
-footer::before{
-  content:'';position:absolute;
-  top:0;left:56px;right:56px;height:1px;
-  background:linear-gradient(90deg,var(--orange),transparent 40%,transparent 60%,var(--blue));
-}
-.footer-logo{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:900;font-size:18px;
-  letter-spacing:5px;color:var(--orange);
-  opacity:0.6;
-}
-.footer-links{display:flex;gap:20px;}
-.footer-links a{
-  font-family:'Share Tech Mono',monospace;
-  font-size:10px;letter-spacing:1px;
-  color:var(--text-dim);text-decoration:none;
-  text-transform:uppercase;
-  transition:color 0.15s;
-}
-.footer-links a:hover{color:var(--orange);}
-.footer-right{
-  font-family:'Share Tech Mono',monospace;
-  font-size:9px;letter-spacing:3px;
-  color:rgba(255,106,0,0.2);
-}
-
-/* ── FADE IN ── */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.55s,transform 0.55s;}
-.fade-in.visible{opacity:1;transform:none;}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  #hero{flex-direction:column;padding:100px 24px 60px;gap:40px;}
-  .hero-right{width:100%;}
-  .id-card{width:100%;}
-  .section-wrapper{padding:60px 24px;}
-  .sec-divide{margin:0 24px;}
-  footer{flex-direction:column;gap:14px;padding:24px;}
-  nav{padding:0 16px;}
-  .nav-links a{padding:6px 10px;font-size:10px;}
-  .nav-status{display:none;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ site.description }}">
+  <title>{{ site.title }} — {{ site.subtitle }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
+        <span class="brand-mark">HX</span>
+        <span class="brand-text">{{ site.title }}</span>
+      </a>
 
-<div id="cursor"></div>
-<div id="grid-bg"></div>
-<canvas id="particle-canvas"></canvas>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">H4CKXEL</div>
-  <div class="nav-status">
-    <div class="nav-status-dot"></div>
-    SECURE CONNECTION
-  </div>
-  <div class="nav-links">
-    <a href="#terminal-section">Terminal</a>
-    <a href="#posts-section">Posts</a>
-    <a href="https://h4ckxel.github.io/projects/" target="_blank">Projects</a>
-    <a href="https://h4ckxel.github.io/writeups/" target="_blank">Write-Ups</a>
-    <a href="https://h4ckxel.github.io/about/" target="_blank">About</a>
-  </div>
-  <div class="nav-wedge"></div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-sys-label">// identity node — security researcher</div>
-
-    <div class="hero-name hero-name-glitch">
-      <span class="n-orange">H4CK</span><span class="n-blue">XEL</span>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#articles">Articles</a>
+        {% for link in site.data.navigation.main %}
+          {% unless link.url == "/" %}
+            <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
+          {% endunless %}
+        {% endfor %}
+      </nav>
     </div>
+  </header>
 
-    <div class="hero-alias">Z3R0 C00L &nbsp;/&nbsp; ALMOST HUMAN</div>
-    <div class="hero-divider"></div>
+  <main>
+    <section class="hero shell" aria-labelledby="hero-title">
+      <p class="eyebrow">Offensive security · reverse engineering · systems</p>
+      <h1 id="hero-title">Technical notes for people who prefer depth over noise.</h1>
+      <p class="hero-copy">
+        H4CKXEL is a personal research blog focused on exploit development, binary analysis,
+        network security, and practical write-ups. The goal is simple: document what is worth
+        understanding, explain it clearly, and keep the signal high.
+      </p>
 
-    <p class="hero-bio">
-      <strong>Just Another Hacker.</strong> Security Researcher. Bytes Addict.<br>
-      Exploiting systems, writing about it, and occasionally touching grass.<br><br>
-      Current host: <strong>127.0.0.1</strong> — Access level: <strong>ROOT</strong>
-    </p>
-
-    <div class="hero-links">
-      <a class="btn btn-primary" href="#terminal-section">[ LAUNCH TERMINAL ]</a>
-      <a class="btn btn-ghost" href="https://github.com/h4ckxel" target="_blank">[ GITHUB ]</a>
-      <a class="btn btn-ghost" href="https://x.com/h4ckxel" target="_blank">[ TWITTER ]</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/acxel-elizalde-06b9b9331/" target="_blank">[ LINKEDIN ]</a>
-    </div>
-  </div>
-
-  <div class="hero-right fade-in">
-    <div class="id-card">
-      <div class="id-top-bar">
-        <div class="id-top-bar-left">
-          <div class="id-top-dot"></div>
-          <div class="id-top-title">IDENTITY_CARD.bin</div>
-        </div>
-        <div class="id-top-badge">ENC-256</div>
+      <div class="hero-actions" aria-label="Primary actions">
+        <a class="button button-primary" href="#articles">Read latest articles</a>
+        <a class="button button-secondary" href="/writeups/">Browse write-ups</a>
       </div>
-      <div class="id-img-wrap">
-        <div class="id-scan-line"></div>
-        <div class="id-corners"></div>
-        <img src="https://h4ckxel.github.io/images/bio_main.jpg" alt="h4ckxel" onerror="this.parentElement.style.background='#111118'">
+    </section>
+
+    <section class="shell section-grid" aria-label="Site overview">
+      <article class="summary-card">
+        <h2>Research</h2>
+        <p>Notes on PE internals, code injection, Linux behavior, and techniques worth reproducing by hand.</p>
+      </article>
+
+      <article class="summary-card">
+        <h2>Write-ups</h2>
+        <p>Structured walkthroughs from Hack The Box, OverTheWire, and hands-on offensive security labs.</p>
+      </article>
+
+      <article class="summary-card">
+        <h2>Projects</h2>
+        <p>Tools, experiments, and small systems built to learn by implementation instead of imitation.</p>
+      </article>
+    </section>
+
+    <section class="shell content-section" id="articles" aria-labelledby="articles-title">
+      <div class="section-heading">
+        <p class="eyebrow">Latest writing</p>
+        <h2 id="articles-title">Latest articles</h2>
       </div>
-      <div class="id-data">
-        <div class="id-row">
-          <span class="id-k">alias</span>
-          <span class="id-v">z3r0 c00l // h4ckxel</span>
-        </div>
-        <div class="id-row">
-          <span class="id-k">role</span>
-          <span class="id-v blue">Ethical Hacker Learner</span>
-        </div>
-        <div class="id-row">
-          <span class="id-k">origin</span>
-          <span class="id-v">127.0.0.1</span>
-        </div>
-        <div class="id-row">
-          <span class="id-k">status</span>
-          <span class="id-v yellow">● ONLINE</span>
-        </div>
-        <div class="id-row">
-          <span class="id-k">clearance</span>
-          <span class="id-v white">ROOT</span>
-        </div>
+
+      <div class="article-list">
+        {% for post in site.posts limit:3 %}
+          <article class="article-item">
+            <div class="article-meta">{{ post.tags | first | default: "Article" }}</div>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
+          </article>
+        {% endfor %}
       </div>
-      <div class="id-bar">
-        <span class="id-bar-txt">Z3R0 NET — ENCRYPTED CHANNEL</span>
-        <span class="id-bar-txt">0x4831</span>
+    </section>
+
+    <section class="shell content-section" aria-labelledby="collections-title">
+      <div class="section-heading">
+        <p class="eyebrow">Collections</p>
+        <h2 id="collections-title">Long-form tracks</h2>
+      </div>
+
+      <div class="collection-grid">
+        <a class="collection-card" href="/writeups/">
+          <span class="collection-label">Archive</span>
+          <strong>Write-ups</strong>
+          <span>CTFs, pentesting notes, and machine walkthroughs.</span>
+        </a>
+
+        <a class="collection-card" href="/trainings/">
+          <span class="collection-label">Training</span>
+          <strong>Security labs</strong>
+          <span>Structured material for learning offensive security fundamentals.</span>
+        </a>
+
+        <a class="collection-card" href="/projects/">
+          <span class="collection-label">Builds</span>
+          <strong>Projects</strong>
+          <span>Tools and experiments shaped by curiosity and repetition.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shell content-section about-band" aria-labelledby="about-title">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">Security is more legible when it is written down.</h2>
+      </div>
+      <p>
+        This site is a working notebook: part research log, part technical archive, part reminder that
+        the best explanations are earned through implementation.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <p>© 2026 H4CKXEL</p>
+      <div class="footer-links">
+        <a href="https://github.com/h4ckxel" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://x.com/h4ckxel" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="https://www.linkedin.com/in/acxel-elizalde-06b9b9331/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </div>
-  </div>
-</section>
-
-<div class="sec-divide" style="margin-bottom:0;">
-  <span class="sec-divide-label">ACCESS_TERMINAL //</span>
-</div>
-
-<!-- TERMINAL -->
-<section class="section-wrapper" id="terminal-section">
-  <div class="sec-eyebrow">access point</div>
-  <div class="sec-title">TERM<span>INAL_</span></div>
-
-  <div class="terminal-wrap fade-in">
-    <div class="term-titlebar">
-      <div class="tbar-dot r"></div>
-      <div class="tbar-dot y"></div>
-      <div class="tbar-dot g"></div>
-      <span class="tbar-path">h4ckxel@z3r0:~$</span>
-      <span class="tbar-badge">SESSION ACTIVE</span>
-    </div>
-    <div class="term-body" id="term-body"></div>
-    <div class="term-prompt-row">
-      <span class="tprompt">h4ckxel@z3r0:~$</span>
-      <input class="tinput" id="term-input" type="text" autocomplete="off" spellcheck="false">
-    </div>
-    <div class="term-hint">type 'help' for available commands — tab to autocomplete</div>
-  </div>
-</section>
-
-<div class="sec-divide">
-  <span class="sec-divide-label">KNOWLEDGE_BASE //</span>
-</div>
-
-<!-- POSTS -->
-<section class="section-wrapper" id="posts-section">
-  <div class="sec-eyebrow">knowledge base</div>
-  <div class="sec-title">WRITE<span>_UPS &</span> POSTS_</div>
-
-  <div class="posts-grid">
-    <a class="post-card fade-in" href="https://h4ckxel.github.io/playing-with-ld_preload/" target="_blank">
-      <div class="post-id">NODE_001</div>
-      <div class="post-tag">// linux internals</div>
-      <div class="post-title">Playing with LD_PRELOAD</div>
-      <div class="post-desc">Introduction to the LD_PRELOAD environment variable and how it can be leveraged for hooking and injection.</div>
-      <div class="post-arrow">READ ──&gt;</div>
-    </a>
-    <a class="post-card fade-in" href="https://h4ckxel.github.io/exploit-101-format-strings/" target="_blank">
-      <div class="post-id">NODE_002</div>
-      <div class="post-tag">// exploit dev</div>
-      <div class="post-title">Exploit 101 — Format Strings</div>
-      <div class="post-desc">Deep dive into format string vulnerabilities on Linux and how to exploit them step by step.</div>
-      <div class="post-arrow">READ ──&gt;</div>
-    </a>
-    <a class="post-card fade-in" href="https://h4ckxel.github.io/code-injection-with-python/" target="_blank">
-      <div class="post-id">NODE_003</div>
-      <div class="post-tag">// malware dev</div>
-      <div class="post-title">Code Injection with Python</div>
-      <div class="post-desc">How to inject a backdoor into a PE file using Python. Hands-on binary manipulation.</div>
-      <div class="post-arrow">READ ──&gt;</div>
-    </a>
-    <a class="post-card fade-in" href="https://h4ckxel.github.io/writeups/" target="_blank">
-      <div class="post-id">ALL_NODES</div>
-      <div class="post-tag">// ctf & pentesting</div>
-      <div class="post-title">All Write-Ups</div>
-      <div class="post-desc">Collection of CTF write-ups, pentesting notes and security research published on the blog.</div>
-      <div class="post-arrow">VIEW ALL ──&gt;</div>
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">H4CKXEL // 2026</div>
-  <div class="footer-links">
-    <a href="https://github.com/h4ckxel" target="_blank">GitHub</a>
-    <a href="https://x.com/h4ckxel" target="_blank">Twitter</a>
-    <a href="https://www.linkedin.com/in/acxel-elizalde-06b9b9331/" target="_blank">LinkedIn</a>
-    <a href="https://h4ckxel.github.io/disclaimer/" target="_blank">Disclaimer</a>
-  </div>
-  <div class="footer-right">© ALL RIGHTS RESERVED</div>
-</footer>
-
-<script>
-// ── CURSOR ──────────────────────────────────────────────
-const cur = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cur.style.left = e.clientX + 'px';
-  cur.style.top  = e.clientY + 'px';
-});
-document.querySelectorAll('a,button,input').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
-
-// ── HEX PARTICLE BG ──────────────────────────────────────
-(function(){
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H;
-  const particles = [];
-
-  function resize(){
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  function hex(x,y,r,color,alpha){
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 0.5;
-    ctx.beginPath();
-    for(let i=0;i<6;i++){
-      const a = Math.PI/3*i - Math.PI/6;
-      const fx = x + r * Math.cos(a);
-      const fy = y + r * Math.sin(a);
-      i===0 ? ctx.moveTo(fx,fy) : ctx.lineTo(fx,fy);
-    }
-    ctx.closePath();
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  class Particle {
-    constructor(){
-      this.reset();
-    }
-    reset(){
-      this.x = Math.random() * W;
-      this.y = Math.random() * H;
-      this.r = Math.random() * 30 + 6;
-      this.vx = (Math.random()-0.5)*0.3;
-      this.vy = (Math.random()-0.5)*0.3;
-      this.life = Math.random();
-      this.speed = Math.random()*0.003 + 0.001;
-      this.color = Math.random() > 0.5 ? '#ff6a00' : '#00d4ff';
-    }
-    update(){
-      this.x += this.vx;
-      this.y += this.vy;
-      this.life += this.speed;
-      if(this.life > 1) this.reset();
-    }
-    draw(){
-      const a = Math.sin(this.life * Math.PI) * 0.18;
-      hex(this.x, this.y, this.r, this.color, a);
-    }
-  }
-
-  for(let i=0;i<60;i++) particles.push(new Particle());
-
-  function animate(){
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p=>{p.update();p.draw();});
-    requestAnimationFrame(animate);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  animate();
-})();
-
-// ── FADE IN OBSERVER ─────────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// ── TERMINAL ─────────────────────────────────────────────
-const tbody = document.getElementById('term-body');
-const tinput = document.getElementById('term-input');
-
-function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
-
-function addLine(text, cls='g', delay=0){
-  return new Promise(async r => {
-    await sleep(delay);
-    const d = document.createElement('div');
-    d.className = 'tl ' + cls;
-    d.textContent = text;
-    tbody.appendChild(d);
-    tbody.scrollTop = tbody.scrollHeight;
-    r();
-  });
-}
-
-async function typeLines(lines){
-  for(const [t,c,d] of lines) await addLine(t, c||'g', d||0);
-}
-
-const COMMANDS = {
-  help: async () => {
-    await typeLines([
-      ['','d'],
-      ['  AVAILABLE COMMANDS', 'y'],
-      ['  ─────────────────────────────────────────', 'd'],
-      ['  help          show this help menu','g'],
-      ['  whoami        display operator profile', 'g'],
-      ['  cv            open curriculum vitae', 'g'],
-      ['  decuber       open Decuber project', 'g'],
-      ['  projects      list all projects', 'g'],
-      ['  skills        list technical skills', 'g'],
-      ['  contact       show contact info', 'g'],
-      ['  blog          open blog / write-ups', 'g'],
-      ['  clear         clear terminal', 'g'],
-      ['','d'],
-    ]);
-  },
-  whoami: async () => {
-    await typeLines([
-      ['','d'],
-      ['  ┌─ IDENTITY RECORD ──────────────────────┐', 'b'],
-      ['  │                                        │', 'b'],
-      ['  │  alias    : z3r0 c00l // h4ckxel       │', 'o'],
-      ['  │  role     : Ethical Hacker Learner     │', 'o'],
-      ['  │  origin   : 127.0.0.1                  │', 'o'],
-      ['  │  status   : Almost Human               │', 'o'],
-      ['  │                                        │', 'b'],
-      ['  │  interests: exploit dev, RE, malware   │', 'w'],
-      ['  │             binary analysis, CTFs      │', 'w'],
-      ['  │                                        │', 'b'],
-      ['  └────────────────────────────────────────┘', 'b'],
-      ['','d'],
-    ]);
-  },
-  cv: async () => {
-    await typeLines([
-      ['','d'],
-      ['  [*] Opening CV...', 'b'],
-      ['  [*] URL: https://h4ckxel.github.io/CV', 'd'],
-      ['','d'],
-    ]);
-    await sleep(600);
-    window.open('https://h4ckxel.github.io/CV', '_blank');
-    await addLine('  [✓] CV opened in new window.', 'g');
-    await addLine('','d');
-  },
-  decuber: async () => {
-    await typeLines([
-      ['','d'],
-      ['  [*] Opening Decuber project...', 'b'],
-      ['  [*] URL: https://h4ckxel.github.io/Decuber', 'd'],
-      ['','d'],
-    ]);
-    await sleep(600);
-    window.open('https://h4ckxel.github.io/Decuber', '_blank');
-    await addLine('  [✓] Decuber opened in new window.', 'g');
-    await addLine('','d');
-  },
-  projects: async () => {
-    await typeLines([
-      ['','d'],
-      ['  [*] Listando proyectos...', 'b'],
-      ['','d'],
-      ['  01  Decuber          https://h4ckxel.github.io/Decuber', 'o'],
-      ['  02  Blog / Portfolio https://h4ckxel.github.io', 'o'],
-      ['  03  GitHub           https://github.com/h4ckxel', 'o'],
-      ['','d'],
-      ['  use "decuber" to open Decuber project.', 'd'],
-      ['','d'],
-    ]);
-  },
-  skills: async () => {
-    await typeLines([
-      ['','d'],
-      ['  TECHNICAL SKILLS', 'y'],
-      ['  ─────────────────────────────────────────', 'd'],
-      ['','d'],
-      ['  [ EXPLOIT DEV ]     ████████████░░  90%', 'o'],
-      ['  [ REVERSE ENG ]     ██████████░░░░  76%', 'o'],
-      ['  [ MALWARE DEV ]     █████████░░░░░  70%', 'o'],
-      ['  [ PYTHON/C    ]     ████████████░░  88%', 'o'],
-      ['  [ CTF/PENTEST ]     ███████████░░░  82%', 'o'],
-      ['  [ LINUX       ]     █████████████░  95%', 'o'],
-      ['','d'],
-    ]);
-  },
-  contact: async () => {
-    await typeLines([
-      ['','d'],
-      ['  CONTACT CHANNELS', 'y'],
-      ['  ─────────────────────────────────────────', 'd'],
-      ['','d'],
-      ['  Twitter    https://x.com/h4ckxel', 'b'],
-      ['  GitHub     https://github.com/h4ckxel', 'b'],
-      ['  LinkedIn   https://linkedin.com/in/acxel-elizalde-06b9b9331', 'b'],
-      ['  Blog       https://h4ckxel.github.io', 'b'],
-      ['','d'],
-    ]);
-  },
-  blog: async () => {
-    await typeLines([
-      ['','d'],
-      ['  [*] Opening blog...', 'b'],
-    ]);
-    await sleep(400);
-    window.open('https://h4ckxel.github.io', '_blank');
-    await addLine('  [✓] Blog opened in new window.', 'g');
-    await addLine('','d');
-  },
-  clear: async () => {
-    tbody.innerHTML = '';
-    await boot();
-  },
-};
-
-async function boot(){
-  await typeLines([
-    ['  Z3r0 TERMINAL v3.1.7 — h4ckxel SECURITY OPS', 'bold', 0],
-    ['  ─────────────────────────────────────────────────', 'd', 50],
-    ['  Ethical Hacker Learner // Bytes Addict // Almost Human', 'w', 50],
-    ['  Type "help" to see available commands.', 'd', 60],
-    ['','d', 40],
-  ]);
-}
-
-let history = [], histIdx = -1;
-
-tinput.addEventListener('keydown', async e => {
-  if(e.key === 'Enter'){
-    const cmd = tinput.value.trim().toLowerCase();
-    if(!cmd){ tinput.value=''; return; }
-    history.unshift(cmd); histIdx = -1;
-    await addLine('h4ckxel@z3r0:~$ ' + cmd, 'bold');
-    tinput.value = '';
-    if(COMMANDS[cmd]) await COMMANDS[cmd]();
-    else {
-      await addLine('','d');
-      await addLine('  bash: ' + cmd + ': command not found', 'r');
-      await addLine('  type "help" for available commands.', 'd');
-      await addLine('','d');
-    }
-  } else if(e.key === 'ArrowUp'){
-    e.preventDefault();
-    if(histIdx < history.length-1){ histIdx++; tinput.value = history[histIdx]; }
-  } else if(e.key === 'ArrowDown'){
-    e.preventDefault();
-    if(histIdx > 0){ histIdx--; tinput.value = history[histIdx]; }
-    else { histIdx=-1; tinput.value=''; }
-  } else if(e.key === 'Tab'){
-    e.preventDefault();
-    const partial = tinput.value.trim().toLowerCase();
-    const matches = Object.keys(COMMANDS).filter(k => k.startsWith(partial));
-    if(matches.length === 1) tinput.value = matches[0];
-    else if(matches.length > 1){
-      await addLine('h4ckxel@phantom:~$ ' + tinput.value, 'bold');
-      await addLine('  ' + matches.join('   '), 'd');
-    }
-  }
-});
-
-document.addEventListener('click', () => tinput.focus());
-boot();
-</script>
+  </footer>
 </body>
 </html>

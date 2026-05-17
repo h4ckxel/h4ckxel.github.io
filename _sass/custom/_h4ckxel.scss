@@ -1,0 +1,238 @@
+/* ==========================================================================
+   H4CKXEL editorial layer
+   ========================================================================== */
+
+$editorial-surface: #141920;
+$editorial-surface-strong: #1a2129;
+$editorial-muted: #b7c0ca;
+$editorial-soft: #7f8a96;
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(127, 179, 255, 0.08), transparent 34rem),
+    linear-gradient(180deg, #0b0d10 0%, #0d1116 100%);
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.7;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  color: $text-color;
+}
+
+code,
+kbd,
+pre,
+samp,
+.highlighter-rouge,
+.highlight {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.masthead {
+  border-bottom: 1px solid $border-color;
+  background: rgba(11, 13, 16, 0.92);
+}
+
+.greedy-nav {
+  background: transparent;
+}
+
+.site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.site-title::before {
+  content: "HX";
+  display: inline-grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 1px solid $border-color;
+  border-radius: 0.65rem;
+  background: $editorial-surface;
+  color: $primary-color;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.page__content,
+.archive__item-body,
+.author__content,
+.sidebar {
+  color: $editorial-muted;
+}
+
+.page__title,
+.archive__item-title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $text-color;
+  letter-spacing: -0.02em;
+}
+
+.page__title {
+  line-height: 1.15;
+}
+
+.page__meta,
+.page__taxonomy,
+.archive__item-excerpt,
+.author__bio,
+.breadcrumbs,
+.toc__menu,
+.nav__items,
+.page__footer-copyright {
+  color: $editorial-soft;
+}
+
+.archive__item,
+.toc,
+.sidebar.sticky,
+.notice,
+.notice--primary,
+.notice--info,
+.notice--warning,
+.notice--danger,
+.notice--success,
+table {
+  border-color: $border-color;
+}
+
+.archive__item,
+.toc,
+.author__avatar img,
+.notice,
+.notice--primary,
+.notice--info,
+.notice--warning,
+.notice--danger,
+.notice--success {
+  border-radius: 1rem;
+}
+
+.archive__item,
+.toc,
+.notice,
+.notice--primary,
+.notice--info,
+.notice--warning,
+.notice--danger,
+.notice--success {
+  background: rgba(20, 25, 32, 0.88);
+}
+
+.archive__item {
+  padding: 1.25rem;
+  border: 1px solid $border-color;
+}
+
+.archive__item + .archive__item {
+  margin-top: 1rem;
+}
+
+.sidebar.sticky {
+  padding: 1rem;
+  border: 1px solid $border-color;
+  border-radius: 1rem;
+  background: rgba(20, 25, 32, 0.72);
+}
+
+.toc {
+  border: 1px solid $border-color;
+  overflow: hidden;
+}
+
+.toc .nav__title {
+  background: $editorial-surface-strong;
+  color: $text-color;
+}
+
+.toc__menu a,
+.nav__items a,
+.author__urls a {
+  color: $editorial-muted;
+}
+
+.toc__menu a:hover,
+.nav__items a:hover,
+.author__urls a:hover {
+  color: $link-color-hover;
+}
+
+.page__content a:not(.btn) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.page__content pre,
+.page__content .highlight {
+  border: 1px solid $border-color;
+  border-radius: 1rem;
+  background: $code-background-color;
+}
+
+.page__content code {
+  border-radius: 0.35rem;
+}
+
+table {
+  border: 1px solid $border-color;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+thead {
+  background: $editorial-surface-strong;
+}
+
+tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.btn,
+.pagination--pager {
+  border-radius: 999px;
+}
+
+.page__footer {
+  border-top: 1px solid $border-color;
+}
+
+.page__footer,
+.page__footer-follow {
+  background: rgba(9, 11, 14, 0.92);
+}
+
+@media (max-width: 768px) {
+  .site-title {
+    gap: 0.6rem;
+  }
+
+  .site-title::before {
+    width: 1.95rem;
+    height: 1.95rem;
+  }
+}
