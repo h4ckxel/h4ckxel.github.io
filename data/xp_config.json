@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "storageKey": "h4ckxel.commandCenter.v1",
+  "curve": {
+    "baseXp": 120,
+    "growth": 1.16,
+    "maxLevel": 100
+  },
+  "hardcoreMultiplier": 1.5,
+  "activityTypes": {
+    "project": {
+      "label": "Project shipped",
+      "unit": "project",
+      "xpPerUnit": 120,
+      "skillXp": {
+        "system-design": 20,
+        "devops": 10
+      }
+    },
+    "writeup": {
+      "label": "Write-up published",
+      "unit": "write-up",
+      "xpPerUnit": 80,
+      "skillXp": {
+        "web-security": 10,
+        "reverse-engineering": 10
+      }
+    },
+    "ctf": {
+      "label": "CTF challenge cleared",
+      "unit": "challenge",
+      "xpPerUnit": 60,
+      "skillXp": {
+        "web-security": 10,
+        "networking": 10
+      }
+    },
+    "note": {
+      "label": "Technical note written",
+      "unit": "note",
+      "xpPerUnit": 30,
+      "skillXp": {
+        "system-design": 5
+      }
+    },
+    "commit": {
+      "label": "Commit pushed",
+      "unit": "commit",
+      "xpPerUnit": 12,
+      "skillXp": {
+        "devops": 3
+      }
+    },
+    "study-session": {
+      "label": "Study session completed",
+      "unit": "hour",
+      "xpPerUnit": 25,
+      "skillXp": {
+        "linux": 4,
+        "algorithms": 4
+      }
+    },
+    "reverse-engineering-log": {
+      "label": "Reverse engineering log",
+      "unit": "log",
+      "xpPerUnit": 70,
+      "skillXp": {
+        "reverse-engineering": 18,
+        "c": 6
+      }
+    },
+    "linux-lab": {
+      "label": "Linux lab completed",
+      "unit": "lab",
+      "xpPerUnit": 50,
+      "skillXp": {
+        "linux": 16,
+        "networking": 4
+      }
+    },
+    "algorithm": {
+      "label": "Algorithm solved",
+      "unit": "problem",
+      "xpPerUnit": 20,
+      "skillXp": {
+        "algorithms": 12,
+        "python": 3
+      }
+    },
+    "milestone": {
+      "label": "Milestone achieved",
+      "unit": "milestone",
+      "xpPerUnit": 150,
+      "skillXp": {
+        "system-design": 15
+      }
+    }
+  },
+  "achievements": [
+    {
+      "id": "first-signal",
+      "title": "First Signal",
+      "description": "Log the first activity.",
+      "kind": "activity-count",
+      "threshold": 1
+    },
+    {
+      "id": "seven-day-streak",
+      "title": "Seven Day Uplink",
+      "description": "Maintain a 7-day activity streak.",
+      "kind": "streak",
+      "threshold": 7
+    },
+    {
+      "id": "level-5",
+      "title": "Script Runner",
+      "description": "Reach level 5.",
+      "kind": "level",
+      "threshold": 5
+    },
+    {
+      "id": "level-10",
+      "title": "Vibe Coder",
+      "description": "Reach level 10.",
+      "kind": "level",
+      "threshold": 10
+    },
+    {
+      "id": "ten-logs",
+      "title": "Archive Builder",
+      "description": "Create 10 logged activities.",
+      "kind": "activity-count",
+      "threshold": 10
+    }
+  ],
+  "github": {
+    "owner": "h4ckxel",
+    "repo": "h4ckxel.github.io"
+  },
+  "projectProgress": [
+    {
+      "name": "escaner-de-puertos",
+      "focus": "validation, reporting, test coverage",
+      "progress": 68,
+      "status": "active"
+    },
+    {
+      "name": "Decuber",
+      "focus": "binary encoding workflow",
+      "progress": 82,
+      "status": "maintenance"
+    },
+    {
+      "name": "CardsGame",
+      "focus": "OO redesign documentation",
+      "progress": 74,
+      "status": "refactor"
+    }
+  ]
+}

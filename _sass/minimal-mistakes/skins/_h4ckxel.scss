@@ -1,38 +1,38 @@
 /* ==========================================================================
-   H4CKXEL editorial skin
+   H4CKXEL terminal skin
    ========================================================================== */
 
 /* Colors */
-$background-color: #0b0d10 !default;
-$text-color: #edf1f5 !default;
-$primary-color: #7fb3ff !default;
-$border-color: #2a333d !default;
-$code-background-color: #11151a !default;
-$code-background-color-dark: #0f1318 !default;
-$form-background-color: #141920 !default;
-$footer-background-color: #090b0e !default;
-$link-color: #9ac3ff !default;
-$link-color-hover: #c2dbff !default;
-$link-color-visited: #86a9da !default;
+$background-color: #050807 !default;
+$text-color: #e7fff7 !default;
+$primary-color: #6dffd5 !default;
+$border-color: rgba(109, 255, 213, 0.18) !default;
+$code-background-color: #09110f !default;
+$code-background-color-dark: #07100d !default;
+$form-background-color: #0b1815 !default;
+$footer-background-color: #040706 !default;
+$link-color: #7fffe0 !default;
+$link-color-hover: #c9fff1 !default;
+$link-color-visited: #8ed7ca !default;
 $masthead-link-color: $text-color !default;
 $masthead-link-color-hover: $link-color-hover !default;
-$navicon-link-color-hover: #1a2129 !default;
+$navicon-link-color-hover: #0b1815 !default;
 
 /* Syntax highlighting */
-$base00: #11151a !default;
-$base01: #171d24 !default;
-$base02: #202832 !default;
-$base03: #7f8a96 !default;
-$base04: #b7c0ca !default;
-$base05: #edf1f5 !default;
-$base06: #f5f8fb !default;
+$base00: #09110f !default;
+$base01: #0d1714 !default;
+$base02: #14211d !default;
+$base03: #71958b !default;
+$base04: #b8d7cf !default;
+$base05: #e7fff7 !default;
+$base06: #f3fffb !default;
 $base07: #ffffff !default;
 $base08: #f28b82 !default;
 $base09: #f6b26b !default;
 $base0a: #ffd479 !default;
-$base0b: #9bd18b !default;
-$base0c: #7bdff2 !default;
-$base0d: #7fb3ff !default;
+$base0b: #7dff9b !default;
+$base0c: #62ddff !default;
+$base0d: #6dffd5 !default;
 $base0e: #c7a6ff !default;
 $base0f: #e7a7b5 !default;
 

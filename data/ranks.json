@@ -1,0 +1,17 @@
+{
+  "ranks": [
+    { "level": 1, "title": "Terminal Newbie" },
+    { "level": 5, "title": "Script Runner" },
+    { "level": 10, "title": "Vibe Coder" },
+    { "level": 15, "title": "Packet Hunter" },
+    { "level": 20, "title": "Linux Wanderer" },
+    { "level": 30, "title": "Reverse Apprentice" },
+    { "level": 40, "title": "Binary Raider" },
+    { "level": 50, "title": "Systems Engineer" },
+    { "level": 60, "title": "Threat Hunter" },
+    { "level": 70, "title": "Exploit Operator" },
+    { "level": 80, "title": "Security Architect" },
+    { "level": 90, "title": "Ghost Analyst" },
+    { "level": 100, "title": "Cyber Warlord" }
+  ]
+}

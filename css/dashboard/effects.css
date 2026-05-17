@@ -1,0 +1,144 @@
+.ambient-grid,
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ambient-grid {
+  z-index: -2;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(109, 255, 213, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(109, 255, 213, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+.scanlines {
+  z-index: 30;
+  opacity: 0.12;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.05) 0 1px,
+    transparent 1px 4px
+  );
+}
+
+.boot-sequence {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: #020403;
+}
+
+.boot-sequence.offline {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 420ms ease, visibility 420ms ease;
+}
+
+.boot-window {
+  width: min(calc(100% - 32px), 560px);
+  min-height: 240px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: rgba(7, 15, 13, 0.95);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.boot-window p {
+  color: var(--accent);
+}
+
+#boot-log {
+  display: grid;
+  gap: 10px;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+}
+
+.site-nav a:hover,
+.footer-links a:hover,
+.article-item a:hover {
+  color: var(--accent);
+}
+
+.panel,
+.telemetry-card,
+.button,
+.skill-node,
+.article-item,
+.mission-card,
+.commit-item {
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease,
+    box-shadow 180ms ease;
+}
+
+@media (hover: hover) {
+  .panel:hover,
+  .telemetry-card:hover,
+  .skill-node:hover,
+  .article-item:hover,
+  .mission-card:hover,
+  .commit-item:hover {
+    border-color: var(--border-strong);
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.xp-track.flash span {
+  animation: xpPulse 720ms ease;
+}
+
+.toast {
+  animation: toastIn 220ms ease both;
+}
+
+@keyframes xpPulse {
+  0% {
+    filter: brightness(1);
+  }
+  45% {
+    filter: brightness(1.8);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

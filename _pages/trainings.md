@@ -1,11 +1,11 @@
 ---
 permalink: /trainings/
-title: "Trainings"
-excerpt: "Free Trainings"
+title: "Academy"
+excerpt: "Training tracks, labs, and progression resources."
 ---
 
 ---
-Here is a list of some free trainings and courses about information security I found while browsing the Web. I hope it will help you to get a better understanding of the various field of information security.
+This academy index tracks the courses, labs, and reference material that feed the progression system.
 {: .text-justify}
 
 >**Note:** This section is constantly evolving. **Last update:** October 08, 2025.

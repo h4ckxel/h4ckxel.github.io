@@ -1,15 +1,15 @@
 # Navigation Links
 main:
-  - title: "Blog"
+  - title: "Command Center"
     url: /
 
   - title: "Projects"
     url: /projects/
 
-  - title: "Write-Ups"
+  - title: "Ops Archive"
     url: /writeups/
 
-  - title: "Trainings"
+  - title: "Academy"
     url: /trainings/
 
   - title: "Links"

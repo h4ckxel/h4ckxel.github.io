@@ -7,123 +7,290 @@ layout: null
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ site.description }}">
-  <title>{{ site.title }} — {{ site.subtitle }}</title>
+  <title>{{ site.title }} — Command Center</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/css/main.css' | relative_url }}">
 </head>
-<body>
+<body class="terminal-shell">
+  <div class="boot-sequence" id="boot-sequence" aria-hidden="true">
+    <div class="boot-window">
+      <p>HX // secure boot</p>
+      <div id="boot-log"></div>
+    </div>
+  </div>
+
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="ambient-grid" aria-hidden="true"></div>
+
   <header class="site-header">
     <div class="shell header-inner">
       <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
         <span class="brand-mark">HX</span>
-        <span class="brand-text">{{ site.title }}</span>
+        <span>
+          <span class="brand-text">{{ site.title }}</span>
+          <span class="brand-subtext">classified training terminal</span>
+        </span>
       </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#articles">Articles</a>
-        {% for link in site.data.navigation.main %}
-          {% unless link.url == "/" %}
-            <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
-          {% endunless %}
-        {% endfor %}
+        <a href="#command-center">Command Center</a>
+        <a href="#missions">Missions</a>
+        <a href="#skills">Skill Tree</a>
+        <a href="#journal">Journal</a>
+        <a href="{{ '/projects/' | relative_url }}">Builds</a>
+        <a href="{{ '/writeups/' | relative_url }}">Ops Archive</a>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="hero shell" aria-labelledby="hero-title">
-      <p class="eyebrow">Offensive security · reverse engineering · systems</p>
-      <h1 id="hero-title">Technical notes for people who prefer depth over noise.</h1>
-      <p class="hero-copy">
-        H4CKXEL is a personal research blog focused on exploit development, binary analysis,
-        network security, and practical write-ups. The goal is simple: document what is worth
-        understanding, explain it clearly, and keep the signal high.
-      </p>
+      <div class="hero-copy-block">
+        <p class="eyebrow">Hacker RPG OS // systems engineering progression terminal</p>
+        <h1 id="hero-title">Build the operator. Track the engineer. Archive the evidence.</h1>
+        <p class="hero-copy">
+          This dashboard turns research, labs, commits, write-ups, and study into a visible progression loop:
+          a technical journal on one side, a mission-driven operating system on the other.
+        </p>
+      </div>
 
-      <div class="hero-actions" aria-label="Primary actions">
-        <a class="button button-primary" href="#articles">Read latest articles</a>
-        <a class="button button-secondary" href="/writeups/">Browse write-ups</a>
+      <div class="hero-telemetry" aria-label="Profile telemetry">
+        <article class="telemetry-card">
+          <span>Current Rank</span>
+          <strong id="hero-rank">Initializing…</strong>
+        </article>
+        <article class="telemetry-card">
+          <span>Level</span>
+          <strong id="hero-level">--</strong>
+        </article>
+        <article class="telemetry-card">
+          <span>Active Streak</span>
+          <strong id="hero-streak">0 days</strong>
+        </article>
+        <article class="telemetry-card">
+          <span>Total XP</span>
+          <strong id="hero-total-xp">0</strong>
+        </article>
       </div>
     </section>
 
-    <section class="shell section-grid" aria-label="Site overview">
-      <article class="summary-card">
-        <h2>Research</h2>
-        <p>Notes on PE internals, code injection, Linux behavior, and techniques worth reproducing by hand.</p>
+    <section class="shell command-grid" id="command-center" aria-label="Command center dashboard">
+      <article class="panel panel-wide xp-panel" aria-labelledby="xp-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Progression engine</p>
+            <h2 id="xp-title">XP / Rank Core</h2>
+          </div>
+          <span class="signal-pill" id="rank-next-unlock">Awaiting config</span>
+        </div>
+
+        <div class="xp-readout">
+          <div>
+            <span class="metric-label">Level</span>
+            <strong id="level-value">--</strong>
+          </div>
+          <div>
+            <span class="metric-label">Rank</span>
+            <strong id="rank-value">Initializing…</strong>
+          </div>
+          <div>
+            <span class="metric-label">Next Level</span>
+            <strong id="next-level-value">-- XP</strong>
+          </div>
+        </div>
+
+        <div class="xp-track" role="progressbar" aria-label="XP progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="xp-bar"></span>
+        </div>
+        <div class="xp-meta">
+          <span id="xp-current">0 XP</span>
+          <span id="xp-required">0 XP required</span>
+        </div>
+
+        <div class="action-console" aria-labelledby="activity-console-title">
+          <div>
+            <p class="eyebrow">Log activity</p>
+            <h3 id="activity-console-title">Grant XP to real work</h3>
+          </div>
+          <form id="activity-form">
+            <label>
+              Activity
+              <select id="activity-type" name="activityType"></select>
+            </label>
+            <label>
+              Quantity
+              <input id="activity-quantity" name="quantity" type="number" min="0.5" step="0.5" value="1">
+            </label>
+            <label>
+              Field note
+              <input id="activity-note" name="note" type="text" maxlength="120" placeholder="Optional context">
+            </label>
+            <button type="submit" class="button button-primary">Add XP</button>
+          </form>
+          <div class="quick-actions" id="quick-actions" aria-label="Quick XP actions"></div>
+        </div>
       </article>
 
-      <article class="summary-card">
-        <h2>Write-ups</h2>
-        <p>Structured walkthroughs from Hack The Box, OverTheWire, and hands-on offensive security labs.</p>
+      <article class="panel mission-panel" id="missions" aria-labelledby="missions-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Mission board</p>
+            <h2 id="missions-title">Active objectives</h2>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="hardcore-toggle">
+            <span>Hardcore</span>
+          </label>
+        </div>
+        <div class="mission-stack" id="mission-stack"></div>
       </article>
 
-      <article class="summary-card">
-        <h2>Projects</h2>
-        <p>Tools, experiments, and small systems built to learn by implementation instead of imitation.</p>
+      <article class="panel telemetry-panel" aria-labelledby="telemetry-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">System diagnostics</p>
+            <h2 id="telemetry-title">Operational status</h2>
+          </div>
+          <span class="signal-pill online">SYSTEM ONLINE</span>
+        </div>
+        <div class="diagnostic-list" id="diagnostic-list"></div>
+        <div class="terminal-feed" id="terminal-feed" aria-live="polite"></div>
       </article>
-    </section>
 
-    <section class="shell content-section" id="articles" aria-labelledby="articles-title">
-      <div class="section-heading">
-        <p class="eyebrow">Latest writing</p>
-        <h2 id="articles-title">Latest articles</h2>
-      </div>
+      <article class="panel radar-panel" aria-labelledby="radar-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Capability map</p>
+            <h2 id="radar-title">Skill radar</h2>
+          </div>
+        </div>
+        <div class="radar-wrap" id="radar-chart"></div>
+      </article>
 
-      <div class="article-list">
-        {% for post in site.posts limit:3 %}
-          <article class="article-item">
-            <div class="article-meta">{{ post.tags | first | default: "Article" }}</div>
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
+      <article class="panel panel-wide skill-panel" id="skills" aria-labelledby="skills-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Academy tracker</p>
+            <h2 id="skills-title">Skill tree</h2>
+          </div>
+          <span class="signal-pill" id="skill-summary">0 nodes unlocked</span>
+        </div>
+        <div class="skill-tree-layout">
+          <div class="skill-tree-wrap">
+            <svg id="skill-links" aria-hidden="true"></svg>
+            <div class="skill-tree" id="skill-tree"></div>
+          </div>
+          <aside class="skill-detail" id="skill-detail" aria-live="polite"></aside>
+        </div>
+      </article>
+
+      <article class="panel heatmap-panel" aria-labelledby="heatmap-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Study cadence</p>
+            <h2 id="heatmap-title">Heatmap</h2>
+          </div>
+          <span class="signal-pill" id="heatmap-summary">0 active days</span>
+        </div>
+        <div class="heatmap" id="heatmap"></div>
+      </article>
+
+      <article class="panel commits-panel" aria-labelledby="commits-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">GitHub uplink</p>
+            <h2 id="commits-title">Recent commits</h2>
+          </div>
+          <span class="signal-pill" id="repo-summary">Linking…</span>
+        </div>
+        <div class="commit-list" id="commit-list"></div>
+      </article>
+
+      <article class="panel ctf-panel" aria-labelledby="ctf-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Archive telemetry</p>
+            <h2 id="ctf-title">CTF / lab stats</h2>
+          </div>
+        </div>
+        <div class="stat-grid">
+          <article>
+            <span>HTB logs</span>
+            <strong>{{ site.htb | size }}</strong>
           </article>
-        {% endfor %}
-      </div>
-    </section>
+          <article>
+            <span>MBE labs</span>
+            <strong>{{ site.mbe | size }}</strong>
+          </article>
+          <article>
+            <span>OTW tracks</span>
+            <strong>{{ site.otw | size }}</strong>
+          </article>
+          <article>
+            <span>Journal entries</span>
+            <strong>{{ site.posts | size }}</strong>
+          </article>
+        </div>
+      </article>
 
-    <section class="shell content-section" aria-labelledby="collections-title">
-      <div class="section-heading">
-        <p class="eyebrow">Collections</p>
-        <h2 id="collections-title">Long-form tracks</h2>
-      </div>
+      <article class="panel project-panel" aria-labelledby="projects-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Engineering queue</p>
+            <h2 id="projects-title">Project progress</h2>
+          </div>
+        </div>
+        <div class="project-list" id="project-list"></div>
+      </article>
 
-      <div class="collection-grid">
-        <a class="collection-card" href="/writeups/">
-          <span class="collection-label">Archive</span>
-          <strong>Write-ups</strong>
-          <span>CTFs, pentesting notes, and machine walkthroughs.</span>
-        </a>
+      <article class="panel panel-wide timeline-panel" id="journal" aria-labelledby="journal-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Technical journal</p>
+            <h2 id="journal-title">Research timeline</h2>
+          </div>
+          <div class="panel-actions">
+            <button type="button" class="button button-secondary" id="export-state">Export JSON</button>
+            <label class="button button-secondary file-button">
+              Import JSON
+              <input type="file" id="import-state" accept="application/json">
+            </label>
+          </div>
+        </div>
 
-        <a class="collection-card" href="/trainings/">
-          <span class="collection-label">Training</span>
-          <strong>Security labs</strong>
-          <span>Structured material for learning offensive security fundamentals.</span>
-        </a>
+        <div class="timeline-grid">
+          <section>
+            <h3>Latest technical logs</h3>
+            <div class="article-list">
+              {% for post in site.posts limit:6 %}
+                <article class="article-item">
+                  <div>
+                    <div class="article-meta">{{ post.tags | first | default: "research-log" }}</div>
+                    <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
+                    <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
+                  </div>
+                  <button type="button" class="button button-secondary article-claim" data-claim-article="{{ post.url | relative_url }}">
+                    Claim XP
+                  </button>
+                </article>
+              {% endfor %}
+            </div>
+          </section>
 
-        <a class="collection-card" href="/projects/">
-          <span class="collection-label">Builds</span>
-          <strong>Projects</strong>
-          <span>Tools and experiments shaped by curiosity and repetition.</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="shell content-section about-band" aria-labelledby="about-title">
-      <div>
-        <p class="eyebrow">About</p>
-        <h2 id="about-title">Security is more legible when it is written down.</h2>
-      </div>
-      <p>
-        This site is a working notebook: part research log, part technical archive, part reminder that
-        the best explanations are earned through implementation.
-      </p>
+          <section>
+            <h3>Progress history</h3>
+            <ol class="history-list" id="history-list"></ol>
+          </section>
+        </div>
+      </article>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="shell footer-inner">
-      <p>© 2026 H4CKXEL</p>
+      <p>© 2026 H4CKXEL // training terminal persistent across sessions</p>
       <div class="footer-links">
         <a href="https://github.com/h4ckxel" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://x.com/h4ckxel" target="_blank" rel="noopener noreferrer">Twitter</a>
@@ -131,5 +298,37 @@ layout: null
       </div>
     </div>
   </footer>
+
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+  <script>
+    window.H4CKXEL_CONFIG_PATHS = {
+      missions: "{{ '/data/missions.json' | relative_url }}",
+      ranks: "{{ '/data/ranks.json' | relative_url }}",
+      skills: "{{ '/data/skills.json' | relative_url }}",
+      xp: "{{ '/data/xp_config.json' | relative_url }}"
+    };
+
+    window.H4CKXEL_CONTENT = {
+      posts: [
+        {% for post in site.posts limit:8 %}
+          {
+            "title": {{ post.title | jsonify }},
+            "url": {{ post.url | relative_url | jsonify }},
+            "date": {{ post.date | date_to_xmlschema | jsonify }},
+            "excerpt": {{ post.excerpt | markdownify | strip_html | strip_newlines | jsonify }},
+            "tags": {{ post.tags | jsonify }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      stats: {
+        "posts": {{ site.posts | size }},
+        "htb": {{ site.htb | size }},
+        "mbe": {{ site.mbe | size }},
+        "otw": {{ site.otw | size }}
+      }
+    };
+  </script>
+  <script type="module" src="{{ '/assets/js/command-center/main.js' | relative_url }}"></script>
 </body>
 </html>

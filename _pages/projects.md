@@ -1,11 +1,11 @@
 ---
 permalink: /projects/
-title: "Projects"
-excerpt: "Projects"
+title: "Builds"
+excerpt: "Security tooling, systems experiments, and engineering projects."
 ---
 
 ---
-This is a curated selection of projects that best represent my current direction: offensive security, security tooling, and software engineering fundamentals.
+This is the build bay: projects that represent the current direction of the operator profile—offensive security, security tooling, and software engineering fundamentals.
 
 ## Security
 
