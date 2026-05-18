@@ -1,11 +1,11 @@
 ---
 permalink: /projects/
-title: "Builds"
-excerpt: "Security tooling, systems experiments, and engineering projects."
+title: "Projects"
+excerpt: "Small tools, systems experiments, and security projects."
 ---
 
 ---
-This is the build bay: projects that represent the current direction of the operator profile—offensive security, security tooling, and software engineering fundamentals.
+This is a curated selection of projects that represent the current direction of the lab: offensive security, security tooling, and software engineering fundamentals.
 
 ## Security
 

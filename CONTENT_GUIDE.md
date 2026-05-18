@@ -1,6 +1,8 @@
-# Guía para mantener actualizado el sistema
+# Guía para mantener actualizado el sitio
 
-## 1. Publicar un nuevo technical log
+Este repositorio funciona como archivo técnico personal: logs, notes, tools, systems, research y writeups.
+
+## 1. Publicar un log nuevo
 
 Los posts normales viven en `_posts/`.
 
@@ -17,8 +19,8 @@ YYYY-MM-DD-titulo-del-post.md
 title: "Título del artículo"
 excerpt: "Resumen corto para listados y SEO."
 tags:
-  - reversing
   - linux
+  - reversing
 ---
 ```
 
@@ -27,22 +29,23 @@ tags:
 Ejemplo:
 
 ```text
-_posts/2026-05-16-analizando-un-binario-elf.md
+_posts/2026-05-18-analizando-un-binario-elf.md
 ```
 
-La portada toma automáticamente los logs más recientes y permite reclamarlos como XP una sola vez dentro del Command Center.
+La portada toma automáticamente los últimos posts desde `site.posts`.
 
 ## 2. Tipos de contenido recomendados
 
-- `reversing`
-- `linux`
-- `ctf`
-- `malware`
-- `project-log`
-- `engineering-note`
 - `writeup`
+- `note`
+- `linux`
+- `reversing`
+- `systems`
+- `math`
+- `tooling`
+- `ctf`
 
-La taxonomía no es decorativa: ayuda a que el sitio lea como diario técnico, academia y archivo operacional al mismo tiempo.
+Mantén los títulos directos y técnicos. El sitio debe leerse como un archivo de laboratorio, no como una landing page.
 
 ## 3. Agregar páginas fijas
 
@@ -52,60 +55,47 @@ Ejemplo:
 
 ```yaml
 ---
-permalink: /recursos/
-title: "Recursos"
-excerpt: "Recursos"
+permalink: /notes/
+title: "Notes"
+excerpt: "Short technical notes."
 ---
 ```
 
 Si quieres que aparezca en la navegación superior, agrega el enlace en `_data/navigation.yml`.
 
-## 4. Agregar write-ups o series
+## 4. Agregar writeups o series
 
 Las colecciones actuales son:
 
 - `_htb/` para Hack The Box
 - `_otw/` para OverTheWire
 - `_mbe/` para Modern Binary Exploitation
-- `_dvwa/` para DVWA
+- `_dvwa/` para DVWA, si se agregan archivos en esa colección
 
-Cada colección ya tiene reglas definidas en `_config.yml`, así que basta con crear nuevos archivos Markdown dentro de la carpeta correcta y, si aplica, enlazarlos desde `_data/navigation.yml`.
+Cada colección ya tiene reglas definidas en `_config.yml`, así que basta con crear nuevos archivos Markdown dentro de la carpeta correcta y enlazarlos desde `_data/navigation.yml` si aplica.
 
-## 5. Configurar la progresión
+## 5. Archivos principales de diseño
 
-El sistema de Command Center se controla desde:
-
-- `data/missions.json`
-- `data/ranks.json`
-- `data/skills.json`
-- `data/xp_config.json`
-
-Ahí puedes ajustar XP, rangos, misiones, nodos del skill tree, achievements y progreso de proyectos sin tocar la lógica JavaScript.
-
-La arquitectura completa está resumida en `PROGRESSION_ARCHITECTURE.md`.
-
-## 6. Archivos que gobiernan el diseño
-
-- Portada / Command Center: `index.html`
-- Entrada CSS de la portada: `css/main.css`
-- Módulos CSS de la portada: `css/dashboard/`
-- Skin global del sitio: `_sass/minimal-mistakes/skins/_h4ckxel.scss`
+- Home minimal: `index.html`
+- CSS de la home: `css/main.css`
+- Skin global del tema: `_sass/minimal-mistakes/skins/_h4ckxel.scss`
 - Ajustes visuales globales: `_sass/custom/_h4ckxel.scss`
-- Lógica del dashboard: `assets/js/command-center/`
 - Entrada principal de estilos del tema: `assets/css/main.scss`
 
-## 7. Flujo recomendado
+La home no carga JavaScript del sistema de dashboard anterior.
+
+## 6. Flujo recomendado
 
 ```bash
 bundle install
 bundle exec jekyll serve
 ```
 
-Después abre `http://localhost:4000`, revisa:
+Después abre `http://localhost:4000` y revisa:
 
-1. la portada,
-2. una página normal,
-3. un post,
-4. el registro de XP,
-5. la misión activa,
-6. la importación/exportación JSON.
+1. la home,
+2. `/writeups/`,
+3. `/projects/`,
+4. `/notes/`,
+5. un post,
+6. una colección como HTB, MBE u OTW.

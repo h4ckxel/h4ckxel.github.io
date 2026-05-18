@@ -18,9 +18,9 @@ minimal_mistakes_skin    : "h4ckxel" # custom editorial skin
 locale                   : "en-US"
 title                    : "H4CKXEL"
 title_separator          : "-"
-subtitle                 : "Research lab, hacker academy, and systems progression terminal"
+subtitle                 : "software / security / systems"
 name                     : "h4ckxel"
-description              : "Technical logs, write-ups, engineering notes, and progression tracking for offensive security, reverse engineering, and systems."
+description              : "Technical logs, writeups, notes, and small tools around security, systems, reverse engineering, and programming."
 url                      : #"http://localhost:4000"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -103,7 +103,7 @@ analytics:
 author:
   name             : "h4ckxel"
   avatar           : "/images/bio_main.jpg"
-  bio              : "Security researcher building toward deep systems, reverse engineering, and offensive security fluency."
+  bio              : "Security researcher and systems learner documenting tools, notes, and writeups."
   location         : "Mexico"
   email            :
   links:

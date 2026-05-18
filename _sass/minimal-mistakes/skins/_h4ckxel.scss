@@ -1,40 +1,40 @@
 /* ==========================================================================
-   H4CKXEL terminal skin
+   H4CKXEL minimal terminal skin
    ========================================================================== */
 
 /* Colors */
-$background-color: #050807 !default;
-$text-color: #e7fff7 !default;
-$primary-color: #6dffd5 !default;
-$border-color: rgba(109, 255, 213, 0.18) !default;
-$code-background-color: #09110f !default;
-$code-background-color-dark: #07100d !default;
-$form-background-color: #0b1815 !default;
-$footer-background-color: #040706 !default;
-$link-color: #7fffe0 !default;
-$link-color-hover: #c9fff1 !default;
-$link-color-visited: #8ed7ca !default;
+$background-color: #050505 !default;
+$text-color: #e6e6e6 !default;
+$primary-color: #39ff14 !default;
+$border-color: #242424 !default;
+$code-background-color: #0b0b0b !default;
+$code-background-color-dark: #111111 !default;
+$form-background-color: #0b0b0b !default;
+$footer-background-color: #050505 !default;
+$link-color: #e6e6e6 !default;
+$link-color-hover: #39ff14 !default;
+$link-color-visited: #bdbdbd !default;
 $masthead-link-color: $text-color !default;
 $masthead-link-color-hover: $link-color-hover !default;
-$navicon-link-color-hover: #0b1815 !default;
+$navicon-link-color-hover: #111111 !default;
 
 /* Syntax highlighting */
-$base00: #09110f !default;
-$base01: #0d1714 !default;
-$base02: #14211d !default;
-$base03: #71958b !default;
-$base04: #b8d7cf !default;
-$base05: #e7fff7 !default;
-$base06: #f3fffb !default;
+$base00: #0b0b0b !default;
+$base01: #111111 !default;
+$base02: #1a1a1a !default;
+$base03: #8a8a8a !default;
+$base04: #bdbdbd !default;
+$base05: #e6e6e6 !default;
+$base06: #f0f0f0 !default;
 $base07: #ffffff !default;
-$base08: #f28b82 !default;
-$base09: #f6b26b !default;
-$base0a: #ffd479 !default;
-$base0b: #7dff9b !default;
-$base0c: #62ddff !default;
-$base0d: #6dffd5 !default;
-$base0e: #c7a6ff !default;
-$base0f: #e7a7b5 !default;
+$base08: #ff4d4d !default;
+$base09: #d7ba7d !default;
+$base0a: #e6db74 !default;
+$base0b: #39ff14 !default;
+$base0c: #9cdcfe !default;
+$base0d: #bdbdbd !default;
+$base0e: #c586c0 !default;
+$base0f: #d16969 !default;
 
 .author__urls.social-icons i,
 .author__urls.social-icons .svg-inline--fa,

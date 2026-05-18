@@ -1,25 +1,22 @@
 # Navigation Links
 main:
-  - title: "Command Center"
+  - title: "Home"
     url: /
 
   - title: "Projects"
     url: /projects/
 
-  - title: "Ops Archive"
+  - title: "Writeups"
     url: /writeups/
 
-  - title: "Academy"
-    url: /trainings/
+  - title: "Notes"
+    url: /notes/
 
-  - title: "Links"
-    url: /links/
+  - title: "Training"
+    url: /trainings/
 
   - title: "About"
     url: /about/
-
-  - title: "Disclaimer"
-    url: /disclaimer/
 
 # Navigation for DVWA
 dvwa:

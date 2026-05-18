@@ -1,11 +1,11 @@
 ---
 permalink: /trainings/
-title: "Academy"
-excerpt: "Training tracks, labs, and progression resources."
+title: "Training"
+excerpt: "Courses, labs, and security learning resources."
 ---
 
 ---
-This academy index tracks the courses, labs, and reference material that feed the progression system.
+This page tracks courses, labs, and reference material for security and systems study.
 {: .text-justify}
 
 >**Note:** This section is constantly evolving. **Last update:** October 08, 2025.

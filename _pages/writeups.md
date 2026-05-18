@@ -1,11 +1,11 @@
 ---
 permalink: /writeups/
-title: "Ops Archive"
+title: "Writeups"
 excerpt: "CTF write-ups, machine walkthroughs, and exploit research logs."
 ---
 
 ---
-This archive contains operational write-ups, challenge reports, and exploitation notes collected across the training pipeline.
+This archive contains writeups, challenge reports, and exploitation notes collected while studying vulnerable systems.
 {: .text-justify}
 
 I left the passwords in cleartext for most of the levels because, if you google it, you'll find them anyway... But, try to do it yourself because *"It's not about the destination; it's about the journey"*.
