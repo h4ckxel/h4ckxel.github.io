@@ -1,7 +1,7 @@
 ---
-title: "Lab1A Write-up (Hard)"
+title: "Разбор Lab1A (сложно)"
 permalink: /writeups/mbe/lab1a/
-excerpt: "Write-up for Lab1A."
+excerpt: "Разбор Lab1A."
 ---
 
 ---
@@ -343,7 +343,7 @@ print("%u" % pswd)
 
 We get the following result : **6234472**
 
-## Solution
+## Решение
 
 Now that we have reversed the algorithm and wrote a keygen, let's try it again and solve this challenge.
 

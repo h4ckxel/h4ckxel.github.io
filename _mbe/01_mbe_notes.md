@@ -1,12 +1,12 @@
 ---
-title: "Notes"
+title: "Заметки"
 permalink: /writeups/mbe/mbe_notes/
-excerpt: "Some notes about the MBE Lab (Warzone)."
+excerpt: "Несколько заметок о MBE Lab (Warzone)."
 ---
 
-## Password for each lab
+## Пароль для каждой лаборатории
 
-Write-up | User | Password
+Разбор | Пользователь | Пароль
 -------- | -----| --------
 [Lab01](/writeups/mbe/lab1c/) | lab1C | lab01start
 [Lab02](/writeups/mbe/lab2c/) | lab2C | lab02start

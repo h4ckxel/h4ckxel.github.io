@@ -1,7 +1,7 @@
 ---
-title: "Lab2C Write-up (Easy)"
+title: "Разбор Lab2C (легко)"
 permalink: /writeups/mbe/lab2c/
-excerpt: "Write-up for Lab2C."
+excerpt: "Разбор Lab2C."
 ---
 
 ---
@@ -28,10 +28,10 @@ lab2C@warzone:/levels/lab02$
 
 The program takes an argument. However, it seems that we need to provide a specific input in order to be authenticated.
 
-**Note:** From now on, we have access to the source code of all the remaining challenges. It means that we will be able to do static analysis on high-level codes in order to figure out where are the vulnerabilities.
+**Заметка:** From now on, we have access to the source code of all the remaining challenges. It means that we will be able to do static analysis on high-level codes in order to figure out where are the vulnerabilities.
 {: .notice--info}
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Given we now have access to the source code, let's do a quick check of what it does:
 
@@ -73,7 +73,7 @@ Here, the *strcpy()* function will copy our argument (**argv[1]**) in the **buf*
 
 So, with a large enough input, we can overwrite *set_me* with the value of our choice.
 
-## Dynamic Analysis
+## Динамический анализ
 
 Enough with the theory, let's check our assumptions. Here, we don't really need to use `gdb` as the exploit is fairly simple.
 
@@ -87,7 +87,7 @@ set_me was 1111638594
 
 Interesting, now the *set_me* value is equal to **1111638594**, which is **0x42424242** in hexadecimal, or **BBBB** is ASCII. Now, we just need to change the second part of our proof of concept with the value **0xdeadbeef** in order to solve this challenge.
 
-## Solution
+## Решение
 
 Let's modify our payload and solve this challenge.
 

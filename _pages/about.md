@@ -1,28 +1,28 @@
 ---
 permalink: /about/
-title: "About this blog"
-excerpt: "About this blog."
+title: "Об этом блоге"
+excerpt: "Об этом блоге."
 ---
 
 ---
-I am **Acxel Elizalde**, a Software Engineering student in Mexico City studying cybersecurity independently with a focus on offensive security, networking, and secure software development.
+Я **Acxel Elizalde**, студент программной инженерии в Мехико. Самостоятельно изучаю кибербезопасность с фокусом на наступательную безопасность, сети и разработку безопасного ПО.
 
-This blog is where I document what I build and what I learn: write-ups, exploitation notes, small tools, and technical experiments around systems, Linux, and software engineering. I use it to make my thinking clearer, preserve the path behind each project, and share work that may help someone else learning the same terrain.
+Этот блог — место, где я документирую то, что создаю и изучаю: разборы, заметки по эксплуатации, небольшие инструменты и технические эксперименты вокруг систем, Linux и программной инженерии. Я веду его, чтобы яснее формулировать свои мысли, сохранять путь за каждым проектом и делиться работой, которая может помочь кому-то еще в похожем обучении.
 
-My current interests include:
+Сейчас мне особенно интересны:
 
-- web security and exploitation methodology
-- Linux and network fundamentals
-- binary exploitation foundations
-- security tooling with Python, C, Bash, and Go
-- the overlap between good software engineering and resilient systems
+- веб-безопасность и методология эксплуатации
+- основы Linux и сетей
+- базовая бинарная эксплуатация
+- инструменты безопасности на Python, C, Bash и Go
+- пересечение хорошей программной инженерии и устойчивых систем
 
-## About me
+## Обо мне
 
-I am still early in the path, and I prefer that honesty. The goal here is not to look finished; it is to keep becoming more precise, more capable, and more useful through consistent public work.
+Я все еще в начале пути, и мне нравится эта честность. Цель здесь не в том, чтобы выглядеть завершенным специалистом; цель — через постоянную публичную практику становиться точнее, сильнее и полезнее.
 
-I am especially interested in projects that force theory and implementation to meet: building tools, reproducing vulnerabilities in authorized labs, writing down what failed, and improving the code until the result is both technically sound and understandable.
+Меня особенно привлекают проекты, где теория встречается с реализацией: создание инструментов, воспроизведение уязвимостей в авторизованных лабораториях, фиксация неудач и улучшение кода до состояния, где результат одновременно технически корректен и понятен.
 
-### Notes
+### Заметки
 
-> This site contains educational material, notes, and experiments produced while learning. Security work should be performed only in authorized environments.
+> Этот сайт содержит учебные материалы, заметки и эксперименты, созданные в процессе обучения. Работы по безопасности следует выполнять только в авторизованных средах.

@@ -1,7 +1,7 @@
 ---
-title: "[OTW] Write-up for the Behemoth Wargame"
+title: "[OTW] Разбор варгейма Behemoth"
 permalink: /writeups/otw/behemoth/
-excerpt: "Quick write-up for the Behemoth wargame from OverTheWire."
+excerpt: "Краткий разбор варгейма Behemoth с OverTheWire."
 ---
 
 ---
@@ -15,7 +15,7 @@ Ready ?!
 
 ![image-center](/images/otw/swordfish.gif){: .align-center}
 
-## Behemoth 00 Solution
+## Решение Behemoth 00
 
 **SSH :** *ssh behemoth0@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *behemoth0*
@@ -44,7 +44,7 @@ puts("Access denied.."Access denied..
 +++ exited (status 0) +++
 ```
 
-**Note:** *ltrace* is a program that simply runs the specified command until it exits. It intercepts and records the dynamic library calls which are called by the executed process and the signals which are received by that process. It can also intercept and print the system calls executed by the program. 
+**Заметка:** *ltrace* is a program that simply runs the specified command until it exits. It intercepts and records the dynamic library calls which are called by the executed process and the signals which are received by that process. It can also intercept and print the system calls executed by the program.
 {: .notice--info}
 
 The output is quite interesting as we get the password comparison : `strcmp("blah", "eatmyshorts")`. Let's try it again.
@@ -61,7 +61,7 @@ aesebootiv
 
 Success !
 
-## Behemoth 01 Solution
+## Решение Behemoth 01
 
 **SSH :** *ssh behemoth1@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *aesebootiv*
@@ -189,7 +189,7 @@ behemoth1@behemoth:/behemoth$ cd /tmp/
 behemoth1@behemoth:/tmp$ gcc -m32 find_addr.c -o find_addr
 behemoth1@behemoth:/tmp$ ./find_addr SHELLCODE
 SHELLCODE is at 0xffffde80
-``` 
+```
 
 Finally, we can execute our exploit...
 
@@ -203,7 +203,7 @@ cat /etc/behemoth_pass/behemoth2
 eimahquuof
 ```
 
-## Behemoth 02 Solution
+## Решение Behemoth 02
 
 **SSH :** *ssh behemoth2@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *eimahquuof*
@@ -245,7 +245,7 @@ behemoth2@behemoth:/tmp/ax$ /behemoth/behemoth2
 nieteidiel
 ```
 
-## Behemoth 03 Solution
+## Решение Behemoth 03
 
 **SSH :** *ssh behemoth3@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *nieteidiel*
@@ -374,7 +374,7 @@ cat /etc/behemoth_pass/behemoth4
 ietheishei
 ```
 
-## Behemoth 04 Solution
+## Решение Behemoth 04
 
 **SSH :** *ssh behemoth4@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *ietheishei*
@@ -412,7 +412,7 @@ behemoth4@behemoth:/behemoth$ Finished sleeping, fgetcing
 aizeeshing
 ```
 
-## Behemoth 05 Solution
+## Решение Behemoth 05
 
 **SSH :** *ssh behemoth5@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *aizeeshing*
@@ -455,7 +455,7 @@ Dump of assembler code for function main:
    0x08048834 <+265>:	push   0x2
    0x08048836 <+267>:	push   0x2
    0x08048838 <+269>:	call   0x80485f0 <socket@plt>
-   
+
 ...[removed]...
 
    0x0804886c <+321>:	push   0x80489e4
@@ -486,7 +486,7 @@ behemoth5@behemoth:~$ nc -ulp 1337
 mayiroeche
 ```
 
-## Behemoth 06 Solution
+## Решение Behemoth 06
 
 **SSH :** *ssh behemoth6@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *mayiroeche*
@@ -540,7 +540,7 @@ code:
 string:
 	call code
 	db "HelloKitty"
-``` 
+```
 
 Then, assembly it, extract it and put it in a file called ***shellcode.txt* :
 
@@ -584,9 +584,9 @@ $ whoami
 behemoth7
 $ cat /etc/behemoth_pass/behemoth7
 baquoxuafo
-``` 
+```
 
-## Behemoth 07 Solution
+## Решение Behemoth 07
 
 **SSH :** *ssh behemoth7@narnia.labs.overthewire.org -p 2221*<br/>
 **Pass :** *baquoxuafo*

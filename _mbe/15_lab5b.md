@@ -1,7 +1,7 @@
 ---
-title: "Lab5B Write-up (Medium)"
+title: "Разбор Lab5B (средне)"
 permalink: /writeups/mbe/lab5b/
-excerpt: "Write-up for Lab5B."
+excerpt: "Разбор Lab5B."
 ---
 
 ---
@@ -22,7 +22,7 @@ PLOP!
 
 Like in the previous level, we need to write a ROP chain to exploit this binary.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's check the source code:
 
@@ -46,7 +46,7 @@ int main()
 
 This time the **lbc** is not included in the binary, but we can use other ways to get code execution through ROP.
 
-## Dynamic Analysis
+## Динамический анализ
 
 First, let's do a bit of dynamic analysis in `gdb` and see if we can take control of the EIP, then we'll see if we can build a ROP chain. Here, we'll create a pattern and send it as input to the binary.
 
@@ -188,7 +188,7 @@ Stopped reason: SIGSEGV
 ```
 Ok, fixed. 
 
-## ROP Chain
+## ROP-цепочка
 
 Now, we need to create our ROP chain. Basically, we can do something like this `execve("/bin/sh/", 0, 0);` using the [syscall](https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md#x86-32_bit) **11** (or `0xb` in hexadecimal). It could look like this, but it will depend on the gadgets we will find in the executable:
 
@@ -315,7 +315,7 @@ process 6298 is executing new program: /bin/dash
 
 Nice!
 
-## Solution
+## Решение
 
 As we are using a stack address pointing to "/bin/sh", like in the previous levels, we will need to adjust the address. Here, it seems that removing **40 bytes** from `0xbffff6e8` did the trick.
 

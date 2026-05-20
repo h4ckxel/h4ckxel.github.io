@@ -2,7 +2,7 @@
 layout: null
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +10,19 @@ layout: null
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>{{ site.title }} — software / security / systems</title>
+  <title>{{ site.title }} — программирование / безопасность / системы</title>
   <link rel="stylesheet" href="{{ '/css/main.css?v=minimal-terminal-20260518' | relative_url }}">
 </head>
 <body>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="site-title" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">h4ckxel</a>
+      <a class="site-title" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} — главная">h4ckxel</a>
 
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="{{ '/writeups/' | relative_url }}">writeups</a>
-        <a href="{{ '/projects/' | relative_url }}">projects</a>
-        <a href="{{ '/notes/' | relative_url }}">notes</a>
-        <a href="{{ '/about/' | relative_url }}">about</a>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a href="{{ '/writeups/' | relative_url }}">разборы</a>
+        <a href="{{ '/projects/' | relative_url }}">проекты</a>
+        <a href="{{ '/notes/' | relative_url }}">заметки</a>
+        <a href="{{ '/about/' | relative_url }}">обо мне</a>
         <a href="https://github.com/h4ckxel" target="_blank" rel="noopener noreferrer">github</a>
       </nav>
     </div>
@@ -30,31 +30,31 @@ layout: null
 
   <main class="shell">
     <section class="hero" aria-labelledby="hero-title">
-      <p class="meta-line">software / security / systems / mathematics</p>
+      <p class="meta-line">программирование / безопасность / системы / математика</p>
       <h1 id="hero-title">h4ckxel</h1>
       <p class="lede">
-        I build small tools, break vulnerable systems, document what I learn,
-        and keep the logs public.
+        Я создаю небольшие инструменты, исследую уязвимые системы, документирую то,
+        чему учусь, и оставляю журналы открытыми.
       </p>
 
-      <pre class="terminal-block" aria-label="terminal identity"><code><span class="prompt">h4ckxel@lab:~$</span> whoami
-security researcher / systems learner / tool builder
+      <pre class="terminal-block" aria-label="терминальная идентичность"><code><span class="prompt">h4ckxel@lab:~$</span> whoami
+исследователь безопасности / ученик систем / разработчик инструментов
 
 <span class="prompt">h4ckxel@lab:~$</span> cat philosophy.txt
-build tools. break assumptions. document everything.</code></pre>
+создавай инструменты. ломай предположения. документируй все.</code></pre>
     </section>
 
     <section class="section" id="latest-logs" aria-labelledby="latest-title">
       <div class="section-heading">
-        <h2 id="latest-title">Latest logs</h2>
-        <a href="{{ '/tags/' | relative_url }}">all tags</a>
+        <h2 id="latest-title">Последние записи</h2>
+        <a href="{{ '/tags/' | relative_url }}">все теги</a>
       </div>
 
       <ol class="log-list">
         {% for post in site.posts limit:8 %}
           <li>
             <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-            <span>{{ post.tags | first | default: "log" }}</span>
+            <span>{{ post.tags | first | default: "журнал" }}</span>
             <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
           </li>
         {% endfor %}
@@ -63,10 +63,10 @@ build tools. break assumptions. document everything.</code></pre>
 
     <div class="split">
       <section class="section" aria-labelledby="archive-title">
-        <h2 id="archive-title">Operations archive</h2>
+        <h2 id="archive-title">Архив операций</h2>
         <ul class="archive-list">
           <li>
-            <a href="{{ '/writeups/' | relative_url }}">posts</a>
+            <a href="{{ '/writeups/' | relative_url }}">посты</a>
             <span>{{ site.posts | size }}</span>
           </li>
           <li>
@@ -86,39 +86,39 @@ build tools. break assumptions. document everything.</code></pre>
             <span>{{ site.dvwa | size }}</span>
           </li>
           <li>
-            <a href="{{ '/projects/' | relative_url }}">projects</a>
-            <span>builds</span>
+            <a href="{{ '/projects/' | relative_url }}">проекты</a>
+            <span>сборки</span>
           </li>
         </ul>
       </section>
 
       <section class="section" aria-labelledby="focus-title">
-        <h2 id="focus-title">Current focus</h2>
+        <h2 id="focus-title">Текущий фокус</h2>
         <ul class="focus-list">
           <li>Python</li>
           <li>C / C++</li>
           <li>Linux</li>
-          <li>Reverse engineering</li>
-          <li>Offensive security</li>
-          <li>Algorithms</li>
-          <li>Systems</li>
+          <li>Реверс-инжиниринг</li>
+          <li>Наступательная безопасность</li>
+          <li>Алгоритмы</li>
+          <li>Системы</li>
         </ul>
       </section>
     </div>
 
-    <section class="section note-block" aria-label="working notes">
+    <section class="section note-block" aria-label="рабочие заметки">
       <p class="meta-line">$ cat lab-notes.txt</p>
       <p>
-        This site is a public archive of notes, writeups, tools, and mistakes worth preserving.
-        The goal is not polish. The goal is a durable record of practice.
+        Этот сайт — публичный архив заметок, разборов, инструментов и ошибок, которые стоит сохранить.
+        Цель не в полировке. Цель — в надежной хронике практики.
       </p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="shell footer-inner">
-      <p>h4ckxel / public research archive</p>
-      <nav aria-label="Social links">
+      <p>h4ckxel / публичный исследовательский архив</p>
+      <nav aria-label="Социальные ссылки">
         <a href="https://github.com/h4ckxel" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/acxel-elizalde-06b9b9331/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://x.com/h4ckxel" target="_blank" rel="noopener noreferrer">X</a>

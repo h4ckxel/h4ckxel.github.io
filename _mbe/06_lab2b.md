@@ -1,7 +1,7 @@
 ---
-title: "Lab2B Write-up (Medium)"
+title: "Разбор Lab2B (средне)"
 permalink: /writeups/mbe/lab2b/
-excerpt: "Write-up for Lab2B."
+excerpt: "Разбор Lab2B."
 ---
 
 ---
@@ -26,7 +26,7 @@ Hello Test
 
 Here, the program takes our argument and prepend the string "Hello " to it.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's take a look at the source to get a better view of what happened here.
 
@@ -63,7 +63,7 @@ Like the previous level, the main issue here is that the user input size is not 
 
 There are multiple way to solve this one, but we'll stick with the way the developer of this challenge want us to do it. It means overwriting the *print_name()* return address with the call to the *system()* function and pass **exec_string** as an argument for this function.
 
-## Dynamic Analysis
+## Динамический анализ
 
 So, first we need to find a way to overflow the return address and pass an argument on the stack (**exec_string**). Here, we will use [PEDA](https://github.com/longld/peda) **pattern** features to help us.
 
@@ -189,7 +189,7 @@ lab2B : 0x80497d0 ("/bin/sh")
 
 So, **0x080486c9** will be the return address and **0x80487d0** the string pointer.
 
-## Solution
+## Решение
 
 Now that we have analyzed how the input is handled, let's try it again and solve this challenge.
 

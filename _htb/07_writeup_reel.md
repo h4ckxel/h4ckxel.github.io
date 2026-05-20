@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Reel"
 permalink: /writeups/htb/reel/
-excerpt: "Quick write-up for the Reel machine from Hack The Box."
+excerpt: "Краткий разбор машины Reel с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -23,20 +23,20 @@ If you didn't solve this challenge and just look for answers, first you should t
 
 ![image-center](/images/htb/htb_reel_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/) in order to reveal some of the ports open on the machine.
 
-**Note:** Always allow a few minutes after the start of an HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -60,7 +60,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 171.76 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 We have a few interesting ports, including **SSH** (22/TCP), **FTP** (21/TCP) and **SMTP** (25/TCP). Let's dig a bit more.
@@ -155,7 +155,7 @@ Words                           : 299
 
 Here, it seems that our initial foothold will involve a phishing email that is able to bypass some AppLocker rules.
 
-# Initial Access
+# Первичный доступ
 
 According to the [MITRE](https://attack.mitre.org/techniques/T1566/), adversaries may send victims emails containing malicious attachments or links, typically to execute malicious code on victim systems. 
 
@@ -266,7 +266,7 @@ Meterpreter     : x86/windows
 
 Nice, we now have a remote shell and our **first flag**.
 
-# Privileges Escalation
+# Повышение привилегий
 
 Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 

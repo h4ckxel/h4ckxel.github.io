@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Search"
 permalink: /writeups/htb/search/
-excerpt: "Quick write-up for the Search machine from Hack The Box."
+excerpt: "Краткий разбор машины Search с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -24,20 +24,20 @@ If you didn't solve this challenge and just look for answers, first, you should 
 
 ![image-center](/images/htb/htb_search_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/). Note the **-sV** switch which enables *version detection* and allows Nmap to check its internal database to try to determine the service protocol, application name and version number.
 
-**Note:** Always allow a few minutes after the start of the HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -66,12 +66,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 50.69 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 This machine is a domain controller for **search.htb**. We also have a couple of web-related port **HTTP** (80/TCP) and **HTTPS** (443/TCP).
 
-## HTTP Recon
+## HTTP-разведка
 
 Let's check this website, but before, we will add the domain to our `/etc/hosts` file with the following command:
 - `echo "10.129.227.156 search.htb" | sudo tee --append /etc/hosts`
@@ -127,7 +127,7 @@ SMB         10.129.227.156  445    RESEARCH         [+] search.htb\hope.sharp:Is
 
 The credentials are valid, however, this account does not have remote access privileges on the box. Maybe we could try a **kerberoasting** attack to find another account.
 
-# Initial Access
+# Первичный доступ
 
 In a real-world scenario, adversaries may search network shares on computers they have compromised to find files of interest. Sensitive data can be collected from remote systems via shared network drives. With the previously discovered account, let's see if we can execute a kerberoast attack.
 
@@ -154,7 +154,7 @@ $krb5tgs$23$*web_svc$SEARCH.HTB$search.htb/web_svc*$5c0473f3881702bee09c6bde8a2f
 
 As we can see, the **web_svc** account is kerberoastable. Let's try to crack its password.
 
-## Password Cracking
+## Взлом пароля
 
 We just have to crack the recovered hash offline using the *rockyou* password list (if you are using Kali Linux, it should be present in the `/usr/share/wordlists/` folder). Here, we used [John the Ripper](https://github.com/openwall/john) to crack the password, but it can be done with other tools.
 
@@ -276,7 +276,7 @@ NT_STATUS_ACCESS_DENIED listing \abril.suarez\Desktop\*
 
 We can see the first flag in **sierra.frye** folder, but we can't read it. Let's try a password spraying attack with the usernames and passwords we found.
 
-## Password Spraying
+## Password spraying
 
 As stated by [MITRE](https://attack.mitre.org/techniques/T1110/003/), adversaries may use a single or small list of commonly used passwords against many different accounts to attempt to acquire valid account credentials. Password spraying uses one password, or a small list of commonly used passwords, that may match the complexity policy of the domain. Logins are attempted with that password against many different accounts on a network to avoid account lockouts that would normally occur when brute forcing a single account with many passwords.
 
@@ -453,7 +453,7 @@ Finally, we have a shell.
 
 ![image-center](/images/htb/htb_search_webps2.png){: .align-center}
 
-## Active Directory Recon
+## Разведка Active Directory
 
 With a valid account, we can now use one of the [BloodHound](https://github.com/BloodHoundAD/BloodHound) ingestors and gather more information about the Active Directory. BloodHound uses graph theory to reveal the hidden and often unintended relationships within an Active Directory or Azure environment. 
 
@@ -492,7 +492,7 @@ Then, if we take a closer look at the **BIR-ADFS-GMSA@SEARCH.HTB** account, we c
 
 Next step, privilege escalation.
 
-# Privilege Escalation
+# Повышение привилегий
 
 Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 

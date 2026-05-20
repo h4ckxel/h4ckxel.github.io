@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Mantis"
 permalink: /writeups/htb/mantis/
-excerpt: "Quick write-up for the Mantis machine from Hack The Box."
+excerpt: "Краткий разбор машины Mantis с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -24,20 +24,20 @@ If you didn't solve this challenge and just look for answers, first you should t
 
 ![image-center](/images/htb/htb_mantis_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/) in order to reveal some of the TCP ports open on the machine.
 
-**Note:** Always allow a few minutes after the start of an HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -72,12 +72,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 61.09 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 Here we have a few interesting ports including an **HTTP** server on TCP/8080. The host is also the domain controller for **htb.local**.
 
-## HTTP Recon
+## HTTP-разведка
 
 The Web server seems to be running [Orchard](https://orchardcore.net) an ASP.NET CMS. After looking around we didn't find any specific vulnerability on the CMS. Using [gobuster](https://github.com/OJ/gobuster), a brute-force tool for Web services, and a standard wordlist we started a directory enumeration.
 
@@ -178,7 +178,7 @@ One folder seems to be interesting: **secure_notes**.
 
 Moreover, one of the file name seems to have some kind of Base64 encoded value in it, but we will get back to that later.
 
-# Initial Access
+# Первичный доступ
 
 In a real-world scenario, adversaries may search network shares on computers they have compromised to find files of interest. Sensitive data can be collected from remote systems via shared network drives or other services.
 
@@ -316,7 +316,7 @@ SMB         10.129.100.147   445    MANTIS           [*] Windows Server 2008 R2 
 SMB         10.129.100.147   445    MANTIS           [+] htb.local\james:J@m3s_P@ssW0rd!
 ```
 
-# Privilege Escalation
+# Повышение привилегий
 
 Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 

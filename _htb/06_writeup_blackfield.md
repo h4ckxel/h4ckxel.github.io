@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Blackfield"
 permalink: /writeups/htb/blackfield/
-excerpt: "Quick write-up for the Blackfield machine from Hack The Box."
+excerpt: "Краткий разбор машины Blackfield с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -24,20 +24,20 @@ If you didn't solve this challenge and just look for answers, first you should t
 
 ![image-center](/images/htb/htb_blackfield_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/) in order to reveal some of the ports open on the machine.
 
-**Note:** Always allow a few minutes after the start of an HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -60,7 +60,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 12.56 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 This computer seems to be a domain controller for **blackfield.local**. Let's see if we can extract some users.
@@ -147,7 +147,7 @@ $ smbclient -N \\\\10.129.140.139\\profiles$ -c dir | sed \$d | grep -oE '([a-zA
 
 Now, we should have all our usernames in the **users.txt** file.
 
-# Initial Access
+# Первичный доступ
 
 With the previously generated user list, we could try to do some brute force or password spraying attacks. However, it could be time consuming and we don’t have any information about the domain’s password policy and lockout threshold. Let’s stay on the safe side for now and try an [ASREPRoast](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/as-rep-roasting-using-rubeus-and-hashcat) attack.
 
@@ -175,7 +175,7 @@ $krb5asrep$23$support@BLACKFIELD.LOCAL:eab3cec4ef7550d9f7336270ab461115$51de4e1d
 
 Nice, we do have a hash for the **support** user. If the user is using a weak password, we may be able to recover it.
 
-## Password Cracking
+## Взлом пароля
 
 Now, we just have to copy/paste the recovered hash in a file and try to crack it offline using the *rockyou* password list (if you are using Kali Linux, it should be present in the `/usr/share/wordlists/` folder). Here, we used [John the Ripper](https://github.com/openwall/john) to crack the password, but it can be done with other tools.
 
@@ -192,7 +192,7 @@ Session completed.
 ```
 Great, we now have credentials the **support** account (`support:#00^BlackKnight`). 
 
-## WinRM Access
+## Доступ по WinRM
 
 Using another awesome tool, [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec), we can check if the user's password is properly working.
 
@@ -204,7 +204,7 @@ SMB         10.129.140.139  445    DC01             [+] blackfield.local\support
 
 The credentials are valid, but we still don't have any remote shell on the machine. Let's see if we can get some information about the domain using **BloodHound**.
 
-## Active Directory Recon
+## Разведка Active Directory
 
 With a valid account, we can now use one of the [BloodHound](https://github.com/BloodHoundAD/BloodHound) ingestors and gather more information about the Active Directory. Here, we use a Python based ingestor for BloodHound, [BloodHound.py](https://github.com/fox-it/BloodHound.py).
 
@@ -346,7 +346,7 @@ WINRM       10.129.140.139  5985   10.129.140.139   [+] blackfield.local\svc_bac
 
 The hash is valid and we do have a WinRM access to the remote computer.
 
-## WinRM Access
+## Доступ по WinRM
 
 Using [Evil-WinRM](https://github.com/Hackplayers/evil-winrm) and the recovered account, we can try to connect to the remote machine.
 
@@ -370,7 +370,7 @@ Mode                LastWriteTime         Length Name
 
 We now have a remote shell access and the **first flag**.
 
-# Privilege Escalation
+# Повышение привилегий
 
 Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 

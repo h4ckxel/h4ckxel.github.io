@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Multimaster"
 permalink: /writeups/htb/multimaster/
-excerpt: "Quick write-up for the Multimaster machine from Hack The Box."
+excerpt: "Краткий разбор машины Multimaster с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -26,20 +26,20 @@ If you didn't solve this challenge and just look for answers, first you should t
 
 ![image-center](/images/htb/htb_multimaster_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/) in order to reveal some of the ports open on the machine.
 
-**Note:** Always allow a few minutes after the start of an HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -68,12 +68,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 13.81 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 Here the host seems to be the domain controller of **megacorp.local**. We have a few interesting ports open including an **HTTP** (80/TCP) port and an **RDP** (3389/TCP) port.
 
-## HTTP Recon
+## HTTP-разведка
 
 Let's start with a bit of HTTP recon. By looking at the website hosted at *http://10.129.247.110* we found a login page. However, as per the error message, the login system does not seem to be working.
 
@@ -114,7 +114,7 @@ Nice, given we got **null** as response, we may have broken the request on the s
 
 Here, we saved the **Burp Suite** POST request in *post_me.txt* and specified the *charunicodeescape* tamper script to encode the queries performed by `sqlmap`. The `--delay 3` was found to be enough to avoid being blocked by the WAF.
 
-**Note:** It took lots of time to find the proper `sqlmap` command. It was due to the WAF present on the remote system that was blocking us when sending multiple query in a row.
+**Заметка:** It took lots of time to find the proper `sqlmap` command. It was due to the WAF present on the remote system that was blocking us when sending multiple query in a row.
 {: .notice--info}
 
 ```bash
@@ -245,7 +245,7 @@ finance1
 password1
 ```
 
-## Password Spraying
+## Password spraying
 
 Let's see if we can find a valid account on the remote machine with a password spraying attack. A **password spraying** attack uses a single or small list of commonly used passwords against many different accounts to attempt to acquire valid account credentials.
 
@@ -383,7 +383,7 @@ MEGACORP\lana
 ```
 
 
-# Initial Access
+# Первичный доступ
 
 
 
@@ -505,7 +505,7 @@ After a quick search, we found out that this version was vulnerable to the [CVE-
 
 Basically, an elevation of privilege vulnerability exists in Visual Studio Code when it exposes a debug listener to users of a local computer. A local attacker who successfully exploited the vulnerability could inject arbitrary code to run in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system.
 
-# Privilege Escalation
+# Повышение привилегий
 
 Depending on which user is running **VS Code**, we might get elevated privileges on the target computer.
 

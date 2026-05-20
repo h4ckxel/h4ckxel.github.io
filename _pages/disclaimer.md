@@ -1,13 +1,13 @@
 ---
 permalink: /disclaimer/
-title: "Disclaimer"
-excerpt: "Disclaimer"
+title: "Отказ от ответственности"
+excerpt: "Отказ от ответственности"
 ---
-Any actions and or activities related to the material contained within this Website is solely your responsibility. The misuse of the information in this website can result in criminal charges brought against the persons in question. The author, axcheron.github.io and breakinsecurity.com will not be held responsible in the event any criminal charges be brought against any individuals misusing the information in this website to break the law.
+Любые действия и активности, связанные с материалами на этом сайте, являются исключительно вашей ответственностью. Неправильное использование информации с этого сайта может привести к уголовным обвинениям в отношении соответствующих лиц. Автор, axcheron.github.io и breakinsecurity.com не несут ответственности, если против кого-либо будут выдвинуты обвинения из-за незаконного использования информации с этого сайта.
 {: .text-justify}
 
-This site contains materials that can be potentially damaging or dangerous. If you do not fully understand something on this site, then get out of here ! Refer to the laws in your province/country before accessing, using, or in any other way utilizing these materials. These materials are for educational and research purposes only. Do not attempt to violate the law with anything contained here. If this is your intention, then LEAVE NOW ! Neither administration of this server, the author of this material, or anyone else affiliated in any way, is going to accept responsibility for your actions.
+Этот сайт содержит материалы, которые потенциально могут быть вредоносными или опасными. Если вы не полностью понимаете что-либо на этом сайте, лучше покиньте его. Перед доступом, использованием или любым иным применением этих материалов ознакомьтесь с законами вашей провинции/страны. Эти материалы предназначены только для образовательных и исследовательских целей. Не пытайтесь нарушать закон с помощью чего-либо, опубликованного здесь. Если это ваше намерение, покиньте сайт сейчас. Ни администрация этого сервера, ни автор материала, ни кто-либо еще, связанный с ним, не принимает ответственности за ваши действия.
 {: .text-justify}
 
-Any linked sites are not under the control of the author, I am not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. I am providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement.
+Любые внешние сайты по ссылкам не находятся под контролем автора. Я не отвечаю за содержание любого связанного сайта, за ссылки внутри него, а также за любые изменения или обновления таких сайтов. Эти ссылки предоставлены только для удобства, и их наличие не означает одобрения.
 {: .text-justify}

@@ -1,7 +1,7 @@
 ---
-title: "[OTW] Write-up for the Natas Wargame"
+title: "[OTW] Разбор варгейма Natas"
 permalink: /writeups/otw/natas/
-excerpt: "Quick write-up for the Natas wargame from OverTheWire."
+excerpt: "Краткий разбор варгейма Natas с OverTheWire."
 ---
 
 ---
@@ -16,7 +16,7 @@ Let's get started !
 
 ![image-center](/images/otw/crash_override.gif){: .align-center}
 
-## Natas 00 Solution
+## Решение Natas 00
 
 **URL :** [http://natas0.natas.labs.overthewire.org](http://natas0.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas0:natas0*
@@ -27,7 +27,7 @@ This one is simple, just check the source of the page :
 <!--The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto -->
 ```
 
-## Natas 01 Solution
+## Решение Natas 01
 
 **URL :** [http://natas1.natas.labs.overthewire.org](http://natas1.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas1:gtVrDuiDfck831PqWsLEZy5gyDz1clto*
@@ -38,7 +38,7 @@ In this level the right click has been blocked, but to display the source you ca
 <!--The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi -->
 ```
 
-## Natas 02 Solution
+## Решение Natas 02
 
 **URL :** [http://natas2.natas.labs.overthewire.org](http://natas2.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas2:ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi*
@@ -55,7 +55,7 @@ Just remove the filename and check [http://natas2.natas.labs.overthewire.org/fil
 natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
 ```
 
-## Natas 03 Solution
+## Решение Natas 03
 
 **URL :** [http://natas3.natas.labs.overthewire.org](http://natas3.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14*
@@ -75,7 +75,7 @@ Browse the folder, and check the **users.txt** file.
 natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
 ```
 
-## Natas 04 Solution
+## Решение Natas 04
 
 **URL :** [http://natas4.natas.labs.overthewire.org](http://natas4.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ*
@@ -108,7 +108,7 @@ Grab the password and go to the next level :
 Access granted. The password for natas5 is iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
 ```
 
-## Natas 05 Solution
+## Решение Natas 05
 
 **URL :** [http://natas5.natas.labs.overthewire.org](http://natas5.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas5:iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq*
@@ -146,7 +146,7 @@ Done !
 Access granted. The password for natas6 is aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
 ```
 
-## Natas 06 Solution
+## Решение Natas 06
 
 **URL :** [http://natas6.natas.labs.overthewire.org](http://natas6.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas6:aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1*
@@ -183,7 +183,7 @@ Now, if you enter the secret, you'll be able to get the password for the followi
 Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
 ```
 
-## Natas 07 Solution
+## Решение Natas 07
 
 **URL :** [http://natas7.natas.labs.overthewire.org](http://natas7.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas7:7z3hEENjQtflzgnT29q7wAvMNfZdh0i9*
@@ -207,7 +207,7 @@ And here we go !
 DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
 ```
 
-## Natas 08 Solution
+## Решение Natas 08
 
 **URL :** [http://natas8.natas.labs.overthewire.org](http://natas8.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas8:DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe*
@@ -256,7 +256,7 @@ Now, if you enter the secret you should get the password for the next level :
 Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
 ```
 
-## Natas 09 Solution
+## Решение Natas 09
 
 **URL :** [http://natas9.natas.labs.overthewire.org](http://natas9.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas9:W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl*
@@ -285,7 +285,7 @@ So if we enter `; cat /etc/natas_webpass/natas10` in the search field, we will g
 nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
 ```
 
-## Natas 10 Solution
+## Решение Natas 10
 
 **URL :** [http://natas10.natas.labs.overthewire.org](http://natas10.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas10:nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu*
@@ -316,7 +316,7 @@ This one is quite similar to the previous one however, we got some restriction o
 /etc/natas_webpass/natas11:U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
 ```
 
-## Natas 11 Solution
+## Решение Natas 11
 
 **URL :** [http://natas11.natas.labs.overthewire.org](http://natas11.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas11:U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK*
@@ -448,7 +448,7 @@ Done !
 The password for natas12 is EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
 ```
 
-## Natas 12 Solution
+## Решение Natas 12
 
 **URL :** [http://natas12.natas.labs.overthewire.org](http://natas12.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas12:EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3*
@@ -523,7 +523,7 @@ Here you go ...
 jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
 ```
 
-## Natas 13 Solution
+## Решение Natas 13
 
 **URL :** [http://natas13.natas.labs.overthewire.org](http://natas13.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas13:jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY*
@@ -599,7 +599,7 @@ Here is the password :
 Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
 ```
 
-## Natas 14 Solution
+## Решение Natas 14
 
 **URL :** [http://natas14.natas.labs.overthewire.org](http://natas14.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas14:Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1*
@@ -646,7 +646,7 @@ Congrats, you solved the challenge.
 Successful login! The password for natas15 is AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
 ```
 
-## Natas 15 Solution
+## Решение Natas 15
 
 **URL :** [http://natas15.natas.labs.overthewire.org](http://natas15.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas15:AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J*
@@ -742,7 +742,7 @@ Grab a coffee while the script is running and when you get back you should have 
 WaIHEacj63wnNIBROHeqi3p9t0m5nhmh
 ```
 
-## Natas 16 Solution
+## Решение Natas 16
 
 **URL :** [http://natas16.natas.labs.overthewire.org](http://natas16.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas16:WaIHEacj63wnNIBROHeqi3p9t0m5nhmh*
@@ -811,7 +811,7 @@ Wait a few seconds and you should get an answer.
 8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
 ```
 
-## Natas 17 Solution
+## Решение Natas 17
 
 **URL :** [http://natas17.natas.labs.overthewire.org](http://natas17.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas17:8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw*
@@ -890,7 +890,7 @@ Again, wait a few seconds and get the password :
 xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
 ```
 
-## Natas 18 Solution
+## Решение Natas 18
 
 **URL :** [http://natas18.natas.labs.overthewire.org](http://natas18.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas18:xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP*
@@ -1000,7 +1000,7 @@ Here is the result :
 4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs
 ```
 
-## Natas 19 Solution
+## Решение Natas 19
 
 **URL :** [http://natas19.natas.labs.overthewire.org](http://natas19.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas19:4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs*
@@ -1047,7 +1047,7 @@ Run the script and get the result :
 eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
 ```
 
-## Natas 20 Solution
+## Решение Natas 20
 
 **URL :** [http://natas20.natas.labs.overthewire.org](http://natas20.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas20:eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF*
@@ -1195,7 +1195,7 @@ Username: natas21
 Password: IFekPyrQXftziDEsUr3x21sYuahypdgJ
 ```
 
-## Natas 21 Solution
+## Решение Natas 21
 
 **URL :** [http://natas21.natas.labs.overthewire.org](http://natas21.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas21:IFekPyrQXftziDEsUr3x21sYuahypdgJ*
@@ -1298,7 +1298,7 @@ Username: natas22
 Password: chG9fbe1Tq2eWVMgjYYD1MsfIvN461kJ
 ```
 
-## Natas 22 Solution
+## Решение Natas 22
 
 **URL :** [http://natas22.natas.labs.overthewire.org](http://natas22.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas22:chG9fbe1Tq2eWVMgjYYD1MsfIvN461kJ*
@@ -1335,7 +1335,7 @@ Username: natas23
 Password: D0vlad33nQF0Hz2EP255TP5wSW9ZsRSE
 ```
 
-## Natas 23 Solution
+## Решение Natas 23
 
 **URL :** [http://natas23.natas.labs.overthewire.org](http://natas23.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas23:D0vlad33nQF0Hz2EP255TP5wSW9ZsRSE*
@@ -1366,7 +1366,7 @@ And it worked :
 Username: natas24 Password: OsRmXFguozKpTZZ5X14zNO43379LZveg
 ```
 
-## Natas 24 Solution
+## Решение Natas 24
 
 **URL :** [http://natas24.natas.labs.overthewire.org](http://natas24.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas24:OsRmXFguozKpTZZ5X14zNO43379LZveg*
@@ -1401,7 +1401,7 @@ As expected, we have a warning... and the password :
 GHF6X7YwACaYYssHVY05cFq83hRktl4c
 ```
 
-## Natas 25 Solution
+## Решение Natas 25
 
 **URL :** [http://natas25.natas.labs.overthewire.org](http://natas25.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas25:GHF6X7YwACaYYssHVY05cFq83hRktl4c*
@@ -1487,7 +1487,7 @@ And the result :
 oGgWAJ7zcGT28vYazGo4rkhOPDhBu34T
 ```
 
-## Natas 26 Solution
+## Решение Natas 26
 
 **URL :** [http://natas26.natas.labs.overthewire.org](http://natas26.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas26:oGgWAJ7zcGT28vYazGo4rkhOPDhBu34T*
@@ -1684,7 +1684,7 @@ Done.
 55TBjpPZUUJgVP5b3BnbG6ON9uDPVzCJ
 ```
 
-## Natas 27 Solution
+## Решение Natas 27
 
 **URL :** [http://natas27.natas.labs.overthewire.org](http://natas27.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas27:55TBjpPZUUJgVP5b3BnbG6ON9uDPVzCJ*
@@ -1824,7 +1824,7 @@ Done.
 JWwR438wkgTsNKBbcJoowyysdM82YjeF
 ```
 
-## Natas 28 Solution
+## Решение Natas 28
 
 **URL :** [http://natas28.natas.labs.overthewire.org](http://natas28.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas28:JWwR438wkgTsNKBbcJoowyysdM82YjeF*
@@ -2029,7 +2029,7 @@ airooCaiseiyee8he8xongien9euhe8b
 
 I have to admit that this one was challenging, it took me several days to get it right so, no worries if you don't get it right away !
 
-## Natas 29 Solution
+## Решение Natas 29
 
 **URL :** [http://natas29.natas.labs.overthewire.org](http://natas29.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas29:airooCaiseiyee8he8xongien9euhe8b*
@@ -2086,7 +2086,7 @@ Here you go !
 wie9iexae0Daihohv8vuu3cei9wahf0e
 ```
 
-## Natas 30 Solution
+## Решение Natas 30
 
 **URL :** [http://natas30.natas.labs.overthewire.org](http://natas30.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas30:wie9iexae0Daihohv8vuu3cei9wahf0e*
@@ -2139,7 +2139,7 @@ Bingo !
 hay7aecuungiuKaezuathuk9biin0pu1
 ```
 
-## Natas 31 Solution
+## Решение Natas 31
 
 **URL :** [http://natas31.natas.labs.overthewire.org](http://natas31.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas31:hay7aecuungiuKaezuathuk9biin0pu1*
@@ -2202,7 +2202,7 @@ Done !
 no1vohsheCaiv3ieH4em1ahchisainge
 ```
 
-## Natas 32 Solution
+## Решение Natas 32
 
 **URL :** [http://natas32.natas.labs.overthewire.org](http://natas32.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas32:no1vohsheCaiv3ieH4em1ahchisainge*
@@ -2286,7 +2286,7 @@ It worked !
 shoogeiGa2yee3de6Aex8uaXeech5eey
 ```
 
-## Natas 33 Solution
+## Решение Natas 33
 
 **URL :** [http://natas33.natas.labs.overthewire.org](http://natas33.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas33:shoogeiGa2yee3de6Aex8uaXeech5eey*
@@ -2418,7 +2418,7 @@ Success !!
 shu5ouSu6eicielahhae0mohd4ui5uig
 ```
 
-## Natas 34 Solution
+## Решение Natas 34
 
 **URL :** [http://natas34.natas.labs.overthewire.org](http://natas34.natas.labs.overthewire.org) <br/>
 **Credentials :** *natas34:shu5ouSu6eicielahhae0mohd4ui5uig*

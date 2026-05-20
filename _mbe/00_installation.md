@@ -1,82 +1,82 @@
 ---
-title: "Installation"
+title: "Установка"
 permalink: /writeups/mbe/installation/
-excerpt: "How to install the MBE Lab (Warzone)."
+excerpt: "Как установить MBE Lab (Warzone)."
 ---
 
 ---
-[Modern Binary Exploitation (MBE)](https://github.com/RPISEC/MBE) is a free course developed and used by [RPISEC](http://rpis.ec) to teach Modern Binary Exploitation at [Rensselaer Polytechnic Institute](http://rpi.edu). It covers basic x86 reverse engineering, vulnerability analysis, and classical forms of Linux-based userland binary exploitation. It also focuses on protections found on modern systems and the techniques used to defeat them. This course comes with a large number of labs that I'll explain/solve in this write-up.
+[Modern Binary Exploitation (MBE)](https://github.com/RPISEC/MBE) — бесплатный курс, разработанный и используемый [RPISEC](http://rpis.ec) для преподавания современной бинарной эксплуатации в [Rensselaer Polytechnic Institute](http://rpi.edu). Он охватывает базовый реверс-инжиниринг x86, анализ уязвимостей и классические формы эксплуатации пользовательских Linux-бинарей. Также курс разбирает защиты современных систем и техники их обхода. В нем много лабораторных работ, которые я объясняю и решаю в этом разделе.
 
-This installation procedure is based on the [official documentation](https://github.com/RPISEC/MBE) of the MBE repository. I suggest you read it if you need more details on how to setup the lab.
+Эта процедура установки основана на [официальной документации](https://github.com/RPISEC/MBE) репозитория MBE. Если нужны дополнительные детали по настройке лаборатории, лучше прочитать ее полностью.
 
-You can download the [slides](https://github.com/RPISEC/MBE/releases/download/v1.1_release/MBE_lectures.tar.gz) or clone the repository with the following command: 
+Можно скачать [слайды](https://github.com/RPISEC/MBE/releases/download/v1.1_release/MBE_lectures.tar.gz) или клонировать репозиторий следующей командой:
 
 ```bash
 git clone https://github.com/RPISEC/MBE
 ```
 
-## Lab Breakdown
+## Разбор лабораторий
 
-The challenges are based on the lectures present in the GitHub [repository](https://github.com/RPISEC/MBE). If you don't have the necessary knowledge to solve the labs, I advise you to read them before starting.
+Задания основаны на лекциях из GitHub-[репозитория](https://github.com/RPISEC/MBE). Если для решения лабораторных не хватает знаний, лучше прочитать материалы перед стартом.
 
-Write-up | Topic | Corresponding Lectures | Available
+Разбор | Тема | Соответствующие лекции | Доступно
 -------- | ----- | ---------------------- | ---------
-[01](/writeups/mbe/lab1c/) | Reverse Engineering | 01-03 | Yes
-[02](/writeups/mbe/lab2c/) | Memory Corruption | 04 | Yes
-[03](/writeups/mbe/lab3c/) | Shellcoding | 05 | Yes
-[04](/writeups/mbe/lab4c/) | Format Strings | 06 | Yes
-[05](/writeups/mbe/lab5c/) | DEP and ROP | 07 | Yes
-[06](/writeups/mbe/lab6c/) | ASLR | 09 | Yes
-07 | Heap | 10 | No
-08 | Misc and Stack Cookies | 11 | No
-09 | C++ | 12 | No
-10 | Linux Kernel | 13 | No
-P1 | Project 1 | 01-06 | No
-P2 | Project 2 | 01-12 | No
+[01](/writeups/mbe/lab1c/) | реверс-инжиниринг | 01-03 | Да
+[02](/writeups/mbe/lab2c/) | повреждение памяти | 04 | Да
+[03](/writeups/mbe/lab3c/) | shellcoding | 05 | Да
+[04](/writeups/mbe/lab4c/) | форматные строки | 06 | Да
+[05](/writeups/mbe/lab5c/) | DEP и ROP | 07 | Да
+[06](/writeups/mbe/lab6c/) | ASLR | 09 | Да
+07 | Heap | 10 | Нет
+08 | Misc и Stack Cookies | 11 | Нет
+09 | C++ | 12 | Нет
+10 | Linux Kernel | 13 | Нет
+P1 | Project 1 | 01-06 | Нет
+P2 | Project 2 | 01-12 | Нет
 
-**Note:** The Linux Kernel labs is not implemented in the provided virtual machine. I still need to find a way to implement them in order to provide the writeups.
+**Заметка:** лаборатории Linux Kernel не реализованы в предоставленной виртуальной машине. Мне еще нужно найти способ добавить их, чтобы подготовить разборы.
 {: .notice--info}
 
-## Virtual Machine Setup
+## Настройка виртуальной машины
 
-The **Warzone** is a custom wargame that was built from the ground up for this course. It provides a complete and consistent learning platform for the labs and projects. The wargame was built on top of a vanilla Ubuntu 14.04 32-bit server install, and is modeled after existing local privilege escalation themed wargames.
+**Warzone** — кастомный варгейм, созданный с нуля для этого курса. Он дает целостную и последовательную учебную платформу для лабораторных и проектов. Варгейм построен на базе чистой 32-битной серверной установки Ubuntu 14.04 и вдохновлен существующими локальными варгеймами по повышению привилегий.
 {: .text-justify}
 
-You can download the VMDK (disk image) of the Warzone that is already setup [here](https://github.com/RPISEC/MBE/releases/download/v1.1_release/MBE_VM.vmdk.gz). To install the VM, extract the VMDK and create a new custom virtual machine in VMWare.
+Готовый VMDK-образ диска Warzone можно скачать [здесь](https://github.com/RPISEC/MBE/releases/download/v1.1_release/MBE_VM.vmdk.gz). Чтобы установить VM, распакуй VMDK и создай новую кастомную виртуальную машину в VMWare.
 
 ![image-center](/images/mbe/mbe_custom_vm.png){: .align-center}{:width="600px"}
 
-Then, select **Ubuntu** as operating system.
+Затем выбери **Ubuntu** как операционную систему.
 
 ![image-center](/images/mbe/mbe_os.png){: .align-center}{:width="600px"}
 
-Finally, select the extracted **VMDK** as disk image.
+В конце выбери распакованный **VMDK** как образ диска.
 
 ![image-center](/images/mbe/mbe_disk.png){: .align-center}{:width="600px"}
 
-As resources, you can stick to the following specifications:
+Для ресурсов можно оставить такие параметры:
 * 1 CPU/Core
 * 512MB RAM
 * NAT Networking
 
-## How to use the Warzone
+## Как использовать Warzone
 
-Once the Virtual Machine is created, you can get the IP address by login as **gameadmin** (`gameadmin:gameadmin`) and type the command `ip addr`.
+После создания виртуальной машины можно получить IP-адрес, войдя как **gameadmin** (`gameadmin:gameadmin`) и выполнив команду `ip addr`.
 
 ![image-center](/images/mbe/mbe_ip.png){: .align-center}{:width="600px"}
 
-Then, you can SSH into the first challenge by using the credentials `lab1C:lab01start`. This pattern is the same for the following challenges (eg. `lab2C:lab02start`).
+Затем можно подключиться по SSH к первому заданию с учетными данными `lab1C:lab01start`. Этот шаблон сохраняется и для следующих заданий, например `lab2C:lab02start`.
 
-The Warzone is structured like any local privilege escalation wargame. You must exploit a challenge to escalate your privileges and gain access to another user (level). Once you successfully exploit a level and escalate to the next user (confirm with `whoami`), you can read the user password from the home dir `/home/$USER/.pass`.
+Warzone устроен как типичный локальный варгейм по повышению привилегий. Нужно эксплуатировать задание, повысить привилегии и получить доступ к другому пользователю (уровню). После успешной эксплуатации уровня и перехода к следующему пользователю (проверь через `whoami`) можно прочитать пароль пользователя в домашней директории `/home/$USER/.pass`.
 
-**Note:** The easiest level is **labXC**, then **labXB** and, finally **labXA**.
+**Заметка:** самый простой уровень — **labXC**, затем **labXB** и, наконец, **labXA**.
 {: .notice--info}
 
-The levels (challenges) are located in `/levels`. If you need to write scripts/exploits, `/tmp` is **writable** and **executable**.
+Уровни (задания) находятся в `/levels`. Если нужно писать скрипты или эксплойты, `/tmp` доступен для **записи** и **выполнения**.
 
-## Licensing
-This course was explicitly designed for academic & educational use only. Please keep this in mind when sharing and distributing our course material. The specific licenses involved can be found below.
+## Лицензирование
+Этот курс явно создан только для академического и образовательного использования. Учитывай это при распространении материалов курса. Конкретные лицензии указаны ниже.
 
-The lectures are covered by the Creative Commons Attribution-NonCommercial 4.0 International license [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/legalcode).
+Лекции распространяются по лицензии Creative Commons Attribution-NonCommercial 4.0 International [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/legalcode).
 
 The code in is covered by the BSD 2-Clause license. You can view this license in [LICENSE](https://github.com/RPISEC/MBE/blob/master/LICENSE).

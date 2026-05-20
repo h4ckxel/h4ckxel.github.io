@@ -1,7 +1,7 @@
 ---
-title: "Lab1B Write-up (Medium)"
+title: "Разбор Lab1B (средне)"
 permalink: /writeups/mbe/lab1b/
-excerpt: "Write-up for Lab1B."
+excerpt: "Разбор Lab1B."
 ---
 
 ---
@@ -271,7 +271,7 @@ Key #18 = Congratulations!
 
 So, the case number 18 should give us a shell. The password should be the following decimal value: **322424827** (0x1337d00d - 0x12 (18 in decimal))
 
-## Solution
+## Решение
 
 Now that we have reversed how the input is handled, let's try it again and solve this challenge.
 

@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Sizzle"
 permalink: /writeups/htb/sizzle/
-excerpt: "Quick write-up for the Sizzle machine from Hack The Box."
+excerpt: "Краткий разбор машины Sizzle с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -23,20 +23,20 @@ If you didn't solve this challenge and just look for answers, first you should t
 
 ![image-center](/images/htb/htb_sizzle_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/) in order to reveal some of the TCP ports open on the machine.
 
-**Note:** Always allow a few minutes after the start of an HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -65,12 +65,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 50.44 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 Okay, we are on the domain controller for **htb.local** and we have a few interesting open ports, including **HTTP** (80/TCP) and **HTTPS** (443/TCP).
 
-## HTTP Recon
+## HTTP-разведка
 
 Let's start by doing a quick HTTP reconnaissance with [gobuster](https://github.com/OJ/gobuster), a tool to brute-force directories and files. Here we used a common wordlist to enumerate the directories.
 
@@ -189,7 +189,7 @@ After looking around for a few minutes, we couldn't find any interesting files i
 **How did you get there ?** If we had multiple machines, this would be a valid pentest scenario to try to coerce an authentication on our machine, but we had to think this challenge as what it is, a CTF and this was the best path :)
 {: .notice--success}
 
-# Initial Access
+# Первичный доступ
 
 Adversaries may gather credential material by invoking or forcing a user to automatically provide authentication information through a mechanism in which they can intercept.
 
@@ -237,7 +237,7 @@ $ sudo responder -I tun0
 [SMB] NTLMv2-SSP Hash     : amanda::HTB:8a7e87c1233bc727:D2FE0898E458F50CE1058E063C2E11BE:010100000000000000CF78A4A921D801AC2B3950B152C1C4000000000200080031004B005000410001001E00570049004E002D00500031004800450031004400370050005A003100570004003400570049004E002D00500031004800450031004400370050005A00310057002E0031004B00500041002E004C004F00430041004C000300140031004B00500041002E004C004F00430041004C000500140031004B00500041002E004C004F00430041004C000700080000CF78A4A921D8010600040002000000080030003000000000000000010000000020000059F2C79AD3F324A2CB03F298893ECE8E71C147E0FE3F16F742F2FBA88ADBD0A30A001000000000000000000000000000000000000900200063006900660073002F00310030002E00310030002E00310034002E0032003800000000000000000000000000      
 ```
 
-## Password Cracking
+## Взлом пароля
 
 Now, we just have to crack the recovered hash offline using the *rockyou* password list (if you are using Kali Linux, it should be present in the `/usr/share/wordlists/` folder). Here, we used [John the Ripper](https://github.com/openwall/john) to crack the password, but it can be done with other tools.
 
@@ -367,7 +367,7 @@ Enter PEM pass phrase:
 
 This time we got a shell but no flag, yet.
 
-# Privilege Escalation
+# Повышение привилегий
 
 Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 
@@ -506,7 +506,7 @@ FullLanguage
 
 Awesome, however, we are still constrained by **AppLocker**, but it does not really matter as we can run everything in memory. 
 
-## Active Directory Recon
+## Разведка Active Directory
 
 Here, if we want to run [SharpHound](https://github.com/BloodHoundAD/BloodHound) in-memory through a PowerShell wrapper, first, we need to base64-encode the assembly.
 
@@ -653,7 +653,7 @@ Session completed.
 
 Nice, we are almost done.
 
-## Dump the Administrator Hash
+## Дамп хэша администратора
 
 Here, we used [impacket-secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py), another tool from the *Impacket* suite to dump the **Administrator** password using **mrlky** password.
 

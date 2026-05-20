@@ -1,7 +1,7 @@
 ---
-title: "Lab5C Write-up (Easy)"
+title: "Разбор Lab5C (легко)"
 permalink: /writeups/mbe/lab5c/
-excerpt: "Write-up for Lab5C."
+excerpt: "Разбор Lab5C."
 ---
 
 ---
@@ -91,7 +91,7 @@ Gadgets information
 
 We won't go further in the explanation as the course gives you some hints about it. Let's check the code.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 The code is fairly simple:
 
@@ -126,7 +126,7 @@ int main()
 
 We can already see that there will be an overflow if we send too much data. Now, we just need to build find how many bytes are necessry to overwrite **EIP** and build a ROP chain.
 
-## Dynamic Analysis
+## Динамический анализ
 
 Here, we'll create a pattern and send it as input to the binary.
 
@@ -352,7 +352,7 @@ Warning: not running or target is remote
 
 Great! Let's write our exploit outside `gdb`! 
 
-## Solution
+## Решение
 
 The main advantage of this technique is we won't need to play with the offset of the return address. The exploit should work right away.
 

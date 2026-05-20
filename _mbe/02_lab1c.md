@@ -1,7 +1,7 @@
 ---
-title: "Lab1C Write-up (Easy)"
+title: "Разбор Lab1C (легко)"
 permalink: /writeups/mbe/lab1c/
-excerpt: "Write-up for Lab1C."
+excerpt: "Разбор Lab1C."
 ---
 
 ---
@@ -98,7 +98,7 @@ gdb-peda$ x/s 0x8048818
 
 As we can see, the program expects a decimal integer: **"%d"** (and not a string). Then, our input is compared to **0x149a**, which equals to **5274** in decimal. So, the password should be **5274**.
 
-## Solution
+## Решение
 
 Now that we have analyzed how the input is handled, let's try it again and solve this challenge.
 

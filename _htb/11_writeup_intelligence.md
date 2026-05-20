@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Intelligence"
 permalink: /writeups/htb/intelligence/
-excerpt: "Quick write-up for the Intelligence machine from Hack The Box."
+excerpt: "Краткий разбор машины Intelligence с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -24,20 +24,20 @@ If you didn't solve this challenge and just look for answers, first, you should 
 
 ![image-center](/images/htb/htb_intelligence_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/). Note the **-sV** switch which enables *version detection* and allows Nmap to check its internal database to try to determine the service protocol, application name and version number.
 
-**Note:** Always allow a few minutes after the start of the HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -60,7 +60,7 @@ PORT    STATE SERVICE       VERSION
 Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 As we can see, the machine seems to be a domain controller for **intelligence.htb** and we have a few interesting services including a Web server running on TCP/80.
@@ -189,11 +189,11 @@ William.Lee
 Here you can redirect the output to a file in order to produce a list of usernames.
 
 
-# Initial Access
+# Первичный доступ
 
 In a real-world scenario, adversaries may search network shares on computers they have compromised to find files of interest. Sensitive data can be collected from remote systems via shared network drives. Here, we got a list of usernames and one password, let's see what we can do with that.
 
-## Password Spraying
+## Password spraying
 
 As stated by [MITRE](https://attack.mitre.org/techniques/T1110/003/), adversaries may use a single or small list of commonly used passwords against many different accounts to attempt to acquire valid account credentials. Password spraying uses one password, or a small list of commonly used passwords, that may match the complexity policy of the domain.
 
@@ -275,7 +275,7 @@ Send-MailMessage -From 'Ted Graves <Ted.Graves@intelligence.htb>' -To 'Ted Grave
 
 The script seems top loop through DNS records and sends an authenticated request to any host having a name starting with **web** in order to check its status. Let's see what we can do with that.
 
-# Privilege Escalation
+# Повышение привилегий
 
 According to the MITRE, [Privilege Escalation](https://attack.mitre.org/tactics/TA0004/) consists of techniques that adversaries use to gain higher-level permission on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permission to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 
@@ -312,7 +312,7 @@ $ sudo responder -I tun0
 
 Let's see if we can crack this password.
 
-## Password Cracking
+## Взлом пароля
 
 Now just have to copy/paste the following hash in a file and try to crack it offline using the *rockyou* (or any other list) passwords list (if you are using Kali Linux, it should be present in the `/usr/share/wordlists/` folder). 
 
@@ -336,7 +336,7 @@ Session completed.
 
 Nice, we have a cleartext password.
 
-## Active Directory Recon
+## Разведка Active Directory
 
 With this new compromised, we can now use one of the [BloodHound](https://github.com/BloodHoundAD/BloodHound) ingestors and gather more information about the Active Directory. BloodHound uses graph theory to reveal the hidden and often unintended relationships within an Active Directory or Azure environment. 
 
@@ -391,7 +391,7 @@ Here, **svc_int** has the constrained delegation privilege to **dc.intelligence.
 
 To perform the attack, we can use [impacket-getST](https://github.com/SecureAuthCorp/impacket/blob/master/examples/getST.py), a tool that allows us to request a Service Ticket and save it as ccache.
 
-**Note:** If the time difference between your machine and the attack machine is too great, you will get the following error: **KRB_AP_ERR_SKEW(Clock skew too great)**. This can be fixed by running the following command `sudo ntpdate <target_machine>`.
+**Заметка:** If the time difference between your machine and the attack machine is too great, you will get the following error: **KRB_AP_ERR_SKEW(Clock skew too great)**. This can be fixed by running the following command `sudo ntpdate <target_machine>`.
 {: .notice--info}
 
 ```bash

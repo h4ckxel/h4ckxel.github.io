@@ -1,6 +1,6 @@
 ---
-title: "Code Injection with Python"
-excerpt: "How to inject a backdoor into a PE file with Python."
+title: "Code Injection с Python"
+excerpt: "Как внедрить бэкдор в PE-файл с помощью Python."
 tags:
   - pe
   - python
@@ -14,23 +14,23 @@ If you perform penetration testing as your daily job, it is often useful to inje
 
 Here we will use Python as it is a really versatile language and also one of the most used in offensive computing. I strongly suggest you read one of my previous [article](http://breakinsecurity.com/pe-format-manipulation-with-pefile/) about the Portable Executable format to fully understand this post.
 
-## Introdcution
+## Введение
 
 Here, the goal is to inject foreign code into an executable, but we still want the original executable to work (as we don't want to raise any suspiction from our target). Here is the global idea of how we will modify the application to inject our backdoor:
 
 ![image-center](/images/2017-12-29-code-injection-with-python/diff-backdoored.svg.xml.svg){: .align-center}
 
-There are 2 main methods to inject code to an executable: 
+There are 2 main methods to inject code to an executable:
 
 * Add a section to the executable, but it will (slightly) increase the size of the executable.
 * Add code into *empty* section (or code cave) of the executable, it won't increase the size but its easy to break the program depending on the method you use. Also, it lakes of versatility depending on the target executable (few or no code cave).
 
 Here, we will use the first method as it is more easy and reliable, but if you want to try the second one you can check the following [link](http://www.darkridge.com/~jpr5/mirror/fravia.org/covert1.htm).
 
-**Note:** Be careful, if you run an antivirus on your machine, modifying the structure of an executable could be interpreted as a viral attack and the AV will block or remove your executable. Now you know.
+**Заметка:** Be careful, if you run an antivirus on your machine, modifying the structure of an executable could be interpreted as a viral attack and the AV will block or remove your executable. Now you know.
 {: .notice--danger}
 
-### Quick Reminder
+### Краткое напоминание
 
 Before adding a new section, we need to know the structure details to not break our executable. In a PE executable, the section is composed of 2 parts:
 
@@ -58,19 +58,19 @@ class SECTION_HEADER(Structure):
 Each field help Windows to load the sections properly into the memory. Here, we are only interested by the following fields, the others will be initialized at zero.
 
 * `Name`, contains the section name with a padding of null bytes if the size of the name is not equal to 8 bytes.
-* `VirtualSize`, contains the size of the section in memory. 
-* `VirtualAddress`, contains the relative virtaul address of the section. 
+* `VirtualSize`, contains the size of the section in memory.
+* `VirtualAddress`, contains the relative virtaul address of the section.
 * `SizeOfRawData`, contains the size of the section on the disk.
-* `PointerToRawData`, contains the offset of the section on the disk. 
+* `PointerToRawData`, contains the offset of the section on the disk.
 * `Characteristics`, contains the flags describing the section characteristics (RWX).
 
-**Note:** It's really important to differentiate VA (Virtual Address) and RVA (Relative Virtual Address). A relative virtual address is the virtual address of an object from the file once it is loaded into memory, minus the base address (often equal to `0x00400000`) of the file image. 
+**Заметка:** It's really important to differentiate VA (Virtual Address) and RVA (Relative Virtual Address). A relative virtual address is the virtual address of an object from the file once it is loaded into memory, minus the base address (often equal to `0x00400000`) of the file image.
 {: .notice--info}
 
 Finally, we have to take care of the alignment. The value swe will set into the section header should be aligned to the value set into the `OPTIONAL_HEADER` of the PE file.
 
-* `SectionAligment`, section alignment in memory. 
-* `FileAligment`, section alignment on the disk. 
+* `SectionAligment`, section alignment in memory.
+* `FileAligment`, section alignment on the disk.
 
 Not clear enough ? Let's say `FileAligment` equals 512 bytes and `SectionAligment` equals 4096 bytes. If you new section contains 515 bytes on the disk, the section size value on the disk (`SizeOfRawData`) will be 1024 because 515 > 512, so we round it up. Same thing for the `VirtualSize`, it will be equal to 4096 bytes, because 515 < 4096. Here is how to find the right values for you:
 
@@ -87,7 +87,7 @@ VirtualSize = (((12345 + 4096 - 1) / 4096) * 4096)
 
 In the follwing sections, I will describe the different steps I used to inject a backdoor into an executable. The full code will be available at the end of the tutorial.
 
-### Create the Section Header
+### Создание заголовка секции
 
 Now, we can start. We already can set 4 values in our header. I assume that our shellcode will be smaller than 4096 bytes.
 
@@ -141,10 +141,10 @@ virtual_offset = align((pe.sections[last_section].VirtualAddress +
                        pe.OPTIONAL_HEADER.SectionAlignment)
 ```
 
-**Note:** For the tests I used **putty.exe**. [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/) is a free implementation of SSH and Telnet for Windows, but you can use any executable.
+**Заметка:** For the tests I used **putty.exe**. [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/) is a free implementation of SSH and Telnet for Windows, but you can use any executable.
 {: .notice--info}
 
-### Adding the Section Header
+### Добавление заголовка секции
 
 We have the right value for the new section header, but we didn't insert anything in the executable yet. Let's get the last section header address and add 40 bytes (size of the section header) to get an address to write our section.
 
@@ -158,19 +158,19 @@ number_of_section = pe.FILE_HEADER.NumberOfSections
 new_section_offset = (pe.sections[number_of_section - 1].get_file_offset() + 40)
 ```
 
-Easy, right ? Now we can write the new header properly, but we have to take care of 2 things: 
+Easy, right ? Now we can write the new header properly, but we have to take care of 2 things:
 
 * We have to be careful and not break the current headers, it means that our value have to comply with the header format.
 * We have to write them in little-endian (*pefile* will take care of that).
 
-**Note:** On Intel-based plateform, the value are in little-endian. More info [here](http://en.wikipedia.org/wiki/Endianness).
+**Заметка:** On Intel-based plateform, the value are in little-endian. More info [here](http://en.wikipedia.org/wiki/Endianness).
 {: .notice--info}
 
 ```python
 import pefile
 
     # CODE | EXECUTE | READ | WRITE
-    characteristics = 0xE0000020 
+    characteristics = 0xE0000020
     # Section name must be equal to 8 bytes
     name = ".axc" + (4 * '\x00')
 
@@ -190,12 +190,12 @@ import pefile
     pe.set_dword_at_offset(new_section_offset + 36, characteristics)
 ```
 
-### Some Details
+### Некоторые детали
 
 Our new section header have been added to the executable, but the loader can't see it yet. We nee to modify some value into the main structure header of the file first:
 
 * `NumberOfSections`, in the `FILE_HEADER` must be increased by 1.
-* `SizeOfImage`, in the `OPTIONAL_HEADER`, must be equal to the (VirtualAddress + VirtualSize (size of our new header)). 
+* `SizeOfImage`, in the `OPTIONAL_HEADER`, must be equal to the (VirtualAddress + VirtualSize (size of our new header)).
 * Enlage the size of the executable.
 
 Concerning this last part, I remind you that we told to the executable that there is a new section of 4096 bytes somewhere, so we have to add some empty space to comply with the header information but also to add our shellcode. We only created the section header not the section itself.
@@ -231,9 +231,9 @@ def addSection(exe_path):
     virtual_offset = align((pe.sections[last_section].VirtualAddress +
                             pe.sections[last_section].Misc_VirtualSize),
                            section_alignment)
-    
+
     # CODE | EXECUTE | READ | WRITE
-    characteristics = 0xE0000020 
+    characteristics = 0xE0000020
     # Section name must be equal to 8 bytes
     name = ".axc" + (4 * '\x00')
 
@@ -274,10 +274,10 @@ If we check the result in a random debugger, we should see the new section. At t
 
 ![image-center](/images/2017-12-29-code-injection-with-python/added-section.png){: .align-center}
 
-**Note:** Here I used [Immunity Debugger](http://debugger.immunityinc.com/) to get this output.
+**Заметка:** Here I used [Immunity Debugger](http://debugger.immunityinc.com/) to get this output.
 {: .notice--info}
 
-### Edit the Entry Point
+### Изменение entry point
 
 We are good for the section header structure. Now we will edit the entry point of the executable to execute our backdoor before the rest of the code (application).
 
@@ -310,9 +310,9 @@ pe.write("putty_mod.exe")
 
 Write the original entry point somewhere as we will use it later to redirect the execution flow to the original application.
 
-### Injecting the Code
+### Внедрение кода
 
-The last step is to inject our shellcode in the new section. I generated a simple shellcode with [Metasploit](http://metasploit.com), it will display a message box before starting the application. 
+The last step is to inject our shellcode in the new section. I generated a simple shellcode with [Metasploit](http://metasploit.com), it will display a message box before starting the application.
 
 ```python
 # msfvenom -a x86 --platform windows -p windows/messagebox \
@@ -416,7 +416,7 @@ This backdoored executable should display a message box and give back the contro
 
 ![image-center](/images/2017-12-29-code-injection-with-python/messagebox.png){: .align-center}{:width="250px"}
 
-### Source Code
+### Исходный код
 
 Here is the source code of the script with some comments.
 
@@ -551,7 +551,7 @@ pe.write(exe_path)
 	[+] New Size = 539560 bytes
 
 [*] STEP 0x02 - Add the New Section Header
-	[+] Section Name = .axc    
+	[+] Section Name = .axc
 	[+] Virtual Size = 0x1000
 	[+] Virtual Offset = 0x84000
 	[+] Raw Size = 0x1000
@@ -568,11 +568,11 @@ pe.write(exe_path)
 	[+] Shellcode wrote in the new section
 ```
 
-## Conclusion
+## Заключение
 
 That's all for now. As you can see, we can do really interesting things with Python, even inject code into executable. Of course, this example is not really stable nor dynamic, but it gives you a good grasp on how backdoors are injected into executables.
 
-## Resources
+## Ресурсы
 
 * [Backdoor Factory on GitHub](https://github.com/secretsquirrel/the-backdoor-factory)
 * [Inject your code to a Portable Executable file](http://www.codeproject.com/KB/system/inject2exe.aspx)

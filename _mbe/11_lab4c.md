@@ -1,7 +1,7 @@
 ---
-title: "Lab4C Write-up (Easy)"
+title: "Разбор Lab4C (легко)"
 permalink: /writeups/mbe/lab4c/
-excerpt: "Write-up for Lab4c."
+excerpt: "Разбор Lab4C."
 ---
 
 ---
@@ -28,7 +28,7 @@ Test does not have access!
 
 This program asks for a *username* and a *password*, but we don't have these credentials.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 As a reminder, the behavior of the [printf()](https://cplusplus.com/reference/cstdio/printf/) function is controlled by the **format specifiers**. The function retrieves the parameters requested by the format specifier from the stack.
 
@@ -147,7 +147,7 @@ lab4C@warzone:/levels/lab04$ ./lab4C
 bffff5a2.1e.804a008.6c420000 does not have access!
 ```
 
-## Dynamic Analysis
+## Динамический анализ
 
 Here, dynamic analysis will be a bit complex because of the following piece of code:
 
@@ -203,7 +203,7 @@ lab4C@warzone:/levels/lab04$ ./lab4C
 
 Looks good, now we have to reverse it! You take each 4 bytes, convert it to ASCII and reverse the order of the letters. For example, **75620000** = **ub**, then reverse = **bu**. It did it manually...
 
-## Solution
+## Решение
 
 Now, we can solve this challenge!
 

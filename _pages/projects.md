@@ -1,54 +1,54 @@
 ---
 permalink: /projects/
-title: "Projects"
-excerpt: "Small tools, systems experiments, and security projects."
+title: "Проекты"
+excerpt: "Небольшие инструменты, системные эксперименты и проекты по безопасности."
 ---
 
 ---
-This is a curated selection of projects that represent the current direction of the lab: offensive security, security tooling, and software engineering fundamentals.
+Это отобранная подборка проектов, которые отражают текущее направление лаборатории: наступательная безопасность, инструменты безопасности и основы программной инженерии.
 
-## Security
+## Безопасность
 
 ### CVE-2025-2005
 
-Proof-of-concept research around a critical WordPress plugin vulnerability. The project documents the issue, the exploitation flow, and the defensive ideas needed to understand the bug responsibly.
+Исследовательский proof-of-concept вокруг критической уязвимости плагина WordPress. Проект документирует проблему, процесс эксплуатации и защитные идеи, необходимые для ответственного понимания ошибки.
 
-**Link:** [CVE-2025-2005](https://github.com/h4ckxel/CVE-2025-2005)
+**Ссылка:** [CVE-2025-2005](https://github.com/h4ckxel/CVE-2025-2005)
 
 ### Escaner de Puertos
 
-A Python networking project focused on port scanning and concurrent execution. It is one of the projects I am evolving into a more disciplined security tool with better validation, reporting, and testing.
+Сетевой проект на Python, посвященный сканированию портов и параллельному выполнению. Это один из проектов, который я развиваю в более дисциплинированный инструмент безопасности с лучшей валидацией, отчетностью и тестами.
 
-**Link:** [escaner-de-puertos](https://github.com/h4ckxel/escaner-de-puertos)
+**Ссылка:** [escaner-de-puertos](https://github.com/h4ckxel/escaner-de-puertos)
 
-## Software engineering
+## Программная инженерия
 
 ### Decuber
 
-Decuber is a Rubik's Cube-inspired message encoder built with HTML, CSS, JS, and Python.  
-It converts characters into color pairs using a 6-color scheme, storing 4 characters per cube face.  
-The included Python script [`DecuberBase36.py`](https://github.com/h4ckxel/Decuber/blob/main/DecuberBase36.py) extends functionality to encode any binary data (text, images, ZIPs) into base36 and then into cube colors.  
-This version supports CLI encoding/decoding, optional OpenSSL encryption, and works on Linux, macOS, and WSL.  
-It requires Python 3.x and has no external dependencies.
+Decuber — кодировщик сообщений, вдохновленный кубиком Рубика и созданный на HTML, CSS, JS и Python.
+Он преобразует символы в пары цветов по 6-цветной схеме, сохраняя 4 символа на каждой грани куба.
+Включенный Python-скрипт [`DecuberBase36.py`](https://github.com/h4ckxel/Decuber/blob/main/DecuberBase36.py) расширяет функциональность и позволяет кодировать любые бинарные данные (текст, изображения, ZIP-архивы) в base36, а затем в цвета куба.
+Эта версия поддерживает кодирование/декодирование через CLI, опциональное шифрование OpenSSL и работает на Linux, macOS и WSL.
+Требуется Python 3.x, внешних зависимостей нет.
 
-**Link:** [Decuber](https://github.com/h4ckxel/Decuber)
+**Ссылка:** [Decuber](https://github.com/h4ckxel/Decuber)
 
 ### CardsGame
 
-An UNO game implemented in Java and used to practice object-oriented design, separation of responsibilities, and iterative refactoring. The project includes a documented redesign from an initial version into a clearer architecture.
+Игра UNO, реализованная на Java для практики объектно-ориентированного дизайна, разделения ответственности и итеративного рефакторинга. В проекте задокументирован редизайн от начальной версии к более ясной архитектуре.
 
-**Link:** [CardsGame](https://github.com/h4ckxel/CardsGame)
+**Ссылка:** [CardsGame](https://github.com/h4ckxel/CardsGame)
 
-## Systems and technical experiments
+## Системы и технические эксперименты
 
 ### Agujero Negro Simulador (Black Hole Simulator)
 
-This is a Black Hole Simulator project developed primarily in **C++** using ray tracing and geodesics calculation to visualize the gravitational effects (such as gravitational lensing) of a black hole. It includes C++ source files (`ray_tracing.cpp`, `CPU-geodesic.cpp`) and shader files (`geodesic.comp`, `grid.frag`, `grid.vert`).
+Это симулятор черной дыры, разработанный в основном на **C++** с использованием трассировки лучей и расчета геодезических для визуализации гравитационных эффектов черной дыры, например гравитационного линзирования. Он включает исходные файлы C++ (`ray_tracing.cpp`, `CPU-geodesic.cpp`) и файлы шейдеров (`geodesic.comp`, `grid.frag`, `grid.vert`).
 
-**Link**: [Black Hole Simulator](https://github.com/h4ckxel/agujero_negro_simulador)
+**Ссылка**: [Black Hole Simulator](https://github.com/h4ckxel/agujero_negro_simulador)
 
 ### Didactic Parakeet
 
-A computer-vision prototype for sign-language recognition built around MediaPipe. It remains an active learning project and is included here as an example of experimentation with applied machine learning and accessibility.
+Прототип компьютерного зрения для распознавания жестового языка, построенный вокруг MediaPipe. Это все еще активный учебный проект, включенный сюда как пример экспериментов с прикладным машинным обучением и доступностью.
 
-**Link:** [didactic-parakeet](https://github.com/h4ckxel/didactic-parakeet)
+**Ссылка:** [didactic-parakeet](https://github.com/h4ckxel/didactic-parakeet)

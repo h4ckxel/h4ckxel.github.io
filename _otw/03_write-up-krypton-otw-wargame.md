@@ -1,7 +1,7 @@
 ---
-title: "[OTW] Write-up for the Krypton Wargame"
+title: "[OTW] Разбор варгейма Krypton"
 permalink: /writeups/otw/krypton/
-excerpt: "Quick write-up for the Krypton wargame from OverTheWire."
+excerpt: "Краткий разбор варгейма Krypton с OverTheWire."
 ---
 
 ---
@@ -11,7 +11,7 @@ The [Krypton](http://overthewire.org/wargames/krypton/) wargame is an online gam
 
 ![image-center](/images/otw/hack-the-planet-01.gif){: .align-center}
 
-## Level 00 Solution
+## Решение уровня 00
 
 The host to which you need to connect for this challenge is **krypton.labs.overthewire.org**, on port **2222**. The username is **krypton1** and the password is... encoded with base64: **S1JZUFRPTklTR1JFQVQ=**
 
@@ -26,7 +26,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 b'KRYPTONISGREAT'
 ```
 
-## Level 01 Solution
+## Решение уровня 01
 
 Using the previously found password, you can connect to the first level of this challenge. As per the instruction, the password for **level 2** is in the file **krypton2**. It is *encrypted* using a simple rotation. 
 
@@ -67,10 +67,10 @@ After executing the code, the following line looked like english :
 LEVEL TWO PASSWORD ROTTEN
 ```
 
-**Note:** The substitution cipher used was in fact **ROT13**. You could also solve the challenge by using the following command `echo "YRIRYGJBCNFFJBEQEBGGRA" | tr 'A-Za-z' 'N-ZA-Mn-za-m'`.
+**Заметка:** The substitution cipher used was in fact **ROT13**. You could also solve the challenge by using the following command `echo "YRIRYGJBCNFFJBEQEBGGRA" | tr 'A-Za-z' 'N-ZA-Mn-za-m'`.
 {: .notice--info}
 
-## Level 02 Solution
+## Решение уровня 02
 
 The password for **level 3** is in the file **krypton3**. It is encrypted with [Caesar's Cipher](https://en.wikipedia.org/wiki/Caesar_cipher), one of the simplest and most widely known substitution cipher.
 
@@ -111,7 +111,7 @@ After executing the code, the following line looked like english :
 CAESARISEASY
 ```
 
-## Level 03 Solution
+## Решение уровня 03
 
 The password to the next level is found in the file **krypton4**, it is encrypted using an unknown substitution cipher. However, we have access to 3 files (found1, found2, found3) and two important details :
 
@@ -213,7 +213,7 @@ WELLDONETHELEVELFOURPQSSWORDISBRUTE
 ```
 
 
-## Level 04 Solution
+## Решение уровня 04
 
 So far we have worked with simple substitution ciphers. They have also been **monoalphabetic**, meaning using a fixed key, and giving a one to one mapping of plaintext (P) to ciphertext (C). Another type of substitution cipher is referred to as **polyalphabetic**, where one character of P may map to many, or all, possible ciphertext characters.
 
@@ -342,7 +342,7 @@ The result is **FREKEY**. And after decrypting the **krypton5** file with the **
 CLEARTEXT
 ```
 
-## Level 05 Solution
+## Решение уровня 05
 
 This level is the same as the previous one however, we don't have the key length.
 
@@ -364,7 +364,7 @@ RANDOM
 
 I've been lucky for this one. Normally, I would have used the [Kasiski Examination](https://en.wikipedia.org/wiki/Kasiski_examination) to find the key length first and then, apply some frequency analysis.
 
-## Level 06 Solution
+## Решение уровня 06
 
 This is the last one ! Here, this is a **stream cipher**. A stream cipher attempts to create an on-the-fly **random** keystream to encrypt the incoming plaintext one byte at a time. Typically, the **random** key byte is xor’d with the plaintext to produce the ciphertext If the random keystream can be replicated at the recieving end, then a further xor will produce the plaintext once again.
 

@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Sauna" 
 permalink: /writeups/htb/sauna/ 
-excerpt: "Quick write-up for the Sauna machine from Hack The Box."
+excerpt: "Краткий разбор машины Sauna с Hack The Box."
 tags:
 - hackthebox
 - htb
@@ -21,20 +21,20 @@ If you didn't solve this challenge and just look for answers, first you should t
 
 ![image-center](/images/htb/htb_sauna_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/). Note the **-sV** switch which enables *version detection* and allows Nmap to check its internal database to try to determine the service protocol, application name and version number.
 
-**Note:** Always allow a few minutes after the start of an HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -62,7 +62,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 50.03 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 As we can see, the output reveals an **LDAP** (TCP/389) port with the **egotistical-bank.local** domain name and an **HTTP** (TCP/80) port.
@@ -100,7 +100,7 @@ While this list was created manually, you could use this awesome Python script, 
 
 Also, in a real-world scenario, website like [https://hunter.io](https://hunter.io) can help you to find a valid email pattern for a specific target.
 
-# Initial Access
+# Первичный доступ
 
 With the previously generated user list, we could try to do some brute force or password spraying attacks. However, it could be time consuming and we don’t have any information about the domain’s password policy and lockout threshold. Let’s stay on the safe side for now and try an [ASREPRoast](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/as-rep-roasting-using-rubeus-and-hashcat) attack.
 
@@ -128,7 +128,7 @@ $krb5asrep$23$fsmith@EGOTISTICAL-BANK.LOCAL:747acc403bb7d32d8741dbe1adcb7528$ada
 
 Nice, we do have a hash for the **fsmith** user.
 
-## Password Cracking
+## Взлом пароля
 
 Now, we just have to copy/paste the following hash in a file and try to crack it offline using the *rockyou* password list (if you are using Kali Linux, it should be present in the `/usr/share/wordlists/` folder). 
 
@@ -152,7 +152,7 @@ Session completed.
 
 Great, we now have credentials for the **fsmith** domain account (`fsmith:Thestrokes23`). 
 
-## WinRM Access
+## Доступ по WinRM
 
 Using another awesome tool, [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec), we can check if the user's password is properly working. Here we used the *winrm* switch to specify the *WinRM* protocol. 
 
@@ -162,7 +162,7 @@ HTTP        10.129.95.180   5985   10.129.95.180    [*] http://10.129.95.180:598
 WINRM       10.129.95.180   5985   10.129.95.180    [+] egotistical-bank.local\fsmith:Thestrokes23 (Pwn3d!)
 ```
 
-**Note:** The WinRM ports (5985/TCP and 5986/TCP) didn't show up while scanning the machine, but they are actually open. Again, this is due to the fact that, by default, Nmap only scans the 1000 most common TCP ports and WinRM ports are probably not part of them.
+**Заметка:** Порты WinRM (5985/TCP и 5986/TCP) не появились при сканировании машины, но на самом деле они открыты. Причина снова в том, что по умолчанию Nmap сканирует только 1000 самых распространенных TCP-портов, а порты WinRM, вероятно, не входят в этот набор.
 {: .notice--info}
 
 The password is valid and we do have a WinRM access to the remote computer. Using [Evil-WinRM](https://github.com/Hackplayers/evil-winrm) and the recovered account, we can try to connect to the remote machine.
@@ -185,11 +185,11 @@ Mode                LastWriteTime         Length Name
 
 We now have a remote shell access and the **first flag**.
 
-# Privilege Escalation
+# Повышение привилегий
 
 Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 
-## Active Directory Recon
+## Разведка Active Directory
 
 First, with a valid account, we can now use one of the [BloodHound](https://github.com/BloodHoundAD/BloodHound) ingestors and gather more information about the Active Directory. Here, we used a Python based ingestor for BloodHound, [BloodHound.py](https://github.com/fox-it/BloodHound.py).
 
@@ -213,7 +213,7 @@ INFO: Compressing output into 20220204181855_bloodhound.zip
 
 Now, you can import the generated file (*20220204181855_bloodhound.zip*) in BloodHound by running `sudo neo4j start`, then execute BloodHound in another terminal with the `bloodhound` command.
 
-## Getting Administrator Privileges
+## Получение привилегий администратора
 
 After getting some information about the domain with *Bloodhound*, we could also try to do some local reconnaissance and see if we can get a local administrator access. Using [PrivescCheck](https://github.com/itm4n/PrivescCheck), a script that aims to enumerate common Windows configuration issues, let's try to enumerate common Windows configuration issues that can be leveraged for local privilege escalation.
 
@@ -273,7 +273,7 @@ Using BloodHound help, we can check what we can do with this privilege.
 
 Interesting, since we also have the *GetChangs* privilege, it seems that we could try to perform a [DCSync](https://attack.mitre.org/techniques/T1003/006/) attack. 
 
-## Dump the Administrator Hash
+## Дамп хэша администратора
 
 Here, we used [impacket-secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py), another tool from the *Impacket* suite to dump the **Administrator** password using **svc_loanmgr**.
 

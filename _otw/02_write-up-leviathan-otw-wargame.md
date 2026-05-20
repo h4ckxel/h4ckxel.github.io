@@ -1,7 +1,7 @@
 ---
-title: "[OTW] Write-up for the Leviathan Wargame "
+title: "[OTW] Разбор варгейма Leviathan"
 permalink: /writeups/otw/leviathan/
-excerpt: "Quick write-up for the Leviathan wargame from OverTheWire."
+excerpt: "Краткий разбор варгейма Leviathan с OverTheWire."
 ---
 
 ---
@@ -10,10 +10,10 @@ The [Leviathan](http://overthewire.org/wargames/leviathan/) wargame is an online
 sense and some knowledge about basic \*nix commands. This is a quick write-up of my solutions but, before you read that post, please, try it yourself.
 {: .text-justify}
 
-**Note:** The passwords for each of the challenges can be found in **/etc/leviathan_pass/\<username\>**.
+**Заметка:** The passwords for each of the challenges can be found in **/etc/leviathan_pass/\<username\>**.
 {: .notice--info}
 
-## Level 00 Solution
+## Решение уровня 00
 
 The host to which you need to connect for this challenge is **leviathan.labs.overthewire.org**, on port **2223**. The username is **leviathan0** and the password is **leviathan0**.
 
@@ -38,7 +38,7 @@ leviathan0@leviathan:~/.backup$ cat bookmarks.html | grep password
 <DT><A HREF="http://leviathan.labs.overthewire.org/passwordus.html | This will be fixed later, the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="ISO-8859-1" ID="rdf:#$2wIU71">password to leviathan1</A>
 ```
 
-## Level 01 Solution
+## Решение уровня 01
 
 I have to admit that the solution for this one came naturally. If you know the movie [Hackers](https://www.imdb.com/title/tt0113243/), this challenge is an easy one.
 
@@ -94,7 +94,7 @@ $ cat /etc/leviathan_pass/leviathan2
 ougahZi8Ta
 ```
 
-## Level 02 Solution
+## Решение уровня 02
 
 This challenge was the most interesting of the wargame and certainly the most difficult for me.
 
@@ -165,7 +165,7 @@ bar
 Ahdiemoo1j
 ```
 
-## Level 03 Solution
+## Решение уровня 03
 
 Another easy one :)
 
@@ -206,7 +206,7 @@ vuH0coox6m
 ```
 
 
-## Level 04 Solution
+## Решение уровня 04
 
 This one required a bit of *bash-fu* but nothing to worry about...
 
@@ -230,7 +230,7 @@ leviathan4@leviathan:~/.trash$ ./bin | sed 's/ //g' | perl -lpe '$_=pack"B*",$_'
 Tith4cokei
 ```
 
-## Level 05 Solution
+## Решение уровня 05
 
 Symbolic links ftw !
 
@@ -255,7 +255,7 @@ leviathan5@leviathan:~$ ./leviathan5
 UgaoFee4li
 ```
 
-## Level 06 Solution
+## Решение уровня 06
 
 Quick and dirty.
 
@@ -302,10 +302,10 @@ $ cat /etc/leviathan_pass/leviathan7
 ahy7MaeBo9
 ```
 
-**Note:** You don't really need to exit the script. When it stops, you already are in the shell.
+**Заметка:** You don't really need to exit the script. When it stops, you already are in the shell.
 {: .notice--info}
 
-## Level 07 Solution
+## Решение уровня 07
 
 No challenge here, you did it !
 

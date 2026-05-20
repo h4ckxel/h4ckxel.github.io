@@ -1,7 +1,7 @@
 ---
-title: "Lab6C Write-up (Easy)"
+title: "Разбор Lab6C (легко)"
 permalink: /writeups/mbe/lab6c/
-excerpt: "Write-up for Lab6C."
+excerpt: "Разбор Lab6C."
 ---
 
 ---
@@ -28,7 +28,7 @@ Nope. But we can enable it until the next reboot or permanently:
 - Until reboot: `echo 2 > /proc/sys/kernel/randomize_va_space`
 - Persist reboot: `echo 'kernel.randomize_va_space = 2' > /etc/sysctl.d/01-disable-aslr.conf`
 
-**Note** You will need privileges to perform the change. It can be done with the **gameadmin** account (`gameadmin:gameadmin`).
+**Заметка** You will need privileges to perform the change. It can be done with the **gameadmin** account (`gameadmin:gameadmin`).
 {: .notice--info}
 
 Let's recheck if ASLR is now enabled:
@@ -55,7 +55,7 @@ $ ./lab6C
 
 Here, we can specify a username and send a message. One of these fields is probably vulnerable...
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's check the source code.
 
@@ -219,7 +219,7 @@ void set_tweet(struct savestate *save )
 
 If we can tamper the **msglen** variable with another value by specifying a 41-char long username, we can overwrite the EIP by *asking* the *strncpy()* function to overflow `char tweet[140];`. Enough for the theory, let's get practical.
 
-## Dynamic Analysis
+## Динамический анализ
 
 First, let's see where is our structure and how it looks like in memory. As the structure is declared in *handle_tweet()*, we can start here.
 
@@ -593,7 +593,7 @@ After a few run, due to ASLR, this address will change:
 
 However, we can see that the address always ends with **0x72b**. It means that we can try to do a partial overwrite and bruteforce a valid address!
 
-## Solution
+## Решение
 
 r < <(python -c "print(40 * 'A' + '\xfa\n' + 196 * 'B' + '\x90\x90\x90\x90\n' + 'cat /home/lab6B/.pass\n')")
 

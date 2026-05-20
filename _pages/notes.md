@@ -1,14 +1,14 @@
 ---
 permalink: /notes/
-title: "Notes"
-excerpt: "Short technical notes, research logs, and study fragments."
+title: "Заметки"
+excerpt: "Короткие технические заметки, исследовательские журналы и фрагменты учебы."
 ---
 
-This page is a small index for notes that do not need to become full writeups yet.
+Эта страница — небольшой индекс заметок, которым пока не нужно становиться полноценными разборами.
 
-Use `_posts/` for published logs and tag short entries with `note`, `linux`, `reversing`, `math`, or `systems`.
+Используй `_posts/` для опубликованных журналов и помечай короткие записи тегами `note`, `linux`, `reversing`, `math` или `systems`.
 
-## Recent notes and logs
+## Недавние заметки и журналы
 
 {% for post in site.posts limit:10 %}
 - {{ post.date | date: "%Y-%m-%d" }} — [{{ post.title }}]({{ post.url | relative_url }})

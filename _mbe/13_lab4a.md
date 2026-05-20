@@ -1,7 +1,7 @@
 ---
-title: "Lab4A Write-up (Hard)"
+title: "Разбор Lab4A (сложно)"
 permalink: /writeups/mbe/lab4a/
-excerpt: "Write-up for Lab4A."
+excerpt: "Разбор Lab4A."
 ---
 
 ---
@@ -22,7 +22,7 @@ ERROR: Failed to open ./backups/.log
 
 Hum, we will need to check the code to know how this program works.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's analyze the source code.
 
@@ -171,7 +171,7 @@ RELRO     : FULL
 
 **RELRO** (Relocation Read-Only) is enabled and protects the Global Offset Table (GOT) in ELF binaries from being overwritten. It means that we won't be able to rewrite any address in this section (unlike the previous level).
 
-## Dynamic Analysis
+## Динамический анализ
 
 Like in the previous level, we need to find where our argument is located on the stack. Remember that we need this information to be able to specify the memory locations we want to write into. So, if we specify an address as argument, we need to tell our format specifier (`%<argnum>$n`) where is this address on the stack; is it the first one? the second one? etc.
 
@@ -184,7 +184,7 @@ LOG: Starting back up: AAAABBBBCCCC.b7e9eb73.b7e9548c.bffff7ee. 8048cda. 804b008
 
 As you can see, we have the **0x41** values in the 13th and 14th elements. Given we need to align our values, we just need to prepend 1 byte to our payload.
 
-**Note** As you may know, the **$** (dollar sing) in *bash* is used for variable substitution, you will need to escape it with a backslash(**\\**) in your payload to avoid any issue.
+**Заметка** As you may know, the **$** (dollar sing) in *bash* is used for variable substitution, you will need to escape it with a backslash(**\\**) in your payload to avoid any issue.
 {: .notice--info}
 
 ```shell
@@ -314,7 +314,7 @@ mov    al, 0xb ; sys_execve()
 int    0x80
 ```
 
-**Note** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux VM.
+**Заметка** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux VM.
 {: .notice--info}
 
 ```shell
@@ -354,7 +354,7 @@ Let's build a quick proof of concept to guestimate where our shellcode would be 
 
 [return address of main() on the stack][magic sauce to rewrite the ret_address][NOP + Shellcode]
 
-## Solution
+## Решение
 
 b *log_wrapper+134
 b *main+166

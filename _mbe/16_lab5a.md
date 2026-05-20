@@ -1,7 +1,7 @@
 ---
-title: "Lab5A Write-up (Hard)"
+title: "Разбор Lab5A (сложно)"
 permalink: /writeups/mbe/lab5a/
-excerpt: "Write-up for Lab5A."
+excerpt: "Разбор Lab5A."
 ---
 
 ---
@@ -14,7 +14,7 @@ $ cd /levels/lab05/
 
 Here, we don't really need to execute this program as we already saw it in [lab3A](/writeups/mbe/lab3a/)!
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's check the source code and see if there are any differences.
 
@@ -137,7 +137,7 @@ In **lab3a** we could store data outside the `data[]` array with an *index* grea
 
 However, given the **index** variable is now *signed*, it introduced a new vulnerability. Indeed, we can now use a **negative** index! While we won't be able to overwrite the return address of *main()* this time, we can overwrite the return address of *store_number()*.
 
-## Dynamic Analysis
+## Динамический анализ
 
 First, we need to know the position of the return address of *store_number()*. To do this we can just put a breakpoint on the `ret` instruction at the end of *store_number()*.
 
@@ -316,7 +316,7 @@ Stopped reason: SIGSEGV
 
 Awesome. It was the easy part. Now, we need to build the ROP chain.
 
-## ROP Chain
+## ROP-цепочка
 
 Like in the last challenge, we can try to execute `execve("/bin/sh")`to get a shell. The prototype for the shellcode will look like this:
 
@@ -508,7 +508,7 @@ Warning: not running or target is remote
 
 Nice!
 
-## Solution
+## Решение
 
 As usual, given the stack change a bit outside *gdb*, we will need to play with the value of the address pointing to "/bin/sh". After subtracting *0x40* to the address of "/bin/sh" we finally got a shell.
 

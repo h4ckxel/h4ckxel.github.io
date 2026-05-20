@@ -1,7 +1,7 @@
 ---
-title: "[OTW] Write-up for the Bandit Wargame"
+title: "[OTW] Разбор варгейма Bandit"
 permalink: /writeups/otw/bandit/
-excerpt: "Quick write-up for the Bandit wargame from OverTheWire."
+excerpt: "Краткий разбор варгейма Bandit с OverTheWire."
 ---
 
 ---
@@ -13,10 +13,10 @@ This is a quick write-up of my solutions for this challenge. I advise you do it 
 {: .text-justify}
 
 
-**Note:** You should follow this write-up with the [official](http://overthewire.org/wargames/bandit/) website open as it gives details on the goal of each challenges and some helpful material to read.
+**Заметка:** You should follow this write-up with the [official](http://overthewire.org/wargames/bandit/) website open as it gives details on the goal of each challenges and some helpful material to read.
 {: .notice--info}
 
-## Bandit 00 Solution
+## Решение Bandit 00
 
 The host to which you need to connect is **bandit.labs.overthewire.org**, on port **2220**. The username is **bandit0** and the password is **bandit0**. The password for the next level is stored in a file called **readme** located in the home directory.
 
@@ -38,7 +38,7 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 **Explanation:** Here, you just need to read the content of the **readme** file with the command `cat`.
 {: .notice--success}
 
-## Bandit 01 Solution
+## Решение Bandit 01
 
 The password for the next level is stored in a file called **-** located in the home directory.
 
@@ -53,7 +53,7 @@ bandit1@bandit:~$
 **Explanation:** As **'-'** means reading from/to stdin in a shell, you need to specify a path to read the file. If you don't specify the path, `cat` will read from *stdin* and print back your input.
 {: .notice--success}
 
-## Bandit 02 Solution
+## Решение Bandit 02
 
 The password for the next level is stored in a file called **spaces in this filename** located in the home directory.
 
@@ -69,7 +69,7 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 **Explanation:** You can also read the file by escaping the **spaces** using backslash (**'\\'**) like the following command: `cat spaces\ in\ this\ filename`.
 {: .notice--success}
 
-## Bandit 03 Solution
+## Решение Bandit 03
 
 The password for the next level is stored in a hidden file in the **inhere** directory.
 
@@ -92,7 +92,7 @@ pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 **Explanation:** In the Linux operating system, a **hidden** file is any file that begins with a **"."**. When a file is hidden it can not been seen with the bare `ls` command. If you need to see hidden files using the `ls` command you need to add the **-a** switch.
 {: .notice--success}
 
-## Bandit 04 Solution
+## Решение Bandit 04
 
 The password for the next level is stored in the only human-readable file in the **inhere** directory.
 
@@ -120,7 +120,7 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 **Explanation:** Here, we use the `file` command with a *wildcard* on the filename to find the file containing only ASCII text. 
 {: .notice--success}
 
-## Bandit 05 Solution
+## Решение Bandit 05
 
 The password for the next level is stored in a file somewhere under the **inhere** directory and has all of the following properties:
 - Human-readable
@@ -139,7 +139,7 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 **Explanation:** The `find` command is really useful when you look for a specific file. Here, we use the `-readable`, `! -executable` and `-size 1033c` parameters to find a file with the specified properties.
 {: .notice--success}
 
-## Bandit 06 Solution
+## Решение Bandit 06
 
 The password for the next level is stored somewhere on the server and has all of the following properties:
 - Owned by user bandit7
@@ -160,7 +160,7 @@ HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 **Explanation:** Same as the previous level except that we redirect the files we cannot read to **stderr**. Also we tell `find` to look into the **root** of the file system as we don't know where the file is located.
 {: .notice--success}
 
-## Bandit 07 Solution
+## Решение Bandit 07
 
 The password for the next level is stored in the file **data.txt** next to the word **millionth**.
 
@@ -174,7 +174,7 @@ bandit7@bandit:~$ find / -name "data.txt" -exec grep -H 'millionth' {} \; 2>&1 |
 **Explanation:** Here we use the `-exec` argument of `find` with the `grep` command to find the file containing the word **millionth**.
 {: .notice--success}
 
-## Bandit 08 Solution
+## Решение Bandit 08
 
 The password for the next level is stored in the file **data.txt** and is the only line of text that occurs only once.
 
@@ -188,7 +188,7 @@ bandit8@bandit:~$ sort data.txt | uniq -c | grep "1 "
 **Explanation:** First we use `sort` to sort alphabetically the data in the **data.txt** file then, we use `uniq` to count the number or occurances and find the line of text that occurs only once.
 {: .notice--success}
 
-## Bandit 09 Solution
+## Решение Bandit 09
 
 The password for the next level is stored in the file **data.txt** in one of the few human-readable strings, beginning with several ‘=’ characters.
 
@@ -204,7 +204,7 @@ bandit9@bandit:~$ strings data.txt | grep "^=="
 **Explanation:** The `strings` command helps us to find the human-readable strings and then `grep` the strings beginning with several **‘=’** characters.
 {: .notice--success}
 
-## Bandit 10 Solution
+## Решение Bandit 10
 
 The password for the next level is stored in the file **data.txt**, which contains *base64* encoded data.
 
@@ -222,7 +222,7 @@ The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 **Explanation:** Read the **data.txt** and redirect the output to the `base64` command. The **-d** argument is used to decode the string.
 {: .notice--success}
 
-## Bandit 11 Solution
+## Решение Bandit 11
 
 The password for the next level is stored in the file **data.txt**, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
 
@@ -236,7 +236,7 @@ The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 **Explanation:** The `tr` command is used to translate the first set of characters **'A-Za-z'** to **'N-ZA-Mn-za-m'** which is a rotation of 13 positions of the first set.
 {: .notice--success}
 
-## Bandit 12 Solution
+## Решение Bandit 12
 
 The password for the next level is stored in the file **data.txt**, which is a hexdump of a file that has been repeatedly compressed.
 
@@ -288,7 +288,7 @@ The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 **Explanation:** The `-r` switch of `xxd` convert an hexdump to binary. Then we use the `file` command to find out which compression tool has been used and recursively decompress the files with the right tool.
 {: .notice--success}
 
-## Bandit 13 Solution
+## Решение Bandit 13
 
 The password for the next level is stored in **/etc/bandit_pass/bandit14** and can only be read by user **bandit14**. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level.
 
@@ -318,7 +318,7 @@ bandit14@bandit:~$
 **Explanation:** Here, we download the private key to login to the next level. The `scp` command will do the trick.
 {: .notice--success}
 
-## Bandit 14 Solution
+## Решение Bandit 14
 
 The password for the next level can be retrieved by submitting the password of the current level to port **30000** on localhost.
 
@@ -333,7 +333,7 @@ BfMYroe26WYalil77FoDi9qh59eK5xNr
 **Explanation:** After login to **bandit14** with the private key, you can redirect the content of **/etc/bandit_pass/bandit14** to netcat using the `nc` command.
 {: .notice--success}
 
-## Bandit 15 Solution
+## Решение Bandit 15
 
 The password for the next level can be retrieved by submitting the password of the current level to port **30001** on localhost using SSL encryption.
 
@@ -353,7 +353,7 @@ cluFn7wTiGryunymYOu4RcffSxQluehd
 **Explanation:** Here, we send the content of **/etc/bandit_pass/bandit15** to `openssl`. The `s_client` implements a generic SSL/TLS client which can establish a transparent connection to a remote server speaking SSL/TLS.
 {: .notice--success}
 
-## Bandit 16 Solution
+## Решение Bandit 16
 
 The credentials for the next level can be retrieved by submitting the password of the current level to a port on **localhost** in the range **31000 to 32000**. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
 
@@ -377,33 +377,7 @@ verify return:1
 depth=0 CN = bandit
 verify return:1
 Correct!
------BEGIN RSA PRIVATE KEY-----
-MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
-imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
-Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
-DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
-JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
-x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
-KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
-J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
-d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
-YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
-vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
-+TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
-8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
-SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
-HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
-SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
-R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
-Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
-R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
-L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
-blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
-YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
-77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
-dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
-vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
------END RSA PRIVATE KEY-----
+<redacted SSH private key returned by the challenge>
 bandit16@bandit:~$ exit
 logout
 Connection to bandit.labs.overthewire.org closed.
@@ -412,7 +386,7 @@ Connection to bandit.labs.overthewire.org closed.
 **Explanation:** You can write a simple port scanner in **bash** and try to connect to the open ports with `openssl`.
 {: .notice--success}
 
-## Bandit 17 Solution
+## Решение Bandit 17
 
 There are 2 files in the homedirectory: **passwords.old** and **passwords.new**. The password for the next level is in **passwords.new** and is the **only** line that has been changed between passwords.old and passwords.new
 
@@ -429,7 +403,7 @@ bandit17@bandit:~$ diff passwords.old passwords.new
 **Explanation:** The `diff` command will compare 2 files line by line and show you the differences.
 {: .notice--success}
 
-## Bandit 18 Solution
+## Решение Bandit 18
 
 The password for the next level is stored in a file **readme** in the **homedirectory**. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
 
@@ -446,7 +420,7 @@ IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 **Explanation:** You can pass the command you want to execute directly to the `ssh` command to bypass the issue.
 {: .notice--success}
 
-## Bandit 19 Solution
+## Решение Bandit 19
 
 To gain access to the next level, you should use the **setuid** binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
 
@@ -463,7 +437,7 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 **Explanation:** Nothing to explain here, pretty straightforward.
 {: .notice--success}
 
-## Bandit 20 Solution
+## Решение Bandit 20
 
 There is a **setuid** binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
 
@@ -483,7 +457,7 @@ Password matches, sending next password
 **Explanation:** I suggest you open 2 terminals. Set a listener in the first one and try to connect in the second one. The password should appear in your first terninal.
 {: .notice--success}
 
-## Bandit 21 Solution
+## Решение Bandit 21
 
 A program is running automatically at regular intervals from `cron`, the time-based job scheduler. Look in **/etc/cron.d/** for the configuration and see what command is being executed.
 
@@ -512,7 +486,7 @@ Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 **Explanation:** Just read the **cronjob_bandit22.sh** script executed by `cron`. You'll see where the password will be stored.
 {: .notice--success}
 
-## Bandit 22 Solution
+## Решение Bandit 22
 
 A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in **/etc/cron.d/** for the configuration and see what command is being executed.
 
@@ -548,7 +522,7 @@ jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
 **Explanation:** The script tells us that the file where the password will be stored is an md5 hash. You can compute the hash using the `md5sum` command and retrieve the content of the file.
 {: .notice--success}
 
-## Bandit 23 Solution
+## Решение Bandit 23
 
 A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in **/etc/cron.d/** for the configuration and see what command is being executed.
 
@@ -603,7 +577,7 @@ UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 **Explanation:** The `cron` script execute and delete all scripts in **/var/spool/bandit24**. We just need to write our own script, copy it in **/var/spool/bandit24** and wait for the result. 
 {: .notice--success}
 
-## Bandit 24 Solution (coming soon)
+## Решение Bandit 24 (скоро)
 
 A daemon is listening on port **30002** and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
 
@@ -614,14 +588,14 @@ $ ssh bandit24@bandit.labs.overthewire.org -p 2220
 uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 ```
 
-**Note:** After multiple attempts, I didn't found a valid solution yet. Still working on a viable script.
+**Заметка:** After multiple attempts, I didn't found a valid solution yet. Still working on a viable script.
 {: .notice--danger}
 
-## Bandit 25 & 26 Solution
+## Решение Bandit 25 и 26
 
 Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
 
-**Note:** We will solve Bandit 25 & 26 in this section.
+**Заметка:** We will solve Bandit 25 & 26 in this section.
 {: .notice--info}
 
 ```bash
@@ -688,7 +662,7 @@ drwxr-xr-x  2 root     root     4096 Oct 16 14:00 .ssh
 **Explanation:** In the first part we figure that the fake shell read a file with `more` and exit. As the content of the file is not long enough, we need to reduce the size of the terminal to enable `more` to paging through text one screenful at a time. Once `more` is running we can type **v** to open `vi` and execute command through that tool. Same thing for the second part except the `bandit27-do` command will give us the password.
 {: .notice--success}
 
-## Bandit 27 Solution
+## Решение Bandit 27
 
 There is a git repository at **ssh://bandit27-git@localhost/home/bandit27-git/repo**. The password for the user **bandit27-git** is the same as for the user **bandit27**.
 
@@ -717,7 +691,7 @@ The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
 **Explanation:** You just need to create a temporary folder in **/tmp/** and clone the repo. Inside the repo, you'll find the password.
 {: .notice--success}
 
-## Bandit 28 Solution
+## Решение Bandit 28
 
 There is a git repository at **ssh://bandit28-git@localhost/home/bandit28-git/repo**. The password for the user **bandit28-git** is the same as for the user **bandit28**.
 
@@ -741,10 +715,10 @@ bandit28@bandit:/tmp/repo1337$ cd repo/
 bandit28@bandit:/tmp/repo1337/repo$ ls
 README.md
 bandit28@bandit:/tmp/repo1337/repo$ cat README.md 
-# Bandit Notes
+# Заметки Bandit
 Some notes for level29 of bandit.
 
-## credentials
+## Учетные данные
 
 - username: bandit29
 - password: xxxxxxxxxx
@@ -771,10 +745,10 @@ bandit28@bandit:/tmp/repo1337/repo$ git checkout 186a1038cc54d1358d42d468cdc8e3c
 Previous HEAD position was 073c27c... fix info leak
 HEAD is now at 186a103... add missing data
 bandit28@bandit:/tmp/repo1337/repo$ cat README.md 
-# Bandit Notes
+# Заметки Bandit
 Some notes for level29 of bandit.
 
-## credentials
+## Учетные данные
 
 - username: bandit29
 - password: bbc96594b4e001778eee9975372716b2
@@ -783,7 +757,7 @@ Some notes for level29 of bandit.
 **Explanation:** You need to create a temporary folder in **/tmp/** and clone the repo. Then, to reveal the password you need to checkout an older commit.
 {: .notice--success}
 
-## Bandit 29 Solution
+## Решение Bandit 29
 
 There is a git repository at **ssh://bandit29-git@localhost/home/bandit29-git/repo**. The password for the user **bandit29-git** is the same as for the user **bandit29**.
 
@@ -803,10 +777,10 @@ Receiving objects: 100% (16/16), done.
 Resolving deltas: 100% (2/2), done.
 bandit29@bandit:/tmp/plop123$ cd repo/
 bandit29@bandit:/tmp/plop123/repo$ cat README.md 
-# Bandit Notes
+# Заметки Bandit
 Some notes for bandit30 of bandit.
 
-## credentials
+## Учетные данные
 
 - username: bandit30
 - password: <no passwords in production!>
@@ -820,10 +794,10 @@ bandit29@bandit:/tmp/plop123/repo$ git checkout dev
 Branch dev set up to track remote branch dev from origin.
 Switched to a new branch 'dev'
 bandit29@bandit:/tmp/plop123/repo$ cat README.md 
-# Bandit Notes
+# Заметки Bandit
 Some notes for bandit30 of bandit.
 
-## credentials
+## Учетные данные
 
 - username: bandit30
 - password: 5b90576bedb2cc04c86a9e924ce42faf
@@ -832,7 +806,7 @@ Some notes for bandit30 of bandit.
 **Explanation:** You need to create a temporary folder in **/tmp/** and clone the repo. Then, to reveal the password you need to checkout the **dev** branch.
 {: .notice--success}
 
-## Bandit 30 Solution
+## Решение Bandit 30
 
 There is a git repository at **ssh://bandit30-git@localhost/home/bandit30-git/repo**. The password for the user **bandit30-git** is the same as for the user **bandit30**.
 
@@ -862,7 +836,7 @@ bandit30@bandit:/tmp/plop1234/repo$ git show secret
 **Explanation:** You need to create a temporary folder in **/tmp/** and clone the repo. `git show` will display the tag message and the referenced objects to reveal the password.
 {: .notice--success}
 
-## Bandit 31 Solution
+## Решение Bandit 31
 
 There is a git repository at **ssh://bandit31-git@localhost/home/bandit31-git/repo**. The password for the user **bandit31-git** is the same as for the user **bandit31**.
 
@@ -921,7 +895,7 @@ error: failed to push some refs to 'ssh://bandit31-git@localhost/home/bandit31-g
 **Explanation:** You need to create a temporary folder in **/tmp/** and clone the repo. Then, we just follow the instruction in the **README.md**. Push a file called **key.txt**, add the file and push it to the **master** branch.
 {: .notice--success}
 
-## Bandit 32 Solution
+## Решение Bandit 32
 
 After all this git stuff its time for another escape.
 
@@ -943,7 +917,7 @@ c9c3199ddf4121b10cf581a98d51caee
 **Explanation:** Here we get an interactive shell by inserting **$0** in the *fake* shell, then we run `vim` end read the password for the next level.
 {: .notice--success}
 
-## Bandit 33 Solution (The End)
+## Решение Bandit 33 (конец)
 
 This one is not really a challenge as there are no more levels to play in this game. But we can still try to login to check the password we found previously.
 

@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Acute"
 permalink: /writeups/htb/acute/
-excerpt: "Quick write-up for the Acute machine from Hack The Box."
+excerpt: "Краткий разбор машины Acute с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -23,20 +23,20 @@ If you didn't solve this challenge and just look for answers, first, you should 
 
 ![image-center](/images/htb/htb_acute_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/). Note the **-sV** switch which enables *version detection* and allows Nmap to check its internal database to try to determine the service protocol, application name and version number.
 
-**Note:** Always allow a few minutes after the start of the HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -53,12 +53,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 22.83 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 Here, we can see that we have the **HTTPS** (443/TCP) port open.
 
-## HTTP Recon
+## HTTP-разведка
 
 If we take a closer look at the certificate on "https://10.129.136.40", we can see its CN: 
 - **atsserver.acute.local**.
@@ -89,7 +89,7 @@ Joshua Morgan
 Lois Hopkins
 ```
 
-## Information Gathering
+## Сбор информации
 
 Using `exiftool` on the file showed two interesting information:
 
@@ -139,7 +139,7 @@ Some information about a configuration named **dc_managed** on a PowerShell Web 
 
 A link: **https://atsserver.acute.local/Acute_Staff_Access**
 
-# Initial Access
+# Первичный доступ
 
 With the gathered information, we can try to get access on the target machine. First, we will explore the discovered link.
 
@@ -283,7 +283,7 @@ After a few minutes, we can see that the user is running multiple command in a P
 
 ![image-center](/images/htb/htb_acute_screen.png){: .align-center}
 
-## Lateral Movement
+## Латеральное перемещение
 
 Back to our PSWA, let's use the recovered credentials to see if we can get other privileges.
 
@@ -360,7 +360,7 @@ msf6 exploit(multi/handler) > run
 [*] Meterpreter session 2 opened (10.10.14.10:443 -> 10.129.136.40:49888) at 2023-05-03 09:54:31 -0400
 ```
 
-# Privilege Escalation
+# Повышение привилегий
 
 Now that we have an elevated shell, let's execute `hashdump` to extract the SAM database.
 

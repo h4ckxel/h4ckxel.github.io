@@ -1,7 +1,7 @@
 ---
-title: "Lab4B Write-up (Medium)"
+title: "Разбор Lab4B (средне)"
 permalink: /writeups/mbe/lab4b/
-excerpt: "Write-up for Lab4B."
+excerpt: "Разбор Lab4B."
 ---
 
 ---
@@ -22,7 +22,7 @@ test
 
 Okay, so it seems that this executable simply convert what we type and return it in lower case to the standard output.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's take a look at the source:
 
@@ -175,7 +175,7 @@ As you can see, we overwrote the original address with **0x04** (which is the si
 
 Let's switch to `gdb`.
 
-## Dynamic Analysis
+## Динамический анализ
 
 First, let's see where our shellcode will be in memory. Here, I put a breakpoint on `main+163` as it is the call to *exit()*.
 
@@ -336,7 +336,7 @@ mov    al, 0xb ; sys_execve()
 int    0x80
 ```
 
-**Note** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux VM.
+**Заметка** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux VM.
 {: .notice--info}
 
 ```shell
@@ -442,7 +442,7 @@ Warning: not running or target is remote
 
 The exploit seems to be working inside `gdb`. However, like in the previous levels, we may need to adjust the return address.
 
-## Solution
+## Решение
 
 There is a quick trick to easily find the difference between the stack address inside and outside `gdb`. In `gdb`, our return address was `0xbffff670`. Now, if you set a breakpoint on *exit()* and check the stack, you will see that we can leak an address.
 

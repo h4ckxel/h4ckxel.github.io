@@ -1,7 +1,7 @@
 ---
 title: "[HTB] StreamIO"
 permalink: /writeups/htb/streamio/
-excerpt: "Quick write-up for the StreamIO machine from Hack The Box."
+excerpt: "Краткий разбор машины StreamIO с Hack The Box."
 tags:
   - hackthebox
   - htb
@@ -25,20 +25,20 @@ If you didn't solve this challenge and just look for answers, first, you should 
 
 ![image-center](/images/htb/htb_streamio_infocard.png){: .align-center}
 
-**Note:** All the actions performed against the target machine have been done with a standard *Kali Linux* machine. You can download Kali from the official website [here](https://www.kali.org/).
+**Заметка:** Все действия против целевой машины выполнялись со стандартной системой *Kali Linux*. Скачать Kali можно с официального сайта [здесь](https://www.kali.org/).
 {: .notice--info}
 
-# Reconnaissance
+# Разведка
 
 In a penetration test or red team, reconnaissance consists of techniques that involve adversaries actively or passively gathering information that can be used to support targeting. 
 
 This information can then be leveraged by an adversary to aid in other phases of the adversary lifecycle, such as using gathered information to plan and execute initial access, to scope and prioritize post-compromise objectives, or to drive and lead further reconnaissance efforts. Here, our only piece of information is an IP address. 
 
-## Scan with Nmap
+## Сканирование Nmap
 
 Let's start with a classic service scan with [Nmap](https://nmap.org/) in order to reveal some of the ports open on the machine.
 
-**Note:** Always allow a few minutes after the start of an HTB box to make sure that all the services are properly running. If you scan the machine right away, you may miss some ports that should be open.
+**Заметка:** После запуска HTB-машины всегда подожди несколько минут, чтобы убедиться, что все сервисы поднялись корректно. Если просканировать машину сразу, можно пропустить порты, которые должны быть открыты.
 {: .notice--info}
 
 ```bash
@@ -67,12 +67,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 17.43 seconds
 ```
 
-**Remember:** By default, **Nmap** will scans the 1000 most common TCP ports on the targeted host(s). Make sure to read the [documentation](https://nmap.org/docs.html) if you need to scan more ports or change default behaviors.
+**Помни:** По умолчанию **Nmap** сканирует 1000 самых распространенных TCP-портов на целевых хостах. Если нужно сканировать больше портов или изменить поведение по умолчанию, обязательно прочитай [документацию](https://nmap.org/docs.html).
 {: .notice--warning}
 
 This computer seems to be a domain controller for **streamio.htb** and we also have a couple of web-related ports, **HTTP** (80/TCP) and **HTTPS** (443/TCP).
 
-## HTTP Recon
+## HTTP-разведка
 
 Let's check this website, but before that we will add the domain to our `/etc/hosts` file with the following command:
 - `echo "10.129.207.221 streamio.htb" | sudo tee --append /etc/hosts`
@@ -181,7 +181,7 @@ yoshihide:66boysandgirls..
 
 Let's see if one of these accounts is valid.
 
-## More Recon
+## Дополнительная разведка
 
 Back to **https://streamio.htb**, we were able to connect to the website with `yoshihide:66boysandgirls..`. However, we found nothing interesting. Let's do a bit more recon with [gobuster](https://github.com/OJ/gobuster).
 
@@ -218,7 +218,7 @@ Using [ffuf](https://github.com/ffuf/ffuf), another web fuzzer, we will try to d
 
 - [https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/burp-parameter-names.txt](https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/burp-parameter-names.txt)
 
-**Note:** We used the `--fs 1678` flag to avoid getting too many false positive.
+**Заметка:** We used the `--fs 1678` flag to avoid getting too many false positive.
 {: .notice--info}
 
 Don't forget to recover the **PHPSESSID** of `yoshihide` to run an authenticated scan. This can be done directly in your web browser.
@@ -274,7 +274,7 @@ It is an interesting finding, but we can’t really go further with this informa
 
 Remote File Inclusion (also known as RFI) is the process of including remote files through the exploiting of vulnerable inclusion procedures implemented in the application. This vulnerability occurs, for example, when a page receives, as input, the path to the file that has to be included and this input is not properly sanitized, allowing external URL to be injected. 
 
-## More Recon
+## Дополнительная разведка
 
 Again, we will use `gobuster`, this time with the `-x php` switch to try to discover interesting web pages to read with the **debug** feature.
 
@@ -360,7 +360,7 @@ Microsoft Windows [Version 10.0.17763.2928]
 C:\inetpub\streamio.htb\admin>
 ```
 
-# Initial Access
+# Первичный доступ
 
 In a real-world scenario, adversaries may search network shares on computers they have compromised to find files of interest. Sensitive data can be collected from remote systems via shared network drives. With our current shell, let's see if we can find something interesting.
 
@@ -478,7 +478,7 @@ Mode                LastWriteTime         Length Name
 -ar---        4/27/2023   7:14 PM             34 user.txt
 ```
 
-## More Recon with winPEAS
+## Дополнительная разведка с winPEAS
 
 Here, with [winPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS), we can scan the machine for information and potential privilege escalation paths.
 
@@ -580,11 +580,11 @@ By looking at the BloodHound output, we can see that one of the previously recov
 
 However, after trying the `JDgodd:password@12` credentials, it did not work...
 
-# Privilege Escalation
+# Повышение привилегий
 
 Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities.
 
-## Password Spraying
+## Password spraying
 
 As stated by [MITRE](https://attack.mitre.org/techniques/T1110/003/), adversaries may use a single or small list of commonly used passwords against many different accounts to attempt to acquire valid account credentials. Password spraying uses one password, or a small list of commonly used passwords, that may match the complexity policy of the domain.
 

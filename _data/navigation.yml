@@ -1,179 +1,179 @@
 # Navigation Links
 main:
-  - title: "Home"
+  - title: "Главная"
     url: /
 
-  - title: "Projects"
+  - title: "Проекты"
     url: /projects/
 
-  - title: "Writeups"
+  - title: "Разборы"
     url: /writeups/
 
-  - title: "Notes"
+  - title: "Заметки"
     url: /notes/
 
-  - title: "Training"
+  - title: "Обучение"
     url: /trainings/
 
-  - title: "About"
+  - title: "Обо мне"
     url: /about/
 
 # Navigation for DVWA
 dvwa:
-  - title: "Getting Started"
+  - title: "Начало работы"
     children:
-      - title: "Installation"
+      - title: "Установка"
         url: /writeups/dvwa/installation/
-      - title: "Notes"
+      - title: "Заметки"
         url: /writeups/dvwa/notes/
   
-  - title: "Brute Force"
+  - title: "Перебор"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/bruteforce-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/bruteforce-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/bruteforce-high/
   
-  - title: "Command Injection"
+  - title: "Внедрение команд"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/command-injection-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/command-injection-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/command-injection-high/
   
   - title: "CSRF"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/csrf-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/csrf-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/csrf-high/
   
-  - title: "File Inclusion"
+  - title: "Подключение файлов"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/file-inclusion-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/file-inclusion-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/file-inclusion-high/
   
-  - title: "File Upload"
+  - title: "Загрузка файлов"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/file-upload-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/file-upload-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/file-upload-high/
   
-  - title: "Insecure CAPTCHA"
+  - title: "Небезопасная CAPTCHA"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/insecure-captcha-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/insecure-captcha-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/insecure-captcha-high/
   
-  - title: "SQL Injection"
+  - title: "SQL-инъекция"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/sql-injection-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/sql-injection-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/sql-injection-high/
   
-  - title: "SQL Injection (Blind)"
+  - title: "SQL-инъекция (слепая)"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/sql-injection-blind-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/sql-injection-blind-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/sql-injection-blind-high/
   
-  - title: "XSS (Reflected)"
+  - title: "XSS (отраженная)"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/xss-reflected-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/xss-reflected-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/xss-reflected-high/
   
-  - title: "XSS (Stored)"
+  - title: "XSS (хранимая)"
     children:
-      - title: "Low"
+      - title: "Низкий"
         url: /writeups/dvwa/xss-stored-low/
-      - title: "Medium"
+      - title: "Средний"
         url: /writeups/dvwa/xss-stored-medium/
-      - title: "High"
+      - title: "Высокий"
         url: /writeups/dvwa/xss-stored-high/
 
 # Navigation for MBE
 mbe:
-  - title: "Getting Started"
+  - title: "Начало работы"
     children:
-      - title: "Installation"
+      - title: "Установка"
         url: /writeups/mbe/installation/
-      - title: "Notes"
+      - title: "Заметки"
         url: /writeups/mbe/mbe_notes/
 
-  - title: "Reverse Engineering"
+  - title: "Реверс-инжиниринг"
     children:
-      - title: "Lab1C (easy)"
+      - title: "Lab1C (легко)"
         url: /writeups/mbe/lab1c/
-      - title: "Lab1B (medium)"
+      - title: "Lab1B (средне)"
         url: /writeups/mbe/lab1b/
-      - title: "Lab1A (hard)"
+      - title: "Lab1A (сложно)"
         url: /writeups/mbe/lab1a/
   
-  - title: "Memory Corruption"
+  - title: "Повреждение памяти"
     children:
-      - title: "Lab2C (easy)"
+      - title: "Lab2C (легко)"
         url: /writeups/mbe/lab2c/
-      - title: "Lab2B (medium)"
+      - title: "Lab2B (средне)"
         url: /writeups/mbe/lab2b/
-      - title: "Lab2A (hard)"
+      - title: "Lab2A (сложно)"
         url: /writeups/mbe/lab2a/
   
   - title: "Shellcoding"
     children:
-      - title: "Lab3C (easy)"
+      - title: "Lab3C (легко)"
         url: /writeups/mbe/lab3c/
-      - title: "Lab3B (medium)"
+      - title: "Lab3B (средне)"
         url: /writeups/mbe/lab3b/
-      - title: "Lab3A (hard)"
+      - title: "Lab3A (сложно)"
         url: /writeups/mbe/lab3a/
   
-  - title: "Format Strings"
+  - title: "Форматные строки"
     children:
-      - title: "Lab4C (easy)"
+      - title: "Lab4C (легко)"
         url: /writeups/mbe/lab4c/
-      - title: "Lab4B (medium)"
+      - title: "Lab4B (средне)"
         url: /writeups/mbe/lab4b/
-      - title: "Lab4A (hard)"
+      - title: "Lab4A (сложно)"
         url: /writeups/mbe/lab4a/
   
-  - title: "DEP and ROP"
+  - title: "DEP и ROP"
     children:
-      - title: "Lab5C (easy)"
+      - title: "Lab5C (легко)"
         url: /writeups/mbe/lab5c/
-      - title: "Lab5B (medium)"
+      - title: "Lab5B (средне)"
         url: /writeups/mbe/lab5b/
-      - title: "Lab5A (hard)"
+      - title: "Lab5A (сложно)"
         url: /writeups/mbe/lab5a/
   
   - title: "ASLR"
     children:
-      - title: "Lab6C (easy)"
+      - title: "Lab6C (легко)"
         url: /writeups/mbe/lab6c/
   #   - title: "Lab6B (medium)"
   #     url: /writeups/mbe/lab6b/
@@ -228,10 +228,10 @@ mbe:
 otw:
   - title: "OverTheWire"
     children:
-      - title: "Summary"
+      - title: "Сводка"
         url: /writeups/otw/otw_wargames/
 
-  - title: "Wargames"
+  - title: "Варгеймы"
     children:
       - title: "Bandit"
         url: /writeups/otw/bandit/
@@ -262,42 +262,42 @@ otw:
 htb:
   - title: "Hack The Box"
     children:
-      - title: "Summary"
+      - title: "Сводка"
         url: /writeups/htb/htb_writeups/
 
-  - title: "Active Directory Machines"
+  - title: "Машины Active Directory"
     children:
-      - title: "Forest (Easy)"
+      - title: "Forest (легко)"
         url: /writeups/htb/forest/
-      - title: "Sauna (Easy)"
+      - title: "Sauna (легко)"
         url: /writeups/htb/sauna/
-      - title: "Active (Easy)"
+      - title: "Active (легко)"
         url: /writeups/htb/active/
-      - title: "Resolute (Medium)"
+      - title: "Resolute (средне)"
         url: /writeups/htb/resolute/
-      - title: "Cascade (Medium)"
+      - title: "Cascade (средне)"
         url: /writeups/htb/cascade/
-      - title: "Intelligence (Medium)"
+      - title: "Intelligence (средне)"
         url: /writeups/htb/intelligence/
-      - title: "Monteverde (Medium)"
+      - title: "Monteverde (средне)"
         url: /writeups/htb/monteverde/
-      - title: "StreamIO (Medium)"
+      - title: "StreamIO (средне)"
         url: /writeups/htb/streamio/
-      - title: "Backfield (Hard)"
+      - title: "Backfield (сложно)"
         url: /writeups/htb/blackfield/
-      - title: "Reel (Hard)"
+      - title: "Reel (сложно)"
         url: /writeups/htb/reel/
-      - title: "Mantis (Hard)"
+      - title: "Mantis (сложно)"
         url: /writeups/htb/mantis/
-      - title: "Search (Hard)"
+      - title: "Search (сложно)"
         url: /writeups/htb/search/
-      - title: "Acute (Hard)"
+      - title: "Acute (сложно)"
         url: /writeups/htb/acute/
-      - title: "Object (Hard)"
+      - title: "Object (сложно)"
         url: /writeups/htb/object/  
-      - title: "Sizzle (Insane)"
+      - title: "Sizzle (безумно)"
         url: /writeups/htb/sizzle/
-      - title: "Multimaster (Insane)"
+      - title: "Multimaster (безумно)"
         url: /writeups/htb/multimaster/
 
       

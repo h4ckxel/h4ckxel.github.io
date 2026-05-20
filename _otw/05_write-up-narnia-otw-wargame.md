@@ -1,7 +1,7 @@
 ---
-title: "[OTW] Write-up for the Narnia Wargame"
+title: "[OTW] Разбор варгейма Narnia"
 permalink: /writeups/otw/narnia/
-excerpt: "Quick write-up for the Narnia wargame from OverTheWire."
+excerpt: "Краткий разбор варгейма Narnia с OverTheWire."
 ---
 
 ---
@@ -11,7 +11,7 @@ The [Narnia](http://overthewire.org/wargames/narnia/) wargame is an online game 
 
 The challenges can be found in the **/narnia/** folder and the passwords for each level can be found in **/etc/narnia_pass/narniaX**.
 
-## Narnia 00 Solution
+## Решение Narnia 00
 
 **SSH :** *ssh narnia0@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *narnia0*
@@ -28,7 +28,7 @@ val: 0x41414141
 WAY OFF!!!!
 ```
 
-### Source Code
+### Исходный код
 
 Now, let's take a look at the source code.
 
@@ -89,7 +89,7 @@ efeidiedae
 
 Easy, right ?
 
-## Narnia 01 Solution
+## Решение Narnia 01
 
 **SSH :** *ssh narnia1@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *efeidiedae*
@@ -104,7 +104,7 @@ Give me something to execute at the env-variable EGG
 
 Hum... It seems that we need to initialize an environment variable named **EGG**.
 
-### Source Code
+### Исходный код
 
 Let's clarify that with the source code.
 
@@ -169,7 +169,7 @@ nairiepecu
 
 Done !
 
-## Narnia 02 Solution
+## Решение Narnia 02
 
 **SSH :** *ssh narnia2@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *nairiepecu*
@@ -186,7 +186,7 @@ ABCDnarnia2@narnia:/narnia$
 
 So, this program just return the string we enter to the standard output.
 
-### Source Code
+### Исходный код
 
 Let's check the source :
 
@@ -352,7 +352,7 @@ vaequeezee
 
 Yay, we did it !
 
-## Narnia 03 Solution
+## Решение Narnia 03
 
 **SSH :** *ssh narnia3@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *vaequeezee*
@@ -369,7 +369,7 @@ usage, ./narnia3 file, will send contents of file 2 /dev/null
 
 So, I guess we need to enter a file as argument...
 
-### Source Code
+### Исходный код
 
 Here is the source :
 
@@ -475,7 +475,7 @@ thaenohtai
 
 It was a fun one :)
 
-## Narnia 04 Solution
+## Решение Narnia 04
 
 **SSH :** *ssh narnia4@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *thaenohtai*
@@ -491,7 +491,7 @@ narnia4@narnia:/narnia$ ./narnia4
 
 Nothing... weird.
 
-### Source Code
+### Исходный код
 
 Let's check the source.
 
@@ -608,7 +608,7 @@ faimahchiy
 
 Success !
 
-## Narnia 05 Solution
+## Решение Narnia 05
 
 **SSH :** *ssh narnia5@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *faimahchiy*
@@ -627,7 +627,7 @@ i = 1 (0xffffd6d0)
 
 So, we need to modify the **i** variable with the value **500**. We also know the address of **i** which is equal to `0xffffd6d0`.
 
-### Source Code
+### Исходный код
 
 Here is the source code.
 
@@ -703,7 +703,7 @@ neezocaeng
 
 Format strings are more complex than standard buffer overflow. If you are interested, you can read my [post](https://axcheron.github.io/exploit-101-format-strings/) about this kind of vulnerability.
 
-## Narnia 06 Solution
+## Решение Narnia 06
 
 **SSH :** *ssh narnia6@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *neezocaeng*
@@ -722,7 +722,7 @@ narnia6@narnia:/narnia$ ./narnia6 123 456
 
 It seems that the program takes 2 arguments and print the first one. Let's check the source code to understand how it works.
 
-### Source Code
+### Исходный код
 
 Here is the source :
 
@@ -864,7 +864,7 @@ ahkiaziphu
 
 Done !
 
-## Narnia 07 Solution
+## Решение Narnia 07
 
 **SSH :** *ssh narnia7@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *ahkiaziphu*
@@ -888,7 +888,7 @@ Welcome to the goodfunction, but i said the Hackedfunction..
 
 Looks like we need to redirect the execution flow somehow...
 
-### Source Code
+### Исходный код
 
 Let's check the source.
 
@@ -986,7 +986,7 @@ mohthuphog
 
 On the second try !
 
-## Narnia 08 Solution
+## Решение Narnia 08
 
 **SSH :** *ssh narnia8@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *mohthuphog*
@@ -1005,7 +1005,7 @@ test
 
 The program just print back our input.
 
-### Source Code
+### Исходный код
 
 Let's take a look at the source :
 
@@ -1377,7 +1377,7 @@ eiL5fealae
 
 Finally ! This one was kind of hard. It took me a while to figure it out :)
 
-## Narnia 09 Solution
+## Решение Narnia 09
 
 **SSH :** *ssh narnia9@narnia.labs.overthewire.org -p 2226*<br/>
 **Pass :** *eiL5fealae*

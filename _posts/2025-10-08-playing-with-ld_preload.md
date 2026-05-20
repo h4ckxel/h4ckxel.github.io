@@ -1,6 +1,6 @@
 ---
-title: "Playing with LD_PRELOAD"
-excerpt: "Introduction to LD_PRELOAD environment variable."
+title: "Работа с LD_PRELOAD"
+excerpt: "Введение в переменную окружения LD_PRELOAD."
 tags:
   - utumno
   - linux
@@ -8,17 +8,17 @@ tags:
 ---
 
 ---
-**LD_PRELOAD** is an environment variable that can be set to load ELF *shared objects* before all others. It means that, if your executable is dynamically linked, you can load a library to **override** (or *replace*) any functions or symbols preloaded from other libraries. Basically, you can implement **your** version of *printf()*. 
+**LD_PRELOAD** is an environment variable that can be set to load ELF *shared objects* before all others. It means that, if your executable is dynamically linked, you can load a library to **override** (or *replace*) any functions or symbols preloaded from other libraries. Basically, you can implement **your** version of *printf()*.
 
 This feature is often used as a *"quick fix"* to patch a library while working on a more stable solution. However, this feature can also be used to create **rootkits**, **reverse code** or **bypass anti-debugging** techniques.
 
-# Intro to Dynamic Linking
+# Введение в динамическую линковку
 
 Back in the days, lots of executable were statically linked. Entire libraries were linked and compiled in an executable. One of the advantages was to make sure that all the libraries were present to properly run the executable and avoids dependency problems. However, the size of the executables became significantly greater and in case of a library update, you need to change the whole executable.
 
 Nowadays, we mostly use dynamic linking.  It means that the **shared** libraries are linked at runtime. When the programs is executed and thus, loaded in memory, the dynamic linker loads and links the libraries that are needed to properly run the executable.
 
-# Static vs. Dynamic Linking
+# Статическая и динамическая линковка
 
 Let's take a simple piece of code:
 
@@ -28,9 +28,9 @@ Let's take a simple piece of code:
 void main() {
 	printf("Hello World !\n");
 }
-``` 
+```
 
-In this code, the **stdio.h** header defines variable *types*, several *macros*, and various *functions* for performing input and output. This file contains the declaration of *printf()* and is a part of the **C standard library** or **libc** on Linux systems. 
+In this code, the **stdio.h** header defines variable *types*, several *macros*, and various *functions* for performing input and output. This file contains the declaration of *printf()* and is a part of the **C standard library** or **libc** on Linux systems.
 
 Now, let's link it dynamically :
 
@@ -38,7 +38,7 @@ Now, let's link it dynamically :
 gcc demo.c -o demo_dyn
 ```
 
-By **default**, *gcc* will dynamically link it. You can check that fact by running the following command: 
+By **default**, *gcc* will dynamically link it. You can check that fact by running the following command:
 
 ```bash
 $ readelf -h demo_dyn
@@ -82,7 +82,7 @@ read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\300\254\1\0004\0\0\0"..
 
 You can see the `openat(AT_FDCWD, "/lib/i386-linux-gnu/libc.so.6", O_RDONLY|O_LARGEFILE|O_CLOEXEC)` line calling the *libc*. You can also see the `access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)` before, it means that the **LD_PRELOAD** environment variable have precedence over any other libraries loaded for the executable. Here, we don't have any **LD_PRELOAD** environment variable so, it doesn't matter.
 
-**Note:** There are **various** methods of specifying libraries to be pre‐loaded, and these are handled in the following order : The **LD_PRELOAD** environment variable, the **--preload** command-line option when invoking the dynamic linker directly and the **/etc/ld.so.preload** file. 
+**Заметка:** There are **various** methods of specifying libraries to be pre‐loaded, and these are handled in the following order : The **LD_PRELOAD** environment variable, the **--preload** command-line option when invoking the dynamic linker directly and the **/etc/ld.so.preload** file.
 {: .notice--info}
 
 Now, we can try to statically link it :
@@ -134,7 +134,7 @@ exit_group(14)                          = ?
 
 Now that you have some basics, we can move on to the next steps.
 
-# Hooking a Function
+# Hooking функции
 
 Let's try to hook the *puts()* function of the following code:
 
@@ -145,7 +145,7 @@ Let's try to hook the *puts()* function of the following code:
 void main() {
 	puts("Hello World !");
 }
-``` 
+```
 
 This code will print the famous **"Hello World !"** message. However, you prefer *unicorns*. So you would like to make sure that this program is saying **"I love Unicorns"**. Using **LD_PRELOAD**, you can write a library to change this message by overriding the original *puts()* function. First we need to write a shared object, it's quite simple :
 
@@ -168,18 +168,18 @@ $ gcc preload.c -o preload.so -fPIC -shared -ldl
 Finally, you run the executable with the **LD_PRELOAD** pointing to your newly created library.
 
 ```bash
-# Before
+# До
 $ ./demo
 Hello World !
 
-# After
+# После
 $ LD_PRELOAD="./preload.so" ./demo
 I love Unicorns
 ```
 
 Easy ! Let's move to something a bit more advanced.
 
-# Solving a Simple CrackMe
+# Решение простого CrackMe
 
 Let's say we have a (really) simple **CrackMe**, like the following one :
 
@@ -213,7 +213,7 @@ Password: foobar
 Yay !
 ```
 
-Here, the trick is quite simple (and is used in many *crackmes*), we just do a simple password comparison with *strcmp()*. 
+Here, the trick is quite simple (and is used in many *crackmes*), we just do a simple password comparison with *strcmp()*.
 
 Now, let's say, we are too lazy to start **GDB** but we know how to use **LD_PRELOAD**, we could hook the *strcmp()* function and display the content of the compared variables. However, we want to make sure that *strcmp()* still return the right result, so we must make sure that we get the result from the original *strcmp()* function.
 
@@ -247,7 +247,7 @@ This is due to the fact that our library will be loaded with **LD_PRELOAD**, whi
 
 I also added **_GNU_SOURCE** preprocessor directive to avoid an issue with the *RTLD_NEXT* flag which is not defined by the *POSIX* standard.
 
-**Note:** If you don't want to use `#define _GNU_SOURCE` in your source code, you can also use the **-D_GNU_SOURCE** switch with **gcc**.
+**Заметка:** If you don't want to use `#define _GNU_SOURCE` in your source code, you can also use the **-D_GNU_SOURCE** switch with **gcc**.
 {: .notice--info}
 
 Then, I return the orignal result of *strcmp()* using the pointer to **libc**.
@@ -262,7 +262,7 @@ Nope !
 
 As you can see, we get our *hint* then, the executable still return **"Nope !"** as the password is incorrect. Another solution would have been to simply specify a `return 0;` in our implementation and we would have the **"Yay !"** message.
 
-# Anti-debugging Bypass
+# Обход anti-debugging
 
 There is a simple technique to detect if a process is currently running in a debugger, the **PTRACE_TRACEME** request. This method is based on the *ptrace()* system call which is used to **observe and control** the execution of another process (e.g. **GDB** use *ptrace*).
 
@@ -322,7 +322,7 @@ No debugger detected !
 
 Easy, right ?! Let's do one last exercise.
 
-# Solving Utumno0 on OTW (OverTheWire)
+# Решение Utumno0 на OTW (OverTheWire)
 
 Now, we will apply our skills on a live target. I have to admit that I wrote this post after solving the [Utumno](overthewire.org/wargames/utumno/) level 0 challenge on [OverTheWire](http://overthewire.org/wargames/).
 
@@ -345,7 +345,7 @@ No read permission, meaning no `gdb`, `objdump` or whatsoever but, there is an o
 
 However, we don't really know which function is used to display the message. But it's not really an issue, I'll start with *puts()*.
 
-**Note:** I created a directory in `/tmp` to create and compile my library.
+**Заметка:** I created a directory in `/tmp` to create and compile my library.
 {: .notice--info}
 
 ```c
@@ -354,7 +354,7 @@ However, we don't really know which function is used to display the message. But
 int puts ( const char * str ) {
 	printf("Hello from 'puts' !");
 
-	return 0;	
+	return 0;
 }
 ```
 
@@ -416,6 +416,6 @@ password: [..removed..]
 
 Awesome! We got the password (well, I got the password)!
 
-# Conclusion
+# Заключение
 
 This was a quick introduction to the **LD_PRELOAD** variable but, you should have the basics. It can be really useful with dynamically linked executable to analyse, reverse, exploit or modify code without any alteration on the original program. Sky is the limit, enjoy !

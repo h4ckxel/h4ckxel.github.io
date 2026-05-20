@@ -5,8 +5,8 @@ layout: single
 comments: false
 share: true
 related: false
-title: "Links"
-excerpt: "Collection of Infosec Website."
+title: "Ссылки"
+excerpt: "Подборка сайтов по информационной безопасности."
 
 tags:
   - links
@@ -15,24 +15,24 @@ tags:
 ---
 
 ---
-{% include toc title="Links" %}
+{% include toc title="Ссылки" %}
 
->**Note:** This section is constantly evolving. **Last update:** 08.10.2025.
+>**Заметка:** этот раздел постоянно развивается. **Последнее обновление:** 08.10.2025.
 
-This is a curated collection of handy bookmarks focusing on hacking, penetration testing and other computer security topics.
+Это отобранная коллекция полезных закладок о хакинге, тестировании на проникновение и других темах компьютерной безопасности.
 
-In my day to day work I collect and read lots of infosec resources (btw, I use [Pocket](https://getpocket.com) for this task), so I would like to share the most interesting links with the community.
+В повседневной работе я собираю и читаю много infosec-ресурсов (для этого я использую [Pocket](https://getpocket.com)), поэтому хочу поделиться с сообществом самыми интересными ссылками.
 
-Inspired by the original project, the [Open Penetration Testing Bookmarks Collection](https://github.com/jhaddix/pentest-bookmarks), which seems to be no longer maintened, I cleaned it up and added some bookmarks from my personnal collection.
+Эта подборка вдохновлена оригинальным проектом [Open Penetration Testing Bookmarks Collection](https://github.com/jhaddix/pentest-bookmarks), который, похоже, больше не поддерживается. Я почистил список и добавил несколько закладок из своей личной коллекции.
 
-If you want to contribute to this list, feel free to contact me [@h4ckxel](https://twitter.com/h4ckxel).
+Если хочешь дополнить список, можно связаться со мной: [@h4ckxel](https://twitter.com/h4ckxel).
 
 
-# Medias
+# Медиа
 
-If you want to check the news about hacking and security, here are the links I usually read during my morning coffee. By the way, I manage my links with [Feedly](https://feedly.com), a really handy tool !
+Если хочешь следить за новостями хакинга и безопасности, вот ссылки, которые я обычно читаю за утренним кофе. Кстати, ссылки я веду через [Feedly](https://feedly.com) — очень удобный инструмент.
 
-### News
+### Новости
 
 [Ars Technica | Security & Hacktivism](http://arstechnica.com/security/)<br/>
 [Threatpost | The Kaspersky Lab Security News](https://threatpost.com)<br/>
@@ -47,9 +47,9 @@ If you want to check the news about hacking and security, here are the links I u
 [EFF Deeplinks](https://www.eff.org/deeplinks)<br/>
 [Packet Storm](https://packetstormsecurity.com)<br/>
 
-### Blogs
+### Блоги
 
-There are too much bright people with really interesting blogs in the hacking community to list them all. But here is a quick list of some of them.
+В hacking-сообществе слишком много умных людей с интересными блогами, чтобы перечислить всех. Вот короткий список некоторых из них.
 
 [Schneier on Security](https://www.schneier.com)<br/>
 [Krebs on Security](http://krebsonsecurity.com)<br/>
@@ -86,7 +86,7 @@ There are too much bright people with really interesting blogs in the hacking co
 [XyliBox](http://www.xylibox.com)<br/>
 [Blog | Tomislav Zubcic's blog](http://zubcic.re)<br/>
 
-### Forums
+### Форумы
 
 [The Ethical Hacker Network](https://www.ethicalhacker.net/forums/i)<br/>
 [Kali Linux Forum](https://forums.kali.org/)<br/>
@@ -95,7 +95,7 @@ There are too much bright people with really interesting blogs in the hacking co
 [HackForums](http://hackforums.net/)<br/>
 [Bug Bounty Forum](http://bugbountyforum.com/)<br/>
 
-### Magazines
+### Журналы
 
 [(IN)SECURE Magazine](https://www.helpnetsecurity.com/insecuremag-archive/)<br/>
 [Phrack](http://www.phrack.org/)<br/>
@@ -107,14 +107,14 @@ There are too much bright people with really interesting blogs in the hacking co
 [Skull Security Wiki](https://wiki.skullsecurity.org)<br/>
 [SQL Injection Wiki](http://www.sqlinjectionwiki.com)<br/>
 
-# Methodologies
+# Методологии
 
 [Penetration Test Framework (PTF)](http://www.vulnerabilityassessment.co.uk/Penetration%20Test.html)<br/>
 [The Penetration Testing Execution Standard (PTES)](http://www.pentest-standard.org)<br/>
 [OWASP Testing Project](https://www.owasp.org/index.php/OWASP_Testing_Project)<br/>
 [The Official Social Engineering Portal](http://www.social-engineer.org)<br/>
 
-# Wireless Hacking
+# Взлом беспроводных технологий
 
 ### WiFi
 
@@ -144,9 +144,9 @@ There are too much bright people with really interesting blogs in the hacking co
 [http://scanlime.org/2008/09/using-an-avr-as-an-rfid-tag/](http://scanlime.org/2008/09/using-an-avr-as-an-rfid-tag)<br/>
 [http://www.bishopfox.com/resources/tools/rfid-hacking/attack-tools/](http://www.bishopfox.com/resources/tools/rfid-hacking/attack-tools/)<br/>
 
-# Conferences
+# Конференции
 
-### Official Websites
+### Официальные сайты
 
 [DEFCON](https://www.defcon.org)<br/>
 [BlackHat](http://www.blackhat.com)<br/>
@@ -162,13 +162,13 @@ There are too much bright people with really interesting blogs in the hacking co
 [BruCON](http://brucon.org)<br/>
 [HackInParis](https://hackinparis.com)<br/>
 
-### Calendar
+### Календарь
 
 [http://infosecevents.net/calendar/](http://infosecevents.net/calendar/)<br/>
 [https://tockify.com/infosec.conferences/agenda](https://tockify.com/infosec.conferences/agenda)<br/>
 [https://calendar.google.com/calendar/embed?src=pe2ikdbe6b841od6e26ato0asc@group.calendar.google.com](https://calendar.google.com/calendar/embed?src=pe2ikdbe6b841od6e26ato0asc@group.calendar.google.com)<br/>
 
-# Web Hacking
+# Веб-хакинг
 
 ### SQL Injection
 
@@ -189,7 +189,7 @@ There are too much bright people with really interesting blogs in the hacking co
 [http://websec.files.wordpress.com/2010/11/sqli2.pdf](http://websec.files.wordpress.com/2010/11/sqli2.pdf)<br/>
 [http://lab.mediaservice.net/notes_more.php?id=MSSQL](http://lab.mediaservice.net/notes_more.php?id=MSSQL)<br/>
 
-### Upload Tricks
+### Трюки с загрузкой файлов
 
 [http://www.google.com/#hl=en&q=bypassing+upload+file+type&start=40&sa=N&fp=a2bb30ecf4f91972](http://www.google.com/#hl=en&q=bypassing+upload+file+type&start=40&sa=N&fp=a2bb30ecf4f91972)<br/>
 [http://blog.skeptikal.org/2009/11/adobe-responds-sort-of.html](http://blog.skeptikal.org/2009/11/adobe-responds-sort-of.html)<br/>
@@ -223,7 +223,7 @@ There are too much bright people with really interesting blogs in the hacking co
 [http://blog.beefproject.com](http://blog.beefproject.com)<br/>
 
 
-# Exploit Development
+# Разработка эксплойтов
 
 ### Corelan
 
@@ -248,7 +248,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [Root Cause Analysis – Integer Overflows](https://www.corelan.be/index.php/2013/07/02/root-cause-analysis-integer-overflows/)
 
 
-### Others
+### Другое
 
 [http://myne-us.blogspot.com/2010/08/from-0x90-to-0x4c454554-journey-into.html](http://myne-us.blogspot.com/2010/08/from-0x90-to-0x4c454554-journey-into.html)<br/>
 [http://www.mgraziano.info/docs/stsi2010.pdf](http://www.mgraziano.info/docs/stsi2010.pdf)<br/>
@@ -258,16 +258,16 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://ref.x86asm.net/index.html](http://ref.x86asm.net/index.html)<br/>
 
 
-# Exploits and Advisories
+# Эксплойты и бюллетени
 
 
-### Exploits
+### Эксплойты
 
 [http://www.exploit-db.com](http://www.exploit-db.com)<br/>
 [http://www.packetstormsecurity.org](ttp://www.packetstormsecurity.org)<br/>
 [http://www.vulnerability-lab.com](http://www.vulnerability-lab.com)<br/>
 
-### Advisories
+### Бюллетени
 
 [http://www.cvedetails.com](http://www.cvedetails.com)<br/>
 [http://secunia.com](http://secunia.com)<br/>
@@ -294,7 +294,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://int3.cc/products/facedancer21](http://int3.cc/products/facedancer21)<br/>
 [http://hardsploit.io](http://hardsploit.io)<br/>
 
-## Reverse Engineering & Malwares
+## Реверс-инжиниринг и malware
 
 [http://www.woodmann.com/TiGa/idaseries.html](http://www.woodmann.com/TiGa/idaseries.html)<br/>
 [http://www.binary-auditing.com](http://www.binary-auditing.com)<br/>
@@ -311,9 +311,9 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://beginners.re](http://beginners.re)<br/>
 [https://remnux.org](https://remnux.org)<br/>
 
-# Passwords and Hashes
+# Пароли и хэши
 
-### Passwords
+### Пароли
 
 [http://www.irongeek.com/i.php?page=videos/password-exploitation-class](http://www.irongeek.com/i.php?page=videos/password-exploitation-class)<br/>
 [http://cirt.net/passwords](http://cirt.net/passwords)<br/>
@@ -331,7 +331,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 
 [http://ophcrack.sourceforge.net/tables.php](http://ophcrack.sourceforge.net/tables.php)<br/>
 
-### Wordlists
+### Словари
 
 [http://contest.korelogic.com/wordlists.html](http://contest.korelogic.com/wordlists.html)<br/>
 [http://packetstormsecurity.org/Crackers/wordlists/](http://packetstormsecurity.org/Crackers/wordlists/)<br/>
@@ -339,9 +339,9 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://www.ericheitzman.com/passwd/passwords/](http://www.ericheitzman.com/passwd/passwords/)<br/>
 [http://www.infosecisland.com/blogview/11968-Brute-Forcing-Passwords-and-Word-List-Resources.html](http://www.infosecisland.com/blogview/11968-Brute-Forcing-Passwords-and-Word-List-Resources.html)<br/>
 
-# Practice and Labs
+# Практика и лаборатории
 
-### ISO & VMs
+### ISO и VM
 
 [http://sourceforge.net/projects/websecuritydojo/](http://sourceforge.net/projects/websecuritydojo/)<br/>
 [http://hackingdojo.com/dojo-media/](http://hackingdojo.com/dojo-media/)<br/>
@@ -355,7 +355,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://sourceforge.net/projects/thebutterflytmp/](http://sourceforge.net/projects/thebutterflytmp/)<br/>
 [https://exploit-exercises.com](https://exploit-exercises.com)<br/>
 
-### Vulnerables Softwares
+### Уязвимое ПО
 
 [http://www.oldapps.com](http://www.oldapps.com)<br/>
 [http://www.oldversion.com](http://www.oldversion.com)<br/>
@@ -367,7 +367,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://www.mcafee.com/us/downloads/free-tools/hacmeshipping.aspx](http://www.mcafee.com/us/downloads/free-tools/hacmeshipping.aspx)<br/>
 [http://www.mcafee.com/us/downloads/free-tools/hacmetravel.aspx](http://www.mcafee.com/us/downloads/free-tools/hacmetravel.aspx)<br/>
 
-### Test Sites
+### Тестовые сайты
 
 [http://www.webscantest.com/](http://www.webscantest.com)<br/>
 [http://testaspnet.vulnweb.com/](http://testaspnet.vulnweb.com)<br/>
@@ -376,7 +376,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://demo.testfire.net/](http://demo.testfire.net)<br/>
 [http://hackme.ntobjectives.com/](http://hackme.ntobjectives.com)<br/>
 
-# Tools
+# Инструменты
 
 ### Metadata
 
@@ -430,11 +430,11 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://translate.google.com/translate?hl=en&sl=es&u=http://xss.codeplex.com/releases/view/43170&prev=/search%3Fq%3D](http://translate.google.com/translate?hl=en&sl=es&u=http://xss.codeplex.com/releases/view/43170&prev=/search%3Fq%3D)<br/>
 [http://www.hackingeek.com/2010/08/x5s-encuentra-fallos-xss-lfi-rfi-en-tus.html%26hl%3Den&rurl=translate.google.com&twu=1](http://www.hackingeek.com/2010/08/x5s-encuentra-fallos-xss-lfi-rfi-en-tus.html%26hl%3Den&rurl=translate.google.com&twu=1)<br/>
 
-### Social Enginnering
+### Социальная инженерия
 
 [Social-Engineer Toolkit](https://github.com/trustedsec/social-engineer-toolkit)<br/>
 
-### Passwords Cracking
+### Взлом паролей
 
 [Ncrack](http://nmap.org/ncrack/)<br/>
 [Medusa](http://www.foofus.net/~jmk/medusa/medusa.html)<br/>
@@ -459,7 +459,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://www.blackhat.com/presentations/bh-dc-10/Ames_Colin/BlackHat-DC-2010-colin-david-neurosurgery-with-meterpreter-wp.pdf](http://www.blackhat.com/presentations/bh-dc-10/Ames_Colin/BlackHat-DC-2010-colin-david-neurosurgery-with-meterpreter-wp.pdf)<br/>
 [http://www.blackhat.com/presentations/bh-dc-10/Egypt/BlackHat-DC-2010-Egypt-UAV-slides.pdf](http://www.blackhat.com/presentations/bh-dc-10/Egypt/BlackHat-DC-2010-Egypt-UAV-slides.pdf)<br/>
 
-### Network Scanner
+### Сетевые сканеры
 
 [http://nmap.org/](http://nmap.org/)<br/>
 [http://asturio.gmxhome.de/software/sambascan2/i.html](http://asturio.gmxhome.de/software/sambascan2/i.html)<br/>
@@ -469,7 +469,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://www.rapid7.com/vulnerability-scanner.jsp](http://www.rapid7.com/vulnerability-scanner.jsp)<br/>
 [http://www.eeye.com/products/retina/community](http://www.eeye.com/products/retina/community)<br/>
 
-### Post Exploitation
+### Post-exploitation
 
 [http://www.awarenetwork.org/home/rattle/source/python/exe2bat.py](http://www.awarenetwork.org/home/rattle/source/python/exe2bat.py)<br/>
 [http://www.phx2600.org/archive/2008/08/29/metacab/](http://www.phx2600.org/archive/2008/08/29/metacab/)<br/>
@@ -487,7 +487,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [http://www.terminally-incoherent.com/blog/2007/08/07/few-useful-netcat-tricks/](http://www.terminally-incoherent.com/blog/2007/08/07/few-useful-netcat-tricks/)<br/>
 [http://www.inguardians.com/research/docs/Skoudis_pentestsecrets.pdf](http://www.inguardians.com/research/docs/Skoudis_pentestsecrets.pdf)<br/>
 
-### Source Inspection
+### Анализ исходного кода
 
 [Graudit](http://www.justanotherhacker.com/projects/graudit.html)<br/>
 
@@ -519,7 +519,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [dnstracer](http://www.mavetju.org/unix/dnstracer-man.php)<br/>
 [Maltego](https://www.paterva.com)<br/>
 
-# CTF and Wargames
+# CTF и варгеймы
 
 ### CTF
 
@@ -542,7 +542,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [Crackmes.de](http://www.crackmes.de)<br/>
 [ZenK-Security](https://www.zenk-security.com/epreuves.php)<br/>
 
-### Planning
+### Планирование
 
 [CTFtime.org](https://ctftime.org)<br/>
 
@@ -554,7 +554,7 @@ All the exploit tutorials wrote by Corelan. High quality content !
 [Ouverture Fine](https://www.ouverture-fine.com)<br/>
 [Southord Lockpicks](https://www.southord.com)<br/>
 
-# Awesome Lists
+# Awesome-списки
 
 A curated list of Awesome lists. An awesome list is a collection of links focused on a specific topic. If you don't find what you are looking for, it does not exist !
 <br/><br/>
@@ -576,7 +576,7 @@ A curated list of Awesome lists. An awesome list is a collection of links focuse
 [Awesome | Fuzzing](https://github.com/secfigo/Awesome-Fuzzing)<br/>
 [Awesome | Static Analysis](https://github.com/mre/awesome-static-analysis)<br/>
 
-# Miscs
+# Разное
 
 [Free Security and Hacking eBooks](https://github.com/Hack-with-Github/Free-Security-eBooks)<br/>
 [Zenk Security Repository](https://repo.zenk-security.com)

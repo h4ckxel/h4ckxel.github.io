@@ -15,12 +15,12 @@
 minimal_mistakes_skin    : "h4ckxel" # custom editorial skin
 
 # Site Settings
-locale                   : "en-US"
+locale                   : "ru-RU"
 title                    : "H4CKXEL"
 title_separator          : "-"
-subtitle                 : "software / security / systems"
+subtitle                 : "программирование / безопасность / системы"
 name                     : "h4ckxel"
-description              : "Technical logs, writeups, notes, and small tools around security, systems, reverse engineering, and programming."
+description              : "Технические журналы, разборы, заметки и небольшие инструменты о безопасности, системах, реверс-инжиниринге и программировании."
 url                      : #"http://localhost:4000"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -103,14 +103,14 @@ analytics:
 author:
   name             : "h4ckxel"
   avatar           : "/images/bio_main.jpg"
-  bio              : "Security researcher and systems learner documenting tools, notes, and writeups."
-  location         : "Mexico"
+  bio              : "Исследователь безопасности и системный энтузиаст, документирующий инструменты, заметки и разборы."
+  location         : "Мексика"
   email            :
   links:
-    - label: "Email"
+    - label: "Почта"
       icon: "fas fa-fw fa-envelope-square"
       # url: "mailto:your.name@email.com"
-    - label: "Website"
+    - label: "Сайт"
       icon: "fas fa-fw fa-link"
       url: "https://h4ckxel.github.io"
     - label: "Twitter"

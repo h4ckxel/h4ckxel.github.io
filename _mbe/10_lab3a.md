@@ -1,7 +1,7 @@
 ---
-title: "Lab3A Write-up (Hard)"
+title: "Разбор Lab3A (сложно)"
 permalink: /writeups/mbe/lab3a/
-excerpt: "Write-up for Lab3A."
+excerpt: "Разбор Lab3A."
 ---
 
 ---
@@ -40,7 +40,7 @@ Input command: quit
 
 It seems that this code allows us to store and retrieve data. Well, let's check the code to have more details...
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Here is the source code, read it carefully!
 
@@ -199,7 +199,7 @@ See? No problems! But what does it mean? Well, if we find the corresponding *ind
 
 Let's see if we can reproduce that in memory.
 
-## Dynamic Analysis
+## Динамический анализ
 
 Here we need two pieces of information: 
 - The return address of *main()*, so we can know what to look for on the stack.
@@ -454,7 +454,7 @@ mov    al, 0xb ; sys_execve()
 int    0x80
 ```
 
-**Note** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux VM.
+**Заметка** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux VM.
 {: .notice--info}
 
 ```shell
@@ -587,7 +587,7 @@ Warning: not running or target is remote
 
 Nice, it seems to be working.
 
-## Solution
+## Решение
 
 As the stack addresses determined using *gdb* vary when directly executing the program, we have to try different addresses to hit the shellcode. The address for the *index 1* of the `data[]` we found in *gdb* was `0xbffff50c`, as the stack address are usually a bit lower outside *gdb*, we can decrease the `0xbffff50c` value one by one until we reach a valid return address.
 

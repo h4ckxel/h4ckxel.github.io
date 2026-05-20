@@ -1,7 +1,7 @@
 ---
-title: "Lab2A Write-up (Hard)"
+title: "Разбор Lab2A (сложно)"
 permalink: /writeups/mbe/lab2a/
-excerpt: "Write-up for Lab2A."
+excerpt: "Разбор Lab2A."
 ---
 
 ---
@@ -34,7 +34,7 @@ Not authenticated
 
 Here, we have to enter 10 words, then it prints the first letter of each word. 
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's check how it looks in the source code:
 
@@ -124,7 +124,7 @@ It means that, if we enter at least an 11-char word, **word_buf** will overflow 
 
 So, what can we from here ? Well, as each loop will increase **cat_pointer** (`locals.cat_pointer++;`) to fill **cat_buf**, when **cat_buf** is full (10 bytes), it'll start overflowing on the stack which could lead to memory corruption. Now, we just need to know how many "words" we have to enter before overwriting the return address...
 
-## Dynamic Analysis
+## Динамический анализ
 
 Enough theory, let's try that in `gdb`. First, we need to corrupt the **i** variable in order to have an infinite loop. To find out where it is, you can place a breakpoint at `concatenate_first_chars+9` as EAX will contain the pointer to the structure:
 
@@ -288,7 +288,7 @@ End of assembler dump.
 
 Here, the address is `0x080486fd`.
 
-## Solution
+## Решение
 
 Let's write our exploit!
 

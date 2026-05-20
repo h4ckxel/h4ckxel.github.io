@@ -1,7 +1,7 @@
 ---
-title: "Lab3B Write-up (Medium)"
+title: "Разбор Lab3B (средне)"
 permalink: /writeups/mbe/lab3b/
-excerpt: "Write-up for Lab3B."
+excerpt: "Разбор Lab3B."
 ---
 
 ---
@@ -23,7 +23,7 @@ child is exiting...
 
 Here, the program just asks for a shellcode.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's check the code to see if we can find a bug.
 
@@ -73,7 +73,7 @@ int main()
 
 Not much to say here, we have a 128 bytes buffer and we can't use the *execve()* (syscall 11) to call a **/bin/bash**. As the *gets()* function doesn't check the size of the input buffer, we can easily overflow the stack.
 
-## Dynamic Analysis
+## Динамический анализ
 
 First things first, let's find the offset of the return address in `gdb`.
 
@@ -275,7 +275,7 @@ mov al, 4 ; sys_write()
 int 0x80
 ```
 
-**Note** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux 32bit VM.
+**Заметка** The *Warzone* VM doesn't have **NASM** installed, so I did the development on another Linux 32bit VM.
 {: .notice--info}
 
 You can now create a file and assemble it.
@@ -327,7 +327,7 @@ $ for i in $(objdump -d read_shellcode -M intel |grep "^ " |cut -f2); do echo -n
 
 We have our shellcode, now we can solve the challenge!
 
-## Solution
+## Решение
 
 Here, as we saw earlier, we will use the `jmp esp` address we found in **libc** as return address:
 

@@ -1,42 +1,42 @@
 ---
 permalink: /writeups/
-title: "Writeups"
-excerpt: "CTF write-ups, machine walkthroughs, and exploit research logs."
+title: "Разборы"
+excerpt: "CTF-разборы, прохождения машин и исследовательские журналы по эксплуатации."
 ---
 
 ---
-This archive contains writeups, challenge reports, and exploitation notes collected while studying vulnerable systems.
+Этот архив содержит разборы, отчеты по заданиям и заметки по эксплуатации, собранные во время изучения уязвимых систем.
 {: .text-justify}
 
-I left the passwords in cleartext for most of the levels because, if you google it, you'll find them anyway... But, try to do it yourself because *"It's not about the destination; it's about the journey"*.
+В большинстве уровней пароли оставлены открытым текстом, потому что при желании их все равно можно найти в Google... Но лучше попробуй пройти все самостоятельно, ведь *"важен не пункт назначения, а путь"*.
 {: .text-justify}
 
 ## OTW - OverTheWire 
 
-[OverTheWire](https://overthewire.org/wargames/) is a community that can help you to learn and practice security concepts in the form of fun-filled games. They offer lots of wargames to practice your skills !
+[OverTheWire](https://overthewire.org/wargames/) — это сообщество, которое помогает изучать и практиковать концепции безопасности через увлекательные игры. Они предлагают много варгеймов для прокачки навыков!
 {: .text-justify}
 
-**You can access to the write-ups with the following link:** [OTW Writeups](/writeups/otw/otw_wargames/).
+**Перейти к разборам можно по ссылке:** [разборы OTW](/writeups/otw/otw_wargames/).
 
->**Note:** This write-up is constantly evolving. **Last update:** October 08, 2025.
+>**Заметка:** этот раздел постоянно развивается. **Последнее обновление:** 08 октября 2025.
 
 ## HTB - Hack The Box 
 
-[Hack The Box](https://www.hackthebox.com) is a massive, online cybersecurity training platform, allowing individuals, companies, universities and all kinds of organizations around the world to level up their hacking skills.
+[Hack The Box](https://www.hackthebox.com) — крупная онлайн-платформа для обучения кибербезопасности, которая помогает людям, компаниям, университетам и организациям по всему миру развивать практические навыки хакинга.
 {: .text-justify}
 
-**You can access to the write-ups with the following link:** [HTB Writeups](/writeups/htb/htb_writeups/).
+**Перейти к разборам можно по ссылке:** [разборы HTB](/writeups/htb/htb_writeups/).
 
->**Note:** This write-up is constantly evolving. **Last update:** May 21, 2023.
+>**Заметка:** этот раздел постоянно развивается. **Последнее обновление:** 21 мая 2023.
 
 ## MBE - Modern Binary Exploitation 
 
-[Modern Binary Exploitation (MBE)](https://github.com/RPISEC/MBE) is a free course developed and used by [RPISEC](http://rpis.ec) to teach Modern Binary Exploitation at [Rensselaer Polytechnic Institute](http://rpi.edu). It covers basic x86 reverse engineering, vulnerability analysis, and classical forms of Linux-based userland binary exploitation. It also focuses on protections found on modern systems and the techniques used to defeat them. This course comes with a large number of labs that I'll explain in this write-up.
+[Modern Binary Exploitation (MBE)](https://github.com/RPISEC/MBE) — бесплатный курс, разработанный и используемый [RPISEC](http://rpis.ec) для преподавания современной бинарной эксплуатации в [Rensselaer Polytechnic Institute](http://rpi.edu). Он охватывает базовый реверс-инжиниринг x86, анализ уязвимостей и классические формы эксплуатации пользовательских Linux-бинарей. Также курс разбирает защиты современных систем и техники их обхода. В нем много лабораторных работ, которые я разбираю в этом разделе.
 {: .text-justify}
 
-**You can access to the write-up with the following link:** [MBE Writeups](/writeups/mbe/installation/).
+**Перейти к разбору можно по ссылке:** [разборы MBE](/writeups/mbe/installation/).
 
->**Note:** This write-up is constantly evolving. **Last update:** May 3, 2023.
+>**Заметка:** этот раздел постоянно развивается. **Последнее обновление:** 3 мая 2023.
 
 <!---
 ## DVWA - Damn Vulnerable Web Application

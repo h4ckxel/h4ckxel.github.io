@@ -1,7 +1,7 @@
 ---
-title: "Lab3C Write-up (Easy)"
+title: "Разбор Lab3C (легко)"
 permalink: /writeups/mbe/lab3c/
-excerpt: "Write-up for Lab3C."
+excerpt: "Разбор Lab3C."
 ---
 
 ---
@@ -25,7 +25,7 @@ nope, incorrect username...
 
 It seems that we just need to provide a valid username to get through.
 
-## Source Code Analysis
+## Анализ исходного кода
 
 Let's check the code in order to see if we can find any information about this username.
 
@@ -142,7 +142,7 @@ See, that's why even if we overflow the username variable, it won't help us to o
 
 So, as we know the right username (*rpisec*), we can overflow the **a_user_pass** variable. Let's do that in memory.
 
-## Dynamic Analysis
+## Динамический анализ
 
 Now, it should be easy to overwrite a return address. Again, we can use the *pattern* feature of PEDA to find out at which offsec we will overwrite the return address.
 
@@ -283,7 +283,7 @@ Warning: not running or target is remote
 
 Bingo! It seems to be working :)
 
-## Solution
+## Решение
 
 Now we can exploit the vulnerability outside `gdb`:
 
